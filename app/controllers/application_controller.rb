@@ -22,7 +22,8 @@ class ApplicationController < ActionController::Base
     #   reset_session
     #   raise CanCan::AccessDenied
     # end
-    edit_user_registration_path(current_user)
+    #
+    dashboard_path
   end
 
 end
