@@ -45,3 +45,4 @@ group :development, :test do
 end
 gem 'haml-rails'
 gem 'devise'
+gem 'bootstrap-sass'
