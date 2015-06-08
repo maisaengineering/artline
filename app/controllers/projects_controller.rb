@@ -1,12 +1,28 @@
 class ProjectsController < ApplicationController
   before_action :authenticate_user!
   # load_and_authorize_resource
+  def index
+
+  end
+
   def new
-
+    @project = Project.new
   end
+
   def create
+    @project = Project.create(project_params)
+    if @project.save
+      flash[:notice] = "Successfully created."
+      redirect_to edit_projects_path
+    else
+      render :new
+    end
+  end
+
+  def show
 
   end
+
   def edit
 
   end
@@ -17,7 +33,11 @@ class ProjectsController < ApplicationController
   def destroy
 
   end
-  def index
 
+  private
+
+  def project_params
+    params.require(:project).permit()
   end
+
 end

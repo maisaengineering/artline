@@ -1,0 +1,14 @@
+
+= form_tag("/projects", method: :post) do
+  - if @project.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@high_score.errors.count, "error")
+        prohibited this project from being saved:
+      %ul
+        - @high_score.errors.full_messages.each do |message|
+          %li= message
+  .div
+    = label_tag("Date")
+  .actions
+    = submit_tag("Submit")
