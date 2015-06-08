@@ -5,8 +5,17 @@
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
-  %body
 
+  - flash.each do |name, msg|
+    #flash_messages
+      .alert_wrapper{:style => "top: -60px;"}
+        .alert.alert-info.alert-dismissible.fade.in
+          %button.close{"data-dismiss" => "alert", :type => "button"}
+            %span{"aria-hidden" => "true"} ×
+            %span.sr-only Close
+          = content_tag :div, msg, :id => "flash_#{name}", class: "text-center"
+
+  %body
     - if user_signed_in?
       %section#container
         %header.header.dark-bg
@@ -76,4 +85,5 @@
             .icon-reorder.tooltips{"data-original-title" => "Toggle Navigation", "data-placement" => "bottom"}
           %a.logo{:href => ""}
             ArtLine
+    .clearfix
     = yield

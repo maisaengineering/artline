@@ -14,3 +14,15 @@
 //= require bootstrap-sprockets
 //= require jquery_ujs
 //= require turbolinks
+
+$(document).ready(function() {
+    renderFlashMessage()
+});
+
+renderFlashMessage = function(){
+    $(".alert_wrapper").animate({top:'10px'}, 500);
+    setTimeout(function() {
+            $(".alert_wrapper").animate({top:'-60px'}, 250)}
+        , 4000)
+}
+
