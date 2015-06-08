@@ -9,6 +9,7 @@ class Ability
         can :manage, :all
       elsif user.is? :project_manager
         cannot :create, User
+        can :update, User
       end
     #
     # The first argument to `can` is the action you are giving the user 
