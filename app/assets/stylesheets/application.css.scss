@@ -4962,3 +4962,33 @@ span.customSelect.changed {
   border-top: 1px solid #ccc;
 
 }
+
+
+.alert_wrapper {
+  position:fixed;
+  z-index:1050;
+  margin-left:auto;
+  margin-right:auto;
+  top:-60px;
+  left:0;
+  right:0;
+  width:60%;
+}
+
+#error_explanation {
+  padding: 15px;
+  margin-bottom: 20px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  color: #a94442;
+  background-color: #f2dede;
+  border-color: #ebccd1;
+}
+#error_explanation h2 {
+  font-size:18px;
+  margin-top:5px;
+  margin-bottom:5px}
+#error_explanation ul {
+}
+#error_explanation ul li {
+}

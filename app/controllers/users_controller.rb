@@ -11,7 +11,7 @@ class UsersController < ApplicationController
     if @user.errors.any?
       render 'new'
     else
-      redirect_to dashboard_path
+      redirect_to dashboard_path, alert: "Project Manager Sucessfully Created"
     end
   end
 
