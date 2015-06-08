@@ -12,12 +12,17 @@ class ProjectsController < ApplicationController
   end
 
   def update
-
   end
   def destroy
 
   end
   def index
 
+  end
+
+  private
+
+  def project_params
+    params.require(:project).permit(params[:project].keys)
   end
 end
