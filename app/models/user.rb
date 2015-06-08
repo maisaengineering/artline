@@ -5,6 +5,8 @@ class User
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  ROLES = %w[super_admin project_manager]
+
   ## Database authenticatable
   field :fname,         type: String, default: ""
   field :lname,              type: String, default: ""
@@ -36,4 +38,11 @@ class User
   # field :failed_attempts, type: Integer, default: 0 # Only if lock strategy is :failed_attempts
   # field :unlock_token,    type: String # Only if unlock strategy is :email or :both
   # field :locked_at,       type: Time
+
+  ##custom
+  field :roles, type:Array, default: ['project_manager']
+
+  def is?(role)
+    respond_to?(:roles) and roles.to_a.include?(role.to_s)
+  end
 end

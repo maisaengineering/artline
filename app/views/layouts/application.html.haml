@@ -10,9 +10,9 @@
       - if user_signed_in?
 
         %ul.nav.navbar-nav.navbar-right
-
-          %li
-            = link_to "Create Project Manager", new_user_registration_path, method: :get
+          - if current_user.is? :super_admin
+            %li
+              = link_to "Create Project Manager", new_user_registration_path, method: :get
           %li
             = link_to "New Quote", new_projects_path
           %li

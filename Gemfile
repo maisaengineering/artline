@@ -46,3 +46,4 @@ end
 gem 'haml-rails'
 gem 'devise'
 gem 'bootstrap-sass'
+gem 'cancan'
