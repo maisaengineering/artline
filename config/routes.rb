@@ -6,7 +6,13 @@ Rails.application.routes.draw do
 
   get '/dashboard' => 'home#index', as: :dashboard
 
-  resource :projects
+  resources :projects
+  resources :items
+  resources :orders do
+    collection do
+      get 'tracking'
+    end
+  end
   # resource :users
   get '/users/new'=>"users#new", as: :new_users
   post '/users/create'=>"users#create", as: :users
