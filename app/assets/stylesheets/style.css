@@ -6,8 +6,8 @@ Website: http://geekslabs.com/
 */
 
 /* Import fonts */
-@import url(http://fonts.googleapis.com/css?family=Lato:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic);
-@import url(line-icons.css);
+/*@import url(http://fonts.googleapis.com/css?family=Lato:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic);*/
+
 
 body {
     color: #797979;
@@ -4944,4 +4944,36 @@ span.customSelect.changed {
 }
 .ptop35{
     padding-top: 35px;
+}
+
+.signin-form {
+    padding-left: 40px;
+}
+
+.form-signin-heading {
+    text-align: center;
+}
+
+.form-signin {
+    max-width: 330px;
+    padding: 15px;
+    margin: 0 auto;
+}
+
+.form-signin .form-control {
+    position: relative;
+    height: auto;
+    box-sizing: border-box;
+    padding: 10px;
+    font-size: 12px;
+}
+
+.form-signin label {
+    font-weight: 100;
+    color: #0D0C0C;
+}
+
+.form-signin .field{
+    text-align: left;
+    padding-top: 10px;
 }
