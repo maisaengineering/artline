@@ -4946,34 +4946,14 @@ span.customSelect.changed {
     padding-top: 35px;
 }
 
-.signin-form {
-    padding-left: 40px;
+.sign_up .col-lg-6{
+    margin-left: 25%;
+    margin-top: 10%;
 }
 
-.form-signin-heading {
-    text-align: center;
-}
 
-.form-signin {
-    max-width: 330px;
-    padding: 15px;
-    margin: 0 auto;
-}
+.sign_up .panel .panel-heading {
 
-.form-signin .form-control {
-    position: relative;
-    height: auto;
-    box-sizing: border-box;
-    padding: 10px;
-    font-size: 12px;
-}
+    border-top: 1px solid #ccc;
 
-.form-signin label {
-    font-weight: 100;
-    color: #0D0C0C;
-}
-
-.form-signin .field{
-    text-align: left;
-    padding-top: 10px;
 }
