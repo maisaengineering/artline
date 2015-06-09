@@ -1,3 +1,11 @@
-%section#main-content
+%section#main-content.cus
   %section.wrapper
+    %div.serch_bg
+      #top_menu.nav.search-row.txt-clr
+        %ul.nav.top-menu
+          %li
+            = link_to "Add/Edit Items", "",class:'btn'
+          %li
+            %form.navbar-form
+              %input.form-control{:placeholder => "Search", :type => "text"}
     %h1 #Item's

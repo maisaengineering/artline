@@ -557,9 +557,9 @@ a.logo span {
   float: left;
 }
 .search-row {
-  float: left;
-  margin-top: 15px;
-  margin-left: 16px;
+  float: right;
+  margin-top: 10px;
+  margin-right: 25px;
 }
 .notification-row {
   float: right;
@@ -623,7 +623,9 @@ ul.top-menu > li > a:hover, ul.top-menu > li > a:focus {
 .navbar-form .form-control{
   width: 200px;
   height: 30px;
-  background: white url('../img/icons/search-line-icon.png') no-repeat 3px;
+  background-image: image-url('search-line-icon.png');
+  background-repeat: no-repeat;
+  background-position: 4px 5px;
   padding-left: 24px;
   margin-top: 1px;
 }
@@ -4992,3 +4994,27 @@ span.customSelect.changed {
 }
 #error_explanation ul li {
 }
+
+.txt_area{
+  width: 50%;
+}
+
+.cus .wrapper{
+  padding: 0px;
+}
+
+.serch_bg{
+  background-color:#394A59;
+  width:100%;
+  height:50px;
+}
+
+.txt-clr ul.top-menu > li > a{
+  color: #d0d8df;
+}
+
+.txt-clr ul li:hover {
+  background-color: #2e3b46;
+
+}
+

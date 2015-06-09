@@ -1,0 +1,15 @@
+= render 'items/forms/similar_fields'
+.row
+  .col-md-3.mbtm15
+    = select_tag("Board Options", options_for_select(["Lite Board","Float Board","Boxed Board","Doublelite","Other"]),include_blank: "Board Options" , class: "form-control" )
+.row
+  .col-md-3.mbtm15
+    = text_field_tag("Print Cost", nil, class: "form-control", placeholder: "Print Cost")
+  .col-md-3.mbtm15
+    = text_field_tag("Board Cost", nil, class: "form-control", placeholder: "Board Cost")
+.row
+  .col-md-3.mbtm15.txt_area
+    = text_area_tag("Special Instructions", nil, class: "form-control", placeholder: "Special Instructions")
+.row
+  .col-md-3.mbtm15
+    = label_tag(:tot_cost, "Total Cost:")

@@ -1,0 +1,48 @@
+.row
+  .col-md-3.mbtm15
+    = text_field_tag("Tag", nil, class: "form-control", placeholder: "Tag")
+  .col-md-3.mbtm15
+    = text_field_tag("Quantity", nil, class: "form-control", placeholder: "Quantity")
+.row
+  .col-md-3.mbtm15
+    = select_tag("Bevel", options_for_select(["Yes", "No"]),include_blank: "Bevel" , class: "form-control" )
+  .col-md-3.mbtm15
+    = number_field_tag("Bevel Size", 1, class: "form-control", placeholder: "Bevel Size",min: 0 )
+.row
+  .col-md-3.mbtm15.txt_area
+    = text_area_tag("Bevel Special Instructions", nil, class: "form-control", placeholder: "Bevel Special Instructions")
+.row
+  .col-md-3.mbtm15
+    = select_tag("Glazing", options_for_select(["Glass", "Plexie"]),include_blank: "Glazing" , class: "form-control" )
+.row
+  .col-md-3.mbtm15.txt_area
+    = text_area_tag("Glazing Special Instructions", nil, class: "form-control", placeholder: "Glazing Special Instructions")
+.row
+  .col-md-3.mbtm15
+    = text_field_tag("Glass Width", nil, class: "form-control", placeholder: "Glass Width")
+  .col-md-3.mbtm15
+    = text_field_tag("Glass Height", nil, class: "form-control", placeholder: "Glass Height")
+.row
+  .col-md-3.mbtm15
+    = select_tag("Moulding Company", options_for_select(["Old Company", "New Company"]),include_blank: "Moulding Company" , class: "form-control" )
+  .col-md-3.mbtm15
+    = select_tag("Frame Number", options_for_select(["Old Item", "New Item"]),include_blank: "Frame Number" , class: "form-control" )
+.row
+  .col-md-3.mbtm15
+    = text_field_tag("Category", nil, class: "form-control", placeholder: "Category")
+  .col-md-3.mbtm15
+    = text_field_tag("Frame Size", nil, class: "form-control", placeholder: "Frame Size")
+.row
+  .col-md-3.mbtm15
+    = text_field_tag("Overall Width", nil, class: "form-control", placeholder: "Overall Width")
+  .col-md-3.mbtm15
+    = text_field_tag("Overall Height", nil, class: "form-control", placeholder: "Overall Height")
+.row
+  .col-md-3.mbtm15
+    = text_field_tag("United Inches", nil, class: "form-control", placeholder: "United Inches")
+.row
+  .col-md-3.mbtm15.txt_area
+    = text_area_tag("Special Instructions", nil, class: "form-control", placeholder: "Special Instructions")
+.row
+  .col-md-3.mbtm15
+    = label_tag(:tot_cost, "Total Cost:")

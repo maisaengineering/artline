@@ -1,13 +1,83 @@
-= form_tag("/projects", method: :post) do
-  - if @project.errors.any?
-    #error_explanation
-      %h2
-        = pluralize(@high_score.errors.count, "error")
-        prohibited this project from being saved:
-      %ul
-        - @high_score.errors.full_messages.each do |message|
-          %li= message
-  -#.div
-  -#  = label_tag("Date")
-  -#.actions
-  -#  = submit_tag("Submit")
+- if @project.errors.any?
+  #error_explanation
+    %h2
+      = pluralize(@project.errors.count, "error")
+      prohibited this project from being saved:
+    %ul
+      - @project.errors.full_messages.each do |message|
+        %li= message
+.row
+  .col-md-3.mbtm15
+    = label_tag(:Quote, "Quote Number:")
+.row
+  .col-md-3.mbtm15
+    = text_field_tag("Project_name", nil, class: "form-control", placeholder: "Project Name")
+  .col-md-3.mbtm15
+    = text_field_tag("Date", nil, class: "form-control", placeholder: "Date")
+.row
+  .col-md-3.mbtm15
+    = select_tag("Company", options_for_select(["Old Company", "New Company"]) , class: "form-control", placeholder: "Company" )
+  .col-md-3.mbtm15
+    = select_tag("Attention", options_for_select(["Attention", "New Attention"]) , class: "form-control", placeholder: "Attention" )
+.row
+  .col-md-3.mbtm15
+    = text_field_tag("new_company",nil, class: "form-control", placeholder: "Company Name" )
+  .col-md-3.mbtm15
+    = text_field_tag("new_attention",nil, class: "form-control", placeholder: "Attention Name" )
+.row
+  .col-md-3.mbtm15
+    = text_field_tag("Address", nil, class: "form-control", placeholder: "Address")
+  .col-md-3.mbtm15
+    = text_field_tag("City", nil, class: "form-control", placeholder: "City")
+.row
+  .col-md-3.mbtm15
+    = text_field_tag("State", nil, class: "form-control", placeholder: "State")
+  .col-md-3.mbtm15
+    = text_field_tag("Zip", nil, class: "form-control", placeholder: "Zip")
+.row
+  .col-md-3.mbtm15
+    = phone_field_tag("Phone", nil, class: "form-control", placeholder: "Phone")
+  .col-md-3.mbtm15
+    = email_field_tag("Email", nil, class: "form-control", placeholder: "Email")
+.row
+  .col-md-3.mbtm15
+    = select_tag("Sales", options_for_select(["Sales", "New Sales", "None"]) , class: "form-control", placeholder: "Attention" )
+  .col-md-3.mbtm15
+    = select_tag("Select Product", options_for_select(["Artwork", "Mirrors", "Artificial Plants", "Lamps", "Others"]) , class: "form-control", placeholder: "Attention" )
+.row
+  .col-md-3.mbtm15
+    = text_field_tag("new_sales",nil, class: "form-control", placeholder: "New Sales" )
+.actions
+  = submit_tag("Submit", class: "btn btn-primary submit")
+
+:javascript
+  $("#new_company").hide()
+  $("#new_attention").hide()
+  $("#new_sales").hide()
+   $("#Company").change(function(){
+      if($("#Company").val() == "New Company"){
+        $("#new_company").fadeIn("slow")
+      }
+      else{
+        $("#new_company").val("")
+        $("#new_company").fadeOut()
+      }
+  });
+   $("#Attention").change(function(){
+      if($("#Attention").val() == "New Attention"){
+        $("#new_attention").fadeIn("slow")
+      }
+      else{
+        $("#new_attention").val("")
+        $("#new_attention").fadeOut()
+      }
+  });
+  $("#Sales").change(function(){
+      if($("#Sales").val() == "New Sales"){
+        $("#new_sales").fadeIn("slow")
+      }
+      else{
+        $("#new_sales").val("")
+        $("#new_sales").fadeOut()
+      }
+  });

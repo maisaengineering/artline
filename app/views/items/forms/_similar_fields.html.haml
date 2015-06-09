@@ -1,0 +1,19 @@
+.row
+  .col-md-3.mbtm15
+    = text_field_tag("Tag", nil, class: "form-control", placeholder: "Tag")
+  .col-md-3.mbtm15
+    = text_field_tag("Quantity", nil, class: "form-control", placeholder: "Quantity")
+.row
+  .col-md-3.mbtm15
+    = select_tag("Publisher", options_for_select(["Old Item", "New Item"]),include_blank: "Publisher" , class: "form-control")
+  .col-md-3.mbtm15
+    = select_tag("Image Number", options_for_select(["Old Item", "New Item"]),include_blank: "Image Number" , class: "form-control" )
+.row
+  .col-md-3.mbtm15
+    = text_field_tag("Title", nil, class: "form-control", placeholder: "Title")
+.row
+  .col-md-3.mbtm15
+    = text_field_tag("Image Width", nil, class: "form-control", placeholder: "Image Width")
+  .col-md-3.mbtm15
+    = text_field_tag("Image Height", nil, class: "form-control", placeholder: "Image Height")
+
