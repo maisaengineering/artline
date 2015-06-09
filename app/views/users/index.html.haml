@@ -1,0 +1,31 @@
+%section#main-content.cus
+  %section.wrapper
+    %div.serch_bg
+      #top_menu.nav.search-row.txt-clr
+        %ul.nav.top-menu
+          %li
+            = link_to "Create New Project Manager", new_users_path,class:'btn'
+          %li
+            %form.navbar-form
+              %input.form-control{:placeholder => "Search", :type => "text"}
+    %section.panel
+      %header.panel-heading.no-border
+        Project manager's
+      %table.table.table-bordered
+        %thead
+          %tr
+            %th #
+            %th First Name
+            %th Last Name
+            %th Email
+        %tbody
+        - @users.each_with_index do |user,index|
+          %tr
+            %td
+              #{index+1}
+            %td
+              #{user.fname}
+            %td
+              #{user.lname}
+            %td
+              #{user.email}

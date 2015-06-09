@@ -47,4 +47,9 @@ class User
   def is?(role)
     respond_to?(:roles) and roles.to_a.include?(role.to_s)
   end
+
+  def full_name
+    "#{fname} #{lname}".strip
+  end
+
 end
