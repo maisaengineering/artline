@@ -51,7 +51,7 @@
               -#    %span Dashboard
               -if current_user.is?(:super_admin)
                 %li
-                  = link_to new_users_path, method: :get do
+                  = link_to project_managers_path, method: :get do
                     %i.icon_document_alt
                     %span Project Managers
               %li
