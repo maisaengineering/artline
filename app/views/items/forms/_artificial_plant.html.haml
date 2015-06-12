@@ -1,19 +1,18 @@
 .row
   .col-md-3.mbtm15
-    = text_field_tag("Tag", nil, class: "form-control", placeholder: "Tag")
+    = text_field_tag("SupplierItemNumber", nil, class: "form-control", placeholder: "Supplier Item Number")
   .col-md-3.mbtm15
-    = text_field_tag("Quantity", nil, class: "form-control", placeholder: "Quantity")
+    = text_field_tag("ArtlineItemNumber", nil, class: "form-control", placeholder: "Artline Item Number")
 .row
   .col-md-3.mbtm15
-    = select_tag("New Item", options_for_select(["Old Item", "New Item"]),include_blank: "Item Number" , class: "form-control")
+    = text_field_tag("PlantName", nil, class: "form-control", placeholder: "Plant Name")
   .col-md-3.mbtm15
-    = select_tag("Fire Rating", options_for_select(["Yes", "No"]),include_blank: "Fire Rating" , class: "form-control" )
+    = text_field_tag("Size", nil, class: "form-control", placeholder: "Size")
 .row
   .col-md-3.mbtm15
-    = select_tag("Container Number", options_for_select(["Old Item", "New Item"]),include_blank: "Container Number" , class: "form-control")
-.row
-  .col-md-3.mbtm15.txt_area
-    = text_area_tag("Special Instructions", nil, class: "form-control", placeholder: "Special Instructions")
+    = text_field_tag("SupplierCost", nil, class: "form-control", placeholder: "Supplier Cost")
 .row
   .col-md-3.mbtm15
-    = label_tag(:tot_cost, "Total Cost:")
+    = file_field_tag("Upload_Image")
+    optional
+

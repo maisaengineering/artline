@@ -1,0 +1,23 @@
+.row
+  .col-md-3.mbtm15
+    = text_field_tag("PublisherItemNumber", nil, class: "form-control", placeholder: "Publisher Item Number")
+  .col-md-3.mbtm15
+    = text_field_tag("ArtlineItemNumber", nil, class: "form-control", placeholder: "Artline Item Number")
+.row
+  .col-md-3.mbtm15
+    = text_field_tag("Title", nil, class: "form-control", placeholder: "Title")
+  .col-md-3.mbtm15
+    = text_field_tag("Artist", nil, class: "form-control", placeholder: "Artist")
+.row
+  .col-md-3.mbtm15
+    = text_field_tag("ImageWidth", nil, class: "form-control", placeholder: "Image Width")
+  .col-md-3.mbtm15
+    = text_field_tag("ImageHeight", nil, class: "form-control", placeholder: "Image Height")
+.row
+  .col-md-3.mbtm15
+    = text_field_tag("ImageRightsCost", nil, class: "form-control", placeholder: "Image Rights Cost")
+.row
+  .col-md-3.mbtm15
+    = file_field_tag("Upload_Image")
+    optional
+
