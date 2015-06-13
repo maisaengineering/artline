@@ -1,0 +1,13 @@
+.row
+  .col-md-3.mbtm15
+    = text_field_tag("ItemNumber", nil, class: "form-control", placeholder: "Item Number")
+.row
+  .col-md-3.mbtm15.txt_area
+    = text_area_tag("ShadeDescription", nil, class: "form-control", placeholder: "Shade Description")
+.row
+  .col-md-3.mbtm15
+    = text_field_tag("SupplierPrice", nil, class: "form-control", placeholder: "Supplier Price")
+.row
+  .col-md-3.mbtm15
+    = file_field_tag("Upload_Image")
+    optional

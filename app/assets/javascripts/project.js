@@ -29,4 +29,22 @@ $(document).ready(function() {
             $("#new_sales").fadeOut()
         }
     });
+
+
+    $("#Select_Product").change(function () {
+        if ( $(this).val() != "" ) {
+            $('.display_item').show()
+            var item = $(this).val()
+            var url = "/product_ajax_load"
+            $.ajax({
+                method: "GET",
+                url: url,
+                data: {item: item}
+            })
+        }
+        else {
+            $('.display_item').hide()
+        }
+    });
+
 });

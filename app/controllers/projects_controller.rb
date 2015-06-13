@@ -33,6 +33,10 @@ class ProjectsController < ApplicationController
 
   end
 
+  def product_ajax_load
+
+  end
+
   private
 
   def project_params
