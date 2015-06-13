@@ -2,7 +2,7 @@
   = hidden_field_tag :item_type, @product.class
   .row
     .col-md-3.mbtm15
-      = f.select :type, Childrens["artwork"].to_a.map(&:reverse), class: "form-control"
+      = f.select :type, Childrens["artwork"].to_a.map(&:reverse),{:include_blank => 'Choose'}, class: "form-control"
   .row
     .col-md-3.mbtm15
       = f.text_field :publisher_item_number, class: "form-control", placeholder: "Publisher Item Number"
@@ -24,7 +24,7 @@
     .col-md-3.mbtm15
       = f.text_field :rights_cost, class: "form-control", placeholder: "Image Rights Cost"
   .row
-    .col-md-3.mbtm15
-      = file_field_tag("source")
-      optional
-  = f.submit
+    .fileUpload.btn.btn-primary.mbtm15
+      %span Upload image
+      = f.file_field :source, class: "upload"
+  = f.submit nil, class: "btn btn-success mbtm15"

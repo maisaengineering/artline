@@ -8,4 +8,29 @@
           %li
             %form.navbar-form
               %input.form-control{:placeholder => "Search", :type => "text"}
-    %h1 #Item's
+    %section.panel
+      %header.panel-heading.no-border
+        Item's
+      %table.table.table-bordered
+        %thead
+          %tr
+            %th #
+            %th Artline Number
+            %th Artline Title
+            %th Action
+        %tbody
+        = will_paginate @products
+        - @products.each_with_index do |product,index|
+          %tr
+            %td
+              #{index+1}
+            %td
+              #{product.number}
+            %td
+              #{product.title}
+            %td
+              .btn-group
+                %a.btn.btn-primary{:href => "#"}
+                  %i.icon_plus_alt2
+                %a.btn.btn-danger{:href => "#"}
+                  %i.icon_close_alt2

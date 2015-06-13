@@ -12,7 +12,7 @@
   .col-md-3.mbtm15
     = text_field_tag("SupplierPrice", nil, class: "form-control", placeholder: "Supplier Price")
 .row
-  .col-md-3.mbtm15
-    = file_field_tag("Upload_Image")
-    optional
+  .fileUpload.btn.btn-primary
+    %span Upload image
+    = file_field_tag("Upload_Image", class: "upload")
 
