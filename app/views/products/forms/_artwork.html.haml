@@ -1,5 +1,8 @@
 .row
   .col-md-3.mbtm15
+    = select_tag("Itemslist", options_for_select(Childrens["artwork"].to_a.map(&:reverse)), class: "form-control")
+.row
+  .col-md-3.mbtm15
     = text_field_tag("PublisherItemNumber", nil, class: "form-control", placeholder: "Publisher Item Number")
   .col-md-3.mbtm15
     = text_field_tag("ArtlineItemNumber", nil, class: "form-control", placeholder: "Artline Item Number")

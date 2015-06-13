@@ -7,7 +7,12 @@ Rails.application.routes.draw do
   get '/dashboard' => 'home#index', as: :dashboard
 
   resources :projects
-  resources :items
+  resources :products do
+    collection do
+      get 'load_form'
+    end
+
+  end
   resources :orders do
     collection do
       get 'tracking'
@@ -17,7 +22,7 @@ Rails.application.routes.draw do
   get '/users/new'=>"users#new", as: :new_users
   post '/users/create'=>"users#create", as: :users
   get '/project-managers'=>"users#index", as: :project_managers
-  get '/item/ajax_load', to: 'items#ajax_load'
+
   get '/product_ajax_load', to: 'projects#product_ajax_load'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -1,0 +1,6 @@
+Categories = {"Artwork"=>"Artwork", "Mirror"=>"Mirror",
+              "ArtificialPlant"=> "Artificial Plant",
+              "lamp"=>"Lamp"}
+Childrens={"artwork"=>{"framed_art"=>"Framed Art", "acrylic"=>"Acrylic",
+                       "aluminum"=>"Aluminum", "colorboard"=>"Colorboard",
+                       "vinyl"=>"Vinyl"}}

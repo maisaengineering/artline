@@ -5,7 +5,7 @@
       %div.panel-body.ptop35
         .row
           .col-md-3.mbtm15
-            = select_tag("Itemslist", options_for_select([["Art Work",'artwork'], ["Artificial Plant",'artificial_plant'], ["Lamp",'lamp']]),include_blank: "Items List" , class: "form-control")
+            = select_tag("Itemslist", options_for_select(Categories.to_a.map(&:reverse)),include_blank: "Item Type" , class: "form-control")
         .row
           .col-md-12.selected_item
 
