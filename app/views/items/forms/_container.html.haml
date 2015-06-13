@@ -1,0 +1,14 @@
+.row
+  .col-md-3.mbtm15
+    = text_field_tag("SupplierItemNumber", nil, class: "form-control", placeholder: "Supplier Item Number")
+  .col-md-3.mbtm15
+    = text_field_tag("ArtlineItemNumber", nil, class: "form-control", placeholder: "Artline Item Number")
+.row
+  .col-md-3.mbtm15
+    = text_field_tag("ContainerName", nil, class: "form-control", placeholder: "Container Name")
+  .col-md-3.mbtm15
+    = text_field_tag("SupplierCost", nil, class: "form-control", placeholder: "Supplier Cost")
+.row
+  .col-md-3.mbtm15
+    = file_field_tag("Upload_Image")
+    optional

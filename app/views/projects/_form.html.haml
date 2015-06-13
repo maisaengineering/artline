@@ -43,9 +43,14 @@
   .col-md-3.mbtm15
     = select_tag("Sales", options_for_select(["Old", "New", "None"]),include_blank: "Sales Rep" , class: "form-control", placeholder: "Attention" )
   .col-md-3.mbtm15
-    = select_tag("Select Product", options_for_select(["Artwork", "Mirrors", "Artificial Plants", "Lamps", "Others"]),include_blank: "Select Product" , class: "form-control", placeholder: "Attention" )
+    = select_tag("Select Product", options_for_select(["Artwork", ["Mirrors","mirror"], ["Artificial Plants", "artificial_plant"], ["Lamps","lamp" ], ["Others","other"]]),include_blank: "Select Product" , class: "form-control", placeholder: "Attention" )
+.row
+  .col-md-3.mbtm15
+    = link_to "Add another item","#", class: ""
 .row
   .col-md-3.mbtm15
     = text_field_tag("new_sales",nil, class: "form-control", placeholder: "New Sales" )
+.row.mm
+  .col-md-12.display_item
 .actions
   = submit_tag("Submit", class: "btn btn-primary submit")
