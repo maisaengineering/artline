@@ -8,19 +8,4 @@
             = select_tag("Itemslist", options_for_select([["Art Work",'artwork'], ["Artificial Plant",'artificial_plant'], ["Lamp",'lamp']]),include_blank: "Items List" , class: "form-control")
         .row
           .col-md-12.selected_item
-:javascript
-  $("#Itemslist").change(function(){
-    if( ($(this).val() == "artwork") || ($(this).val() == "artificial_plant") || ($(this).val() == "lamp")){
-    $('.selected_item').show()
-     var item = $(this).val()
-     var url= "/item/ajax_load"
-     $.ajax({
-        method: "GET",
-        url: url,
-        data: {item: item }
-     })
-    }
-    else{
-    $('.selected_item').hide().empty()
-    }
-    });
+
