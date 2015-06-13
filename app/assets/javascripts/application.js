@@ -11,9 +11,21 @@
 // about supported directives.
 //
 //= require jquery
-//= require bootstrap-sprockets
+//= require jquery.turbolinks
 //= require jquery_ujs
 //= require turbolinks
+//= require bootstrap-sprockets
+
+//= require item
+//= require project
+
+Turbolinks.pagesCached(0);
+// Visit pages via turbolinks
+$(document).on('click', '.viaTurbo',function (e) {
+    e.preventDefault()
+    Turbolinks.visit($(this).attr('data-url'));
+});
+
 
 $(document).ready(function() {
     renderFlashMessage()
