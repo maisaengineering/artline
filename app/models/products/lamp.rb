@@ -1,3 +1,3 @@
-class Products::Mirror < Product
+class Products::Lamp < Product
 
 end

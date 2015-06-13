@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    $("#Itemslist").change(function () {
+    $("#product_type").change(function () {
         if (($(this).val() == "Artwork") || ($(this).val() == "ArtificialPlant") || ($(this).val() == "Lamp")) {
             $('.selected_item').show()
             var item = $(this).val()

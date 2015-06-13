@@ -1,26 +1,30 @@
-.row
-  .col-md-3.mbtm15
-    = select_tag("Itemslist", options_for_select(Childrens["artwork"].to_a.map(&:reverse)), class: "form-control")
-.row
-  .col-md-3.mbtm15
-    = text_field_tag("PublisherItemNumber", nil, class: "form-control", placeholder: "Publisher Item Number")
-  .col-md-3.mbtm15
-    = text_field_tag("ArtlineItemNumber", nil, class: "form-control", placeholder: "Artline Item Number")
-.row
-  .col-md-3.mbtm15
-    = text_field_tag("Title", nil, class: "form-control", placeholder: "Title")
-  .col-md-3.mbtm15
-    = text_field_tag("Artist", nil, class: "form-control", placeholder: "Artist")
-.row
-  .col-md-3.mbtm15
-    = text_field_tag("ImageWidth", nil, class: "form-control", placeholder: "Image Width")
-  .col-md-3.mbtm15
-    = text_field_tag("ImageHeight", nil, class: "form-control", placeholder: "Image Height")
-.row
-  .col-md-3.mbtm15
-    = text_field_tag("ImageRightsCost", nil, class: "form-control", placeholder: "Image Rights Cost")
-.row
-  .col-md-3.mbtm15
-    = file_field_tag("Upload_Image")
-    optional
-
+= form_for @product, as: :product, url:products_path(@product) do |f|
+  = hidden_field_tag :item_type, @product.class
+  .row
+    .col-md-3.mbtm15
+      = f.select :type, Childrens["artwork"].to_a.map(&:reverse), class: "form-control"
+  .row
+    .col-md-3.mbtm15
+      = f.text_field :publisher_item_number, class: "form-control", placeholder: "Publisher Item Number"
+    .col-md-3.mbtm15
+      = f.text_field :number, class: "form-control", placeholder: "Artline Item Number"
+  .row
+    .col-md-3.mbtm15
+      = f.text_field :title, class: "form-control", placeholder: "Title"
+    .col-md-3.mbtm15
+      = f.text_field :artist, class: "form-control", placeholder: "Artist"
+  .row
+    .col-md-3.mbtm15
+      = f.text_field :width, class: "form-control", placeholder: "Image Width"
+    .col-md-3.mbtm15
+      = f.text_field :height, class: "form-control", placeholder: "Image Height"
+  .row
+    .col-md-3.mbtm15
+      = f.text_field :print_cost, class: "form-control", placeholder: "Print Cost"
+    .col-md-3.mbtm15
+      = f.text_field :rights_cost, class: "form-control", placeholder: "Image Rights Cost"
+  .row
+    .col-md-3.mbtm15
+      = file_field_tag("source")
+      optional
+  = f.submit

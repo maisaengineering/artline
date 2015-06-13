@@ -1,3 +1,3 @@
-class Products::Item < Product
+class Products::Mirror < Product
 
 end
