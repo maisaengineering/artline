@@ -18,7 +18,9 @@
             %th First Name
             %th Last Name
             %th Email
+            %th Action
         %tbody
+          = will_paginate @products
         - @users.each_with_index do |user,index|
           %tr
             %td
@@ -29,3 +31,7 @@
               #{user.lname}
             %td
               #{user.email}
+            %td
+              .btn-group
+                %a.btn.btn-danger{:href => "#"}
+                  %i.icon_close_alt2

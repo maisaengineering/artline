@@ -2,6 +2,7 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 @import "bootstrap/theme";
+@import url(elegant-icons-style.css);
 
 /*
 Template Name: Creative Bootstrap 3 Responsive Admin Template
@@ -5015,6 +5016,22 @@ span.customSelect.changed {
 
 .txt-clr ul li:hover {
   background-color: #2e3b46;
+}
 
+.fileUpload {
+  position: relative;
+  overflow: hidden;
+  margin-left: 14px;
+}
+.fileUpload input.upload {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 0;
+  padding: 0;
+  font-size: 20px;
+  cursor: pointer;
+  opacity: 0;
+  filter: alpha(opacity=0);
 }
 

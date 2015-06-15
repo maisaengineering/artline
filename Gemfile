@@ -48,3 +48,6 @@ gem 'haml-rails'
 gem 'devise'
 gem 'bootstrap-sass'
 gem 'cancan'
+gem 'carrierwave-mongoid', require: 'carrierwave/mongoid'
+gem "will_paginate_mongoid"
+
