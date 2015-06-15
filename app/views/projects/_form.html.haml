@@ -11,45 +11,24 @@
     = label_tag(:Quote, "Quote Number:")
 .row
   .col-md-3.mbtm15
-    = text_field_tag("Project_name", nil, class: "form-control", placeholder: "Project Name")
+    = text_field_tag("project[name]", nil, class: "form-control", placeholder: "Project Name")
   .col-md-3.mbtm15
-    = text_field_tag("Date", nil, class: "form-control", placeholder: "Date")
+    = text_field_tag("project[date]", nil, class: "form-control", placeholder: "Date")
 .row
   .col-md-3.mbtm15
-    = select_tag("Company", options_for_select(["Old Company", "New Company"]),include_blank: "Company" , class: "form-control", placeholder: "Company" )
+    = select_tag("project[client_id]", options_for_select(Companies::Client.all.map{|c|[c.name, c.id]}.push('other')),prompt: "Choose Company" , class: "form-control", id:"project_client_id")
   .col-md-3.mbtm15
-    = select_tag("Attention", options_for_select(["Old Attention", "New Attention"]),include_blank: "Attention" , class: "form-control", placeholder: "Attention" )
+    = select_tag("company[attention]", options_for_select([]),include_blank: "Attention" , class: "form-control", placeholder: "Attention" )
+= render 'companies/form'
 .row
   .col-md-3.mbtm15
-    = text_field_tag("new_company",nil, class: "form-control", placeholder: "Company Name" )
+    = select_tag("project[sales_rep]", options_for_select([ "New", "None"]),include_blank: "Sales Rep" , class: "form-control", placeholder: "Attention" )
   .col-md-3.mbtm15
-    = text_field_tag("new_attention",nil, class: "form-control", placeholder: "Attention Name" )
+    = select_tag("Select Product", options_for_select(Categories.to_a.map(&:reverse)),include_blank: "Select Product" , class: "form-control" )
 .row
   .col-md-3.mbtm15
-    = text_field_tag("Address", nil, class: "form-control", placeholder: "Address")
-  .col-md-3.mbtm15
-    = text_field_tag("City", nil, class: "form-control", placeholder: "City")
-.row
-  .col-md-3.mbtm15
-    = text_field_tag("State", nil, class: "form-control", placeholder: "State")
-  .col-md-3.mbtm15
-    = text_field_tag("Zip", nil, class: "form-control", placeholder: "Zip")
-.row
-  .col-md-3.mbtm15
-    = phone_field_tag("Phone", nil, class: "form-control", placeholder: "Phone")
-  .col-md-3.mbtm15
-    = email_field_tag("Email", nil, class: "form-control", placeholder: "Email")
-.row
-  .col-md-3.mbtm15
-    = select_tag("Sales", options_for_select(["Old", "New", "None"]),include_blank: "Sales Rep" , class: "form-control", placeholder: "Attention" )
-  .col-md-3.mbtm15
-    = select_tag("Select Product", options_for_select(["Artwork", ["Mirrors","mirror"], ["Artificial Plants", "artificial_plant"], ["Lamps","lamp" ], ["Others","other"]]),include_blank: "Select Product" , class: "form-control", placeholder: "Attention" )
-.row
-  .col-md-3.mbtm15
-    = link_to "Add another item","#", class: ""
-.row
-  .col-md-3.mbtm15
-    = text_field_tag("new_sales",nil, class: "form-control", placeholder: "New Sales" )
+    = link_to "Add another item","#", id: "add_another_item"
+
 .row.mm
   .col-md-12.display_item
 .actions

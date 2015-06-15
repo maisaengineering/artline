@@ -1,50 +1,31 @@
 $(document).ready(function() {
-    $("#new_company").hide()
-    $("#new_attention").hide()
-    $("#new_sales").hide()
-    $("#Company").change(function () {
-        if ($("#Company").val() == "New Company") {
-            $("#new_company").fadeIn("slow")
-        }
-        else {
-            $("#new_company").val("")
-            $("#new_company").fadeOut()
-        }
-    });
-    $("#Attention").change(function () {
-        if ($("#Attention").val() == "New Attention") {
-            $("#new_attention").fadeIn("slow")
-        }
-        else {
-            $("#new_attention").val("")
-            $("#new_attention").fadeOut()
-        }
-    });
-    $("#Sales").change(function () {
-        if ($("#Sales").val() == "New") {
-            $("#new_sales").fadeIn("slow")
-        }
-        else {
-            $("#new_sales").val("")
-            $("#new_sales").fadeOut()
-        }
-    });
+    $('#company_name').closest('.row').hide();
+    $("#project_client_id").change(function(e){
+        e.preventDefault();
+        $val= $.trim($(this).val());
+        $(this);
 
+        if($val=='other'){
+            $(this).closest('.row').remove();
+            $('#company_name').closest('.row').show();
 
-    $("#Select_Product").change(function () {
-        if ( $(this).val() != "" ) {
-            $('.display_item').show()
-            var item = $(this).val()
-            var url = "/product_ajax_load"
+        }else{
             $.ajax({
                 method: "GET",
-                url: url,
-                data: {item: item}
-            })
-        }
-        else {
-            $('.display_item').hide()
+                url: "/companies/"+$(this).val(),
+                dataType: 'json',
+                success: function(data){
+                    fields = ["name", "attention", "address", "city", "state", "zip","phone", "email"]
+                    $.each(fields,  function( index, value ) {
+                        $("#company_"+value).val(data[value]);
+                    })
+                }
+            });
         }
     });
 
 });
+
+
+
+

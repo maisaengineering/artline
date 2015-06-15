@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get '/dashboard' => 'home#index', as: :dashboard
 
   resources :projects
+  resources :companies
   resources :products do
     collection do
       get 'load_form'

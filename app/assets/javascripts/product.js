@@ -7,7 +7,7 @@ $(document).ready(function() {
             $.ajax({
                 method: "GET",
                 url: url,
-                script: 'js',
+                dataType: 'script',
                 data: {item: item}
             })
         }
