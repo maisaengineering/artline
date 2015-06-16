@@ -1,6 +1,6 @@
 Categories = {"Artwork"=>"Artwork", "Mirror"=>"Mirror",
               "ArtificialPlant"=> "Artificial Plant",
-              "lamp"=>"Lamp"}
+              "Lamp"=>"Lamp"}
 Childrens={"Artwork"=>{"framed_art"=>"Framed Art", "acrylic"=>"Acrylic",
                        "aluminum"=>"Aluminum", "colorboard"=>"Colorboard",
                        "vinyl"=>"Vinyl"}}

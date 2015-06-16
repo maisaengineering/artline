@@ -1,18 +1,33 @@
-.row
-  .col-md-3.mbtm15
-    = text_field_tag("SupplierItemNumber", nil, class: "form-control", placeholder: "Supplier Item Number")
-  .col-md-3.mbtm15
-    = text_field_tag("ArtlineItemNumber", nil, class: "form-control", placeholder: "Artline Item Number")
-.row
-  .col-md-3.mbtm15
-    = text_field_tag("Description", nil, class: "form-control", placeholder: "Description")
-  .col-md-3.mbtm15
-    = text_field_tag("Size", nil, class: "form-control", placeholder: "Size")
-.row
-  .col-md-3.mbtm15
-    = text_field_tag("SupplierPrice", nil, class: "form-control", placeholder: "Supplier Price")
-.row
-  .fileUpload.btn.btn-primary
-    %span Upload image
-    = file_field_tag("Upload_Image", class: "upload")
+= form_for @product, as: :product, url:( @product.new_record? ? products_path(@product) : product_path(@product)) do |f|
+  = hidden_field_tag :item_type, @product.class
+  - if @product.errors.present?
+    #error_explanation
+      %h2 #{@product.errors.count} error prohibited this user from being saved:
+      %ul
+        - @product.errors.full_messages.each do |error|
+          %li
+            = "#{error}"
+  .row
+    .col-md-3.mbtm15
+      = f.text_field :supplier_item_number, class: "form-control", placeholder: "Supplier Item Number",required: true
+    .col-md-3.mbtm15
+      = f.text_field :number, class: "form-control", placeholder: "Artline Item Number",required: true
+  .row
+    .col-md-3.mbtm15
+      = f.text_field :description, class: "form-control", placeholder: "Description",required: true
+    .col-md-3.mbtm15
+      = f.text_field :size, class: "form-control", placeholder: "Size",required: true
+  .row
+    .col-md-3.mbtm15
+      = f.text_field :supplier_price, class: "form-control", placeholder: "Supplier Price",required: true
+  .row
+    .col-md-2.fileUpload.btn.btn-primary.mbtm15
+      %span Upload image
+      = f.file_field :source, class: "upload",onchange: "upload_img(this)"
+    .col-md-4.file-name{style: "padding-top: 5px; padding-left: 5px"}
+      %span
+  = f.submit nil, class: "btn btn-success mbtm15"
+
+
+
 

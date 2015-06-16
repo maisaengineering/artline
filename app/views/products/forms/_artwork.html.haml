@@ -1,30 +1,39 @@
-= form_for @product, as: :product, url:products_path(@product) do |f|
+= form_for @product, as: :product, url:( @product.new_record? ? products_path(@product) : product_path(@product)) do |f|
   = hidden_field_tag :item_type, @product.class
+  - if @product.errors.present?
+    #error_explanation
+      %h2 #{@product.errors.count} error prohibited this user from being saved:
+      %ul
+        - @product.errors.full_messages.each do |error|
+          %li
+            = "#{error}"
   .row
     .col-md-3.mbtm15
       = f.select :type, Childrens["artwork"].to_a.map(&:reverse),{:include_blank => 'Choose'}, class: "form-control"
   .row
     .col-md-3.mbtm15
-      = f.text_field :publisher_item_number, class: "form-control", placeholder: "Publisher Item Number"
+      = f.text_field :publisher_item_number, class: "form-control", placeholder: "Publisher Item Number",required: true
     .col-md-3.mbtm15
-      = f.text_field :number, class: "form-control", placeholder: "Artline Item Number"
+      = f.text_field :number, class: "form-control", placeholder: "Artline Item Number",required: true
   .row
     .col-md-3.mbtm15
-      = f.text_field :title, class: "form-control", placeholder: "Title"
+      = f.text_field :title, class: "form-control", placeholder: "Title",required: true
     .col-md-3.mbtm15
-      = f.text_field :artist, class: "form-control", placeholder: "Artist"
+      = f.text_field :artist, class: "form-control", placeholder: "Artist",required: true
   .row
     .col-md-3.mbtm15
-      = f.text_field :width, class: "form-control", placeholder: "Image Width"
+      = f.text_field :width, class: "form-control", placeholder: "Image Width",required: true
     .col-md-3.mbtm15
-      = f.text_field :height, class: "form-control", placeholder: "Image Height"
+      = f.text_field :height, class: "form-control", placeholder: "Image Height",required: true
   .row
     .col-md-3.mbtm15
       = f.text_field :print_cost, class: "form-control", placeholder: "Print Cost"
     .col-md-3.mbtm15
-      = f.text_field :rights_cost, class: "form-control", placeholder: "Image Rights Cost"
+      = f.text_field :rights_cost, class: "form-control", placeholder: "Image Rights Cost",required: true
   .row
-    .fileUpload.btn.btn-primary.mbtm15
+    .col-md-2.fileUpload.btn.btn-primary.mbtm15
       %span Upload image
-      = f.file_field :source, class: "upload"
+      = f.file_field :source, class: "upload",onchange: "upload_img(this)"
+    .col-md-4.file-name{style: "padding-top: 5px; padding-left: 5px;"}
+      %span
   = f.submit nil, class: "btn btn-success mbtm15"

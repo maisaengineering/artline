@@ -1,6 +1,8 @@
 class ProductsController < ApplicationController
+  before_action :set_product, only: [:edit, :update, :destroy]
+
   def index
-     @products = Products::Artwork.paginate(page: params[:page], per_page: 5)
+    @products = Product.order_by(created_at: "desc").paginate(page: params[:page], per_page: 5)
   end
 
   def new
@@ -16,12 +18,35 @@ class ProductsController < ApplicationController
     end
   end
 
+  def edit
+
+  end
+
+  def update
+    if @product.update(product_params)
+      flash[:noice] = "Successfully Updated"
+      redirect_to products_url
+    else
+      render :edit
+    end
+  end
+
+  def destroy
+    @product.destroy
+    flash[:notice]= "Item successfully deleted"
+    redirect_to products_url
+  end
+
 
   def load_form
     @product = eval(params[:item]).new
   end
 
   private
+
+  def set_product
+    @product = Product.find(params[:id])
+  end
 
   def product_params
     params.require(:product).permit(params[:product].keys)

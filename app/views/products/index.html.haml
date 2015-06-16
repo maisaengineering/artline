@@ -16,7 +16,7 @@
           %tr
             %th #
             %th Artline Number
-            %th Artline Title
+            %th Type
             %th Action
         %tbody
         = will_paginate @products
@@ -27,10 +27,8 @@
             %td
               #{product.number}
             %td
-              #{product.title}
+              #{product._type.split("::").last}
             %td
               .btn-group
-                %a.btn.btn-primary{:href => "#"}
-                  %i.icon_plus_alt2
-                %a.btn.btn-danger{:href => "#"}
-                  %i.icon_close_alt2
+                = link_to("Update", edit_product_path(product.id), class: "btn btn-primary" )
+                = link_to("Delete", product_path(product.id), method: :delete, class: "btn btn-danger" )

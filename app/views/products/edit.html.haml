@@ -1,0 +1,7 @@
+%section#main-content
+  %section.wrapper
+    %h1 Edit Item
+    %section.panel
+      %div.panel-body.ptop35
+        = render  "/products/forms/#{@product._type.split("::").last.downcase}"
+

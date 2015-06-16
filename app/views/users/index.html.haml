@@ -32,6 +32,7 @@
             %td
               #{user.email}
             %td
-              .btn-group
-                %a.btn.btn-danger{:href => "#"}
-                  %i.icon_close_alt2
+              - unless user.is?(:super_admin)
+                .btn-group
+                  %a.btn.btn-danger{:href => "#"}
+                    %span Delete

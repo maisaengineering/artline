@@ -2,7 +2,7 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 @import "bootstrap/theme";
-@import url(elegant-icons-style.css);
+//@import url(elegant-icons-style.css);
 
 /*
 Template Name: Creative Bootstrap 3 Responsive Admin Template
@@ -5022,6 +5022,8 @@ span.customSelect.changed {
   position: relative;
   overflow: hidden;
   margin-left: 14px;
+  text-align: left;
+  width: 11%;
 }
 .fileUpload input.upload {
   position: absolute;
