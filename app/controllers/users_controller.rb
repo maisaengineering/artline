@@ -15,8 +15,15 @@ class UsersController < ApplicationController
     if @user.errors.any?
       render 'new'
     else
-      redirect_to dashboard_path, alert: "Project Manager Sucessfully Created"
+      redirect_to project_managers_path, alert: "Project Manager Successfully Created"
     end
+  end
+
+  def destroy
+    @user = User.find(params[:id])
+    @user.destroy
+    flash[:notice] = "User successfully deleted"
+    redirect_to project_managers_path
   end
 
   private

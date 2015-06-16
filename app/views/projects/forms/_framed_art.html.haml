@@ -1,64 +1,64 @@
 .row
   .col-md-3.mbtm15
-    = text_field_tag("Tag", nil, class: "form-control", placeholder: "Tag")
+    = text_field_tag("item[][tag]", nil, class: "form-control", placeholder: "Tag")
   .col-md-3.mbtm15
-    = text_field_tag("Quantity", nil, class: "form-control", placeholder: "Quantity")
+    = text_field_tag("item[][quantity]", nil, class: "form-control", placeholder: "Quantity")
 .row
   .col-md-3.mbtm15
-    = select_tag("Publisher", options_for_select(["Old Publisher", "New Publisher"]),include_blank: "Publisher" , class: "form-control")
+    = select_tag("item[][publisher]", options_for_select(["other"]),prompt: "Publisher" , class: "form-control")
   .col-md-3.mbtm15
-    = select_tag("Image Number", options_for_select(["Old Item", "New Item"]),include_blank: "Image Number" , class: "form-control" )
+    = select_tag("item[][image_number]", options_for_select(["other"]),prompt: "Image Number" , class: "form-control" )
 .row
   .col-md-3.mbtm15
-    = text_field_tag("Title", nil, class: "form-control", placeholder: "Title")
+    = text_field_tag("item[][title]", nil, class: "form-control", placeholder: "Title")
 .row
   .col-md-3.mbtm15
-    = text_field_tag("Image Width", nil, class: "form-control", placeholder: "Image Width")
+    = text_field_tag("item[][image_width]", nil, class: "form-control", placeholder: "Image Width")
   .col-md-3.mbtm15
-    = text_field_tag("Image Height", nil, class: "form-control", placeholder: "Image Height")
+    = text_field_tag("item[][image_height]", nil, class: "form-control", placeholder: "Image Height")
 .row
   .col-md-3.mbtm15
-    = select_tag("Matting", options_for_select(["Single", "Double","None","Other"]),include_blank: "Matting" , class: "form-control")
+    = select_tag("item[][matting]", options_for_select(["Single", "Double","None","Other"]),prompt: "Matting" , class: "form-control")
   .col-md-3.mbtm15
-    = number_field_tag("Mat Size", 3, class: "form-control", placeholder: "Mat Size",min: 0 )
-.row
-  .col-md-3.mbtm15.txt_area
-    = text_area_tag("Mat Special Instructions", nil, class: "form-control", placeholder: "Mat Special Instructions")
-.row
-  .col-md-3.mbtm15
-    = select_tag("Glazing", options_for_select(["Glass", "Plexie","None"]),include_blank: "Glazing" , class: "form-control" )
+    = number_field_tag("item[][mat_size]", 3, class: "form-control", placeholder: "Mat Size",min: 0 )
 .row
   .col-md-3.mbtm15.txt_area
-    = text_area_tag("Glazing Special Instructions", nil, class: "form-control", placeholder: "Glazing Special Instructions")
+    = text_area_tag("item[][mat_special_instructions]", nil, class: "form-control", placeholder: "Mat Special Instructions")
 .row
   .col-md-3.mbtm15
-    = text_field_tag("Glass Width", nil, class: "form-control", placeholder: "Glass Width")
-  .col-md-3.mbtm15
-    = text_field_tag("Glass Height", nil, class: "form-control", placeholder: "Glass Height")
-.row
-  .col-md-3.mbtm15
-    = text_field_tag("Glass United Inches", nil, class: "form-control", placeholder: "Glass United Inches")
-.row
-  .col-md-3.mbtm15
-    = select_tag("Moulding Company", options_for_select(["Old Company", "New Company"]),include_blank: "Moulding Company" , class: "form-control" )
-  .col-md-3.mbtm15
-    = select_tag("Frame Number", options_for_select(["Old Item", "New Item"]),include_blank: "Frame Number" , class: "form-control" )
-.row
-  .col-md-3.mbtm15
-    = text_field_tag("Category", nil, class: "form-control", placeholder: "Category")
-  .col-md-3.mbtm15
-    = text_field_tag("Frame Size", nil, class: "form-control", placeholder: "Frame Size")
-.row
-  .col-md-3.mbtm15
-    = text_field_tag("Overall Width", nil, class: "form-control", placeholder: "Overall Width")
-  .col-md-3.mbtm15
-    = text_field_tag("Overall Height", nil, class: "form-control", placeholder: "Overall Height")
-.row
-  .col-md-3.mbtm15
-    = text_field_tag("Framing Cost", nil, class: "form-control", placeholder: "Framing Cost")
+    = select_tag("item[][glazing]", options_for_select(["Glass", "Plexie","None"]),prompt: "Glazing" , class: "form-control" )
 .row
   .col-md-3.mbtm15.txt_area
-    = text_area_tag("Special Instructions", nil, class: "form-control", placeholder: "Special Instructions")
+    = text_area_tag("item[][glazing_special_instructions]", nil, class: "form-control", placeholder: "Glazing Special Instructions")
+.row
+  .col-md-3.mbtm15
+    = text_field_tag("item[][glass_width]", nil, class: "form-control", placeholder: "Glass Width")
+  .col-md-3.mbtm15
+    = text_field_tag("item[][glass_height]", nil, class: "form-control", placeholder: "Glass Height")
+.row
+  .col-md-3.mbtm15
+    = text_field_tag("item[][glass_united_inches]", nil, class: "form-control", placeholder: "Glass United Inches")
+.row
+  .col-md-3.mbtm15
+    = select_tag("item[][moulding_company]", options_for_select(["Old Company", "New Company"]),prompt: "Moulding Company" , class: "form-control" )
+  .col-md-3.mbtm15
+    = select_tag("item[][frame_number]", options_for_select(["other"]),prompt: "Frame Number" , class: "form-control" )
+.row
+  .col-md-3.mbtm15
+    = text_field_tag("item[][category]", nil, class: "form-control", placeholder: "Category")
+  .col-md-3.mbtm15
+    = text_field_tag("item[][frame_size]", nil, class: "form-control", placeholder: "Frame Size")
+.row
+  .col-md-3.mbtm15
+    = text_field_tag("item[][overall_width]", nil, class: "form-control", placeholder: "Overall Width")
+  .col-md-3.mbtm15
+    = text_field_tag("item[][overall_height]", nil, class: "form-control", placeholder: "Overall Height")
+.row
+  .col-md-3.mbtm15
+    = text_field_tag("item[][framing_cost]", nil, class: "form-control", placeholder: "Framing Cost")
+.row
+  .col-md-3.mbtm15.txt_area
+    = text_area_tag("item[][special_instructions]", nil, class: "form-control", placeholder: "Special Instructions")
 .row
   .col-md-3.mbtm15
     = label_tag(:tot_cost, "Total Cost:")

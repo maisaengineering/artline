@@ -1,19 +1,19 @@
 .row
   .col-md-3.mbtm15
-    = text_field_tag("Tag", nil, class: "form-control", placeholder: "Tag")
+    = text_field_tag("item[][tag]", nil, class: "form-control", placeholder: "Tag")
   .col-md-3.mbtm15
-    = text_field_tag("Quantity", nil, class: "form-control", placeholder: "Quantity")
+    = text_field_tag("item[][quantity]", nil, class: "form-control", placeholder: "Quantity")
 .row
   .col-md-3.mbtm15
-    = select_tag("New Item", options_for_select(["Old Item", "New Item"]),include_blank: "Item Number" , class: "form-control")
+    = select_tag("item[][item_nuber]", options_for_select(["other"]),prompt: "Item Number" , class: "form-control")
   .col-md-3.mbtm15
-    = select_tag("Fire Rating", options_for_select(["Yes", "No"]),include_blank: "Fire Rating" , class: "form-control" )
+    = select_tag("item[][fire_rating]", options_for_select(["Yes", "No"]),prompt: "Fire Rating" , class: "form-control" )
 .row
   .col-md-3.mbtm15
-    = select_tag("Container Number", options_for_select(["Old Item", "New Item"]),include_blank: "Container Number" , class: "form-control")
+    = select_tag("item[][container_number]", options_for_select(["other"]),prompt: "Container Number" , class: "form-control")
 .row
   .col-md-3.mbtm15.txt_area
-    = text_area_tag("Special Instructions", nil, class: "form-control", placeholder: "Special Instructions")
+    = text_area_tag("item[][special_instructions]", nil, class: "form-control", placeholder: "Special Instructions")
 .row
   .col-md-3.mbtm15
     = label_tag(:tot_cost, "Total Cost:")

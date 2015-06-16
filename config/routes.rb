@@ -23,6 +23,7 @@ Rails.application.routes.draw do
   get '/users/new'=>"users#new", as: :new_users
   post '/users/create'=>"users#create", as: :users
   get '/project-managers'=>"users#index", as: :project_managers
+  delete 'users/:id', to: "users#destroy", as: :destroy_user
 
   get '/product_ajax_load', to: 'projects#product_ajax_load'
   # The priority is based upon order of creation: first created -> highest priority.

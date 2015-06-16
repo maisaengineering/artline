@@ -1,12 +1,12 @@
 = render 'projects/forms/similar_fields'
 .row
   .col-md-3.mbtm15
-    = select_tag("Acrylic Thickness", options_for_select(["1/4", "1/2","Add Thickness"]),include_blank: "Acrylic Thickness" , class: "form-control" )
+    = select_tag("item[][acrylic_thickness]", options_for_select(["other"]),prompt: "Acrylic Thickness" , class: "form-control" )
   .col-md-3.mbtm15
-    = text_field_tag("Print Cost", nil, class: "form-control", placeholder: "Print Cost")
+    = text_field_tag("item[][print_cost]", nil, class: "form-control", placeholder: "Print Cost")
 .row
   .col-md-3.mbtm15.txt_area
-    = text_area_tag("Special Instructions", nil, class: "form-control", placeholder: "Special Instructions")
+    = text_area_tag("item[][special_instructions]", nil, class: "form-control", placeholder: "Special Instructions")
 .row
   .col-md-3.mbtm15
     = label_tag(:tot_cost, "Total Cost:")

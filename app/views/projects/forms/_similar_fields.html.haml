@@ -1,19 +1,19 @@
 .row
   .col-md-3.mbtm15
-    = text_field_tag("Tag", nil, class: "form-control", placeholder: "Tag")
+    = text_field_tag("item[][tag]", nil, class: "form-control", placeholder: "Tag")
   .col-md-3.mbtm15
-    = text_field_tag("Quantity", nil, class: "form-control", placeholder: "Quantity")
+    = text_field_tag("item[][quantity]", nil, class: "form-control", placeholder: "Quantity")
 .row
   .col-md-3.mbtm15
-    = select_tag("Publisher", options_for_select(["Old Publisher", "New Publisher"]),include_blank: "Publisher" , class: "form-control")
+    = select_tag("item[][publisher]", options_for_select(["other"]),prompt: "Publisher" , class: "form-control")
   .col-md-3.mbtm15
-    = select_tag("Image Number", options_for_select(["Old Item", "New Item"]),include_blank: "Image Number" , class: "form-control" )
+    = select_tag("item[][image_number]", options_for_select(["other"]),prompt: "Image Number" , class: "form-control" )
 .row
   .col-md-3.mbtm15
-    = text_field_tag("Title", nil, class: "form-control", placeholder: "Title")
+    = text_field_tag("item[][title]", nil, class: "form-control", placeholder: "Title")
 .row
   .col-md-3.mbtm15
-    = text_field_tag("Image Width", nil, class: "form-control", placeholder: "Image Width")
+    = text_field_tag("item[][image_width]", nil, class: "form-control", placeholder: "Image Width")
   .col-md-3.mbtm15
-    = text_field_tag("Image Height", nil, class: "form-control", placeholder: "Image Height")
+    = text_field_tag("item[][image_height]", nil, class: "form-control", placeholder: "Image Height")
 

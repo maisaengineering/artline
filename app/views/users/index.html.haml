@@ -34,5 +34,4 @@
             %td
               - unless user.is?(:super_admin)
                 .btn-group
-                  %a.btn.btn-danger{:href => "#"}
-                    %span Delete
+                  = link_to("Delete", destroy_user_path(user.id),method: :delete , class: "btn btn-danger" )
