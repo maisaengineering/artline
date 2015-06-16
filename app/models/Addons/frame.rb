@@ -1,3 +1,3 @@
-class Products::Frame < Product
+class Addons::Frame < Product
 
 end

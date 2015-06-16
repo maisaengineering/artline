@@ -1,3 +1,3 @@
-class Products::Bulb < Product
+class Addons::Bulb < Product
 
 end

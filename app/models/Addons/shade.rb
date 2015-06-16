@@ -1,3 +1,3 @@
-class Products::Shade < Product
+class Addons::Shade < Product
 
 end

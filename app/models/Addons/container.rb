@@ -1,3 +1,3 @@
-class Products::Container < Product
+class Addons::Container < Product
 
 end
