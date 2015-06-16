@@ -23,8 +23,10 @@
 .row
   .col-md-3.mbtm15
     = select_tag("project[sales_rep]", options_for_select([ "New", "None"]),include_blank: "Sales Rep" , class: "form-control", placeholder: "Attention" )
+.row
   .col-md-3.mbtm15
-    = select_tag("Select Product", options_for_select(Categories.to_a.map(&:reverse)),include_blank: "Select Product" , class: "form-control" )
+    = select_tag("select_product", options_for_select(Categories.to_a.map(&:reverse)),prompt: "Select Product",  onchange:"getForm(this)", class: "form-control select_product" )
+
 .row
   .col-md-3.mbtm15
     = link_to "Add another item","#", id: "add_another_item"

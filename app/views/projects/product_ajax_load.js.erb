@@ -1,1 +1,6 @@
-$('.display_item').empty().append("<%= j render(:partial => '/projects/forms/'+ params[:item] ) %>");
+<%if params[:item].eql?('Artwork')%>
+    $('.select_product, .child_product').eq(<%=params[:index].to_i%>).closest('.row').after("<div class='row'><div class='col-md-3 mbtm15'><%=j select_tag("child_product", options_for_select(Childrens[params[:item]].to_a.map(&:reverse)),prompt: "Select Product" , onchange: "getForm(this)", class: "form-control child_product" )%></div></div>")
+
+<%else%>
+    $('.select_product, .child_product').eq(<%=params[:index].to_i%>).closest('.row').after("<span class='product_form'><%= j render(:partial => '/projects/forms/'+ params[:item].downcase) %></span>");
+<%end%>
