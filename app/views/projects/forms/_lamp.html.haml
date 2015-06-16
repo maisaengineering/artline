@@ -5,12 +5,12 @@
     = text_field_tag("item[][quantity]", nil, class: "form-control", placeholder: "Quantity")
 .row
   .col-md-3.mbtm15
-    = select_tag("item[][item_number]", options_for_select(Lamp.all.map(&:number).push('other')),prompt: "Item Number" , class: "form-control")
+    = select_tag("item[][item_number]", options_for_select(Lamp.all.map(&:number).push('other')),prompt: "Item Number" , class: "form-control lamb_no")
   .col-md-3.mbtm15
-    = select_tag("item[][shade]", options_for_select(Shade.all.map(&:number).push('other')),prompt: "Shade Options" , class: "form-control" )
+    = select_tag("item[][shade]", options_for_select(Shade.all.map(&:number).push('other')),prompt: "Shade Options" , class: "form-control shade_no" )
 .row
   .col-md-3.mbtm15
-    = select_tag("item[][bulb]", options_for_select(Bulb.all.map(&:number).push('other')),prompt: "Bulb Options" , class: "form-control")
+    = select_tag("item[][bulb]", options_for_select(Bulb.all.map(&:number).push('other')),prompt: "Bulb Options" , class: "form-control bulb_no")
 .row
   .col-md-3.mbtm15.txt_area
     = text_area_tag("item[][special_instructions]", nil, class: "form-control", placeholder: "Special Instructions")
