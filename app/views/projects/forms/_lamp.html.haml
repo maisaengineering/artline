@@ -7,10 +7,10 @@
   .col-md-3.mbtm15
     = select_tag("item[][item_number]", options_for_select(Lamp.all.map(&:number).push('other')),include_blank: "Item Number" , class: "form-control")
   .col-md-3.mbtm15
-    = select_tag("item[][shade]", options_for_select(Addons::Shade.all.map(&:number).push('other')),include_blank: "Shade Options" , class: "form-control" )
+    = select_tag("item[][shade]", options_for_select(Shade.all.map(&:number).push('other')),include_blank: "Shade Options" , class: "form-control" )
 .row
   .col-md-3.mbtm15
-    = select_tag("item[][bulb]", options_for_select(Addons::Bulb.all.map(&:number).push('other')),include_blank: "Bulb Options" , class: "form-control")
+    = select_tag("item[][bulb]", options_for_select(Bulb.all.map(&:number).push('other')),include_blank: "Bulb Options" , class: "form-control")
 .row
   .col-md-3.mbtm15.txt_area
     = text_area_tag("item[][special_instructions]", nil, class: "form-control", placeholder: "Special Instructions")
