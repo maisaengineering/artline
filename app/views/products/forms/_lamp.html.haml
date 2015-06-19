@@ -9,17 +9,9 @@
             = "#{error}"
   .row
     .col-md-3.mbtm15
-      = f.text_field :supplier_item_number, class: "form-control", placeholder: "Supplier Item Number",required: true
-    .col-md-3.mbtm15
-      = f.text_field :number, class: "form-control", placeholder: "Artline Item Number",required: true
-  .row
-    .col-md-3.mbtm15
       = f.text_field :description, class: "form-control", placeholder: "Description",required: true
     .col-md-3.mbtm15
       = f.text_field :size, class: "form-control", placeholder: "Size",required: true
-  .row
-    .col-md-3.mbtm15
-      = f.text_field :supplier_price, class: "form-control", placeholder: "Supplier Price",required: true
   .row
     .col-md-2.fileUpload.btn.btn-primary.mbtm15
       %span Upload image

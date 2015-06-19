@@ -1,6 +1,6 @@
 class Products::Artwork < Product
 
-  field :number    #artline Item Number
+
   field :type
   field :title
   field :artist

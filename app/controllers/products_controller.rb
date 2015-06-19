@@ -1,5 +1,6 @@
 class ProductsController < ApplicationController
-  before_action :set_product, only: [:edit, :update, :destroy]
+  before_action :authenticate_user!
+  before_action :set_product, only: [:show,:edit, :update, :destroy]
 
   def index
     @products = Product.order_by(created_at: "desc").paginate(page: params[:page], per_page: 5)
@@ -12,10 +13,14 @@ class ProductsController < ApplicationController
   def create
     @product = eval(params[:item_type]).create(product_params)
     unless @product.errors.any?
-      redirect_to products_path
+      redirect_to product_url(@product)
     else
       render new
     end
+  end
+
+  def show
+   @suppliers = Supplier.all
   end
 
   def edit
@@ -25,7 +30,7 @@ class ProductsController < ApplicationController
   def update
     if @product.update(product_params)
       flash[:noice] = "Successfully Updated"
-      redirect_to products_url
+      redirect_to product_url(@product)
     else
       render :edit
     end

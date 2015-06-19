@@ -1,0 +1,53 @@
+%section#main-content.cus
+  %section.wrapper
+    %section.panel
+      %header.panel-heading.no-border
+        Item
+      %table.table.table-bordered
+        %thead
+          %tr
+            %th #
+            %th Action
+        %tbody
+          %tr
+            %td
+              = @product._type
+            %td
+              .btn-group
+                = link_to("Update", edit_product_path(@product.id), class: "btn btn-primary" )
+                = link_to("Delete", product_path(@product.id), method: :delete, class: "btn btn-danger" )
+  - if @product.prices.present?
+    %section.panel
+      %header.panel-heading.no-border
+        Prices
+      %table.table.table-bordered
+        %thead
+          %tr
+            %th Price
+        %tbody
+          - @product.prices.each do |price|
+            %tr
+              %td
+                = price
+  - if @suppliers.present?
+    %section.panel
+      %header.panel-heading.no-border
+        Prices
+      %table.table.table-bordered
+        %thead
+          %tr
+            %th Supplier Name
+            %th
+        %tbody
+          - @suppliers.each do |supplier|
+            %tr
+              %td
+                = supplier.name
+              - if supplier.prices.present?
+                %td
+                  - supplier.prices.each do |price|
+                    = "#{price},"
+              - else
+                %td
+                  %input{name: "", type: "checkbox", value: ""}
+    %button{type: "button",class: "btn-primary" } Get supplier quota

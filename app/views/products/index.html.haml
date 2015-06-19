@@ -15,7 +15,6 @@
         %thead
           %tr
             %th #
-            %th Artline Number
             %th Type
             %th Action
         %tbody
@@ -23,8 +22,6 @@
           %tr
             %td
               #{index+1}
-            %td
-              #{product.number}
             %td
               #{product._type.split("::").last}
             %td
