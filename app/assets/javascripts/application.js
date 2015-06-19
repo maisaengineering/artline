@@ -17,7 +17,7 @@
 //= require bootstrap-sprockets
 
 //= require product
-//= require project
+
 
 Turbolinks.pagesCached(0);
 // Visit pages via turbolinks

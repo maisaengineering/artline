@@ -14,3 +14,6 @@ Container = Products::Addons::Container
 Frame = Products::Addons::Frame
 Shade = Products::Addons::Shade
 # Other = Product::Other
+
+Client = Companies::Client
+Supplier = Companies::Supplier

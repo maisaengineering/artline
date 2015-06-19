@@ -1,3 +1,14 @@
-= form_tag 'create', method:'post', remote:true do
-
-  = render 'form', locals:{_type: "Companies::client"}
+%section#main-content
+  %section.wrapper
+    %h2 Create Client/Supplier
+    %section.panel
+      %div.panel-body.ptop35
+        = form_tag companies_path, method: :post do
+          .row
+            .col-md-3.mbtm15
+              = select_tag :_type, options_for_select(%w(Client Supplier)),prompt: "Select Client/Supplier", class: "form-control", required: true
+          = render 'form'
+          .row
+            .col-md-12
+              .actions
+                = submit_tag nil,class: "btn btn-primary"

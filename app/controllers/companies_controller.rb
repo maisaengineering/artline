@@ -1,4 +1,10 @@
 class CompaniesController < ApplicationController
+  before_action :authenticate_user!
+  before_action :set_company, only: [:show, :edit, :update, :destroy]
+
+  def index
+    @companys = Company.order_by(created_at: "desc").paginate(page: params[:page], per_page: 5)
+  end
 
   def new
     respond_to do |format|
@@ -8,11 +14,15 @@ class CompaniesController < ApplicationController
   end
 
   def create
-    @company = eval(company_params[:_type]).create(company_params)
+    @company = eval(params[:_type]).create(company_params)
+    if @company.save
+      redirect_to companies_url
+    else
+      render :new
+    end
   end
 
   def show
-    @company = Company.find(params[:id])
     if @company
       respond_to do |format|
         format.html
@@ -21,11 +31,37 @@ class CompaniesController < ApplicationController
     else
       render nothing: true, status:404
     end
+  end
 
+  def edit
 
   end
 
+  def update
+    if @company.update(company_params)
+      flash[:notice] = "Successfully Updated"
+      redirect_to companies_url
+    else
+      flash[:notice] = "not updated"
+      render :edit
+    end
+  end
+
+  def destroy
+    if @company.destroy
+      flash[:notice] = "Successfully deleted"
+      redirect_to companies_url
+    else
+      flash[:notice] = "Record Not found"
+      redirect_to companies_url
+    end
+  end
+
   private
+
+  def set_company
+    @company = Company.find(params[:id])
+  end
 
   def company_params
     params.require(:company).permit(params[:company].keys)

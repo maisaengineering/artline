@@ -1,0 +1,35 @@
+%section#main-content.cus
+  %section.wrapper
+    %div.serch_bg
+      #top_menu.nav.search-row.txt-clr
+        %ul.nav.top-menu
+          %li
+            = link_to "Add Client/Supplier", new_company_path,class:'btn'
+          %li
+            %form.navbar-form
+              %input.form-control{:placeholder => "Search", :type => "text"}
+    %section.panel
+      %header.panel-heading.no-border
+        Client's/Supplier's
+      %table.table.table-bordered
+        %thead
+          %tr
+            %th #
+            %th Client/Supplier Name
+            %th Type
+            %th Action
+        %tbody
+        - @companys.each_with_index do |company,index|
+          %tr
+            %td
+              #{index+1}
+            %td
+              #{company.name}
+            %td
+              #{company._type.split("::").last}
+            %td
+              .btn-group
+                = link_to("Update", edit_company_path(company.id), class: "btn btn-primary" )
+                = link_to("Delete", company_path(company.id), method: :delete, class: "btn btn-danger" )
+      .flickr_pagination
+        = will_paginate @companys
