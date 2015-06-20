@@ -39,15 +39,19 @@
             %th Supplier Name
             %th
         %tbody
-          - @suppliers.each do |supplier|
+          = form_tag(create_request_quote_path, method: :post) do
+            = hidden_field_tag "request_quote[item_id]", @product.id
+            - @suppliers.each do |supplier|
+              %tr
+                %td
+                  = supplier.name
+                - if supplier.prices.present?
+                  %td
+                    - supplier.prices.each do |price|
+                      = "#{price},"
+                - else
+                  %td
+                    = check_box_tag "request_quote[supplier_id][]", "#{supplier.id}"
             %tr
               %td
-                = supplier.name
-              - if supplier.prices.present?
-                %td
-                  - supplier.prices.each do |price|
-                    = "#{price},"
-              - else
-                %td
-                  %input{name: "", type: "checkbox", value: ""}
-    %button{type: "button",class: "btn-primary" } Get supplier quota
+                = submit_tag("Get supplier quota", class: "btn btn-primary")
