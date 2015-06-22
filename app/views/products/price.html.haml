@@ -1,0 +1,27 @@
+%h1 Product Price
+%section.panel
+  .panel-body.ptop35
+    .row
+      .col-md-3
+        Item number
+      .col-md-3
+        Name
+      .col-md-3
+        Supplier item number
+      .col-md-3
+        Price
+    %hr
+    =form_tag update_product_price_path(@product.id), method: :post do
+      .row
+        .col-md-3
+          = "#{@product.id}"
+        .col-md-3
+          = "#{@product._type.split("::").last}"
+        .col-md-3
+          = text_field_tag("product[supplier_item_number]", nil, class: "form-control",  required: true)
+        .col-md-3
+          = text_field_tag("product[supplier_cost]",nil, class: "form-control",  required: true)
+      %hr
+      .row
+        .col-md-12
+          = submit_tag("SAVE", class: "btn btn-success")

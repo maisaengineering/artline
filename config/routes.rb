@@ -12,13 +12,14 @@ Rails.application.routes.draw do
     collection do
       get 'load_form'
     end
-
   end
   resources :orders do
     collection do
       get 'tracking'
     end
   end
+
+
   # resource :users
   get '/users/new'=>"users#new", as: :new_users
   post '/users/create'=>"users#create", as: :users
@@ -27,6 +28,8 @@ Rails.application.routes.draw do
   post 'create_request_quote', to: "companies#create_request_quote", as: :create_request_quote
 
   get '/product_ajax_load', to: 'projects#product_ajax_load'
+  get '/product/:id/price', to: "products#price", as: :product_price
+  post '/product/:id', to: "prices#update_product_price", as: :update_product_price
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
