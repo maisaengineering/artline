@@ -36,5 +36,23 @@ Rails.application.configure do
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 
-  config.action_mailer.default_url_options = { host: 'localhost', port: 8080 }
+  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+
+  config.action_mailer.delivery_method = :letter_opener #:smtp
+  # change to false to prevent email from being sent during development
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.default :charset => "utf-8"
+  ENV['SENDER'] = 'labs@maisasolutions.com'
+
+
+  # ENV['CDN_URL'] = 'https://d1l5f2v82xoaic.cloudfront.net'
+  config.action_mailer.smtp_settings = {
+      :address => "smtp.yandex.ru",
+      :port => 25,
+      :enable_starttls_auto => true,
+      :user_name => '*****',
+      :password => '*****',
+      :authentication => :plain
+  }
 end
