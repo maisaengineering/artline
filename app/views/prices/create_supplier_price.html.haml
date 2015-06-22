@@ -3,18 +3,15 @@
   .panel-body.ptop35
     .row
       .col-md-3
-        Item number
-      .col-md-3
-        Name
+        Supplier Name
       .col-md-3
         Supplier item number
       .col-md-3
         Price
     %hr
     =form_tag update_product_price_path(@product.id), method: :post do
+      = hidden_field_tag "product[companies_supplier_id]",  @supplier.id
       .row
-        .col-md-3
-          = "#{@product.id}"
         .col-md-3
           = "#{@product._type.split("::").last}"
         .col-md-3

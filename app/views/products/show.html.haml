@@ -23,16 +23,19 @@
       %table.table.table-bordered
         %thead
           %tr
+            %th Supplier Name
             %th Price
         %tbody
           - @product.prices.each do |price|
             %tr
               %td
-                = price
+                = price.companies_supplier.name if price.companies_supplier
+              %td
+                = price.supplier_cost
   - if @suppliers.present?
     %section.panel
       %header.panel-heading.no-border
-        Prices
+        List
       %table.table.table-bordered
         %thead
           %tr
@@ -48,7 +51,7 @@
                 - if supplier.prices.present?
                   %td
                     - supplier.prices.each do |price|
-                      = "#{price},"
+                      = "#{price.supplier_cost},"
                 - else
                   %td
                     = check_box_tag "request_quote[supplier_id][]", "#{supplier.id}"

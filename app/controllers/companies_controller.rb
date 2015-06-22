@@ -62,7 +62,7 @@ class CompaniesController < ApplicationController
       current_user.request_quotes.create(item_id: params[:request_quote][:item_id],supplier_id: supplier_id)
     end
     flash[:notice] = "Request successfully sent"
-    redirect_to companies_url
+    redirect_to products_url
   end
 
   private

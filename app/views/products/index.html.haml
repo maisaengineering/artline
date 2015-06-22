@@ -23,7 +23,7 @@
             %td
               #{index+1}
             %td
-              #{product._type.split("::").last}
+              = link_to("#{product._type.split("::").last}", product_path(product.id) )
             %td
               .btn-group
                 = link_to("Update", edit_product_path(product.id), class: "btn btn-primary" )

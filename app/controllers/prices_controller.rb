@@ -1,5 +1,11 @@
 class PricesController < ApplicationController
   before_action :authenticate_user!
+  layout "mailer", only: [:create_supplier_price]
+
+  def create_supplier_price
+    @product = Product.find(params[:id])
+    @supplier = Company.find(params[:supplier_id])
+  end
 
   def update_product_price
     @product = Product.find(params[:id])

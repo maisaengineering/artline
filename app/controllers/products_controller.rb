@@ -1,7 +1,6 @@
 class ProductsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_product, only: [:show,:edit, :update, :destroy, :price]
-  layout "mailer", only: [:price]
+  before_action :set_product, only: [:show,:edit, :update, :destroy]
 
   def index
     @products = Product.order_by(created_at: "desc").paginate(page: params[:page], per_page: 5)
@@ -46,10 +45,6 @@ class ProductsController < ApplicationController
 
   def load_form
     @product = eval(params[:item]).new
-  end
-
-  def price
-
   end
 
   private
