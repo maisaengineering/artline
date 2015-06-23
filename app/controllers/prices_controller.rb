@@ -5,6 +5,7 @@ class PricesController < ApplicationController
   def create_supplier_price
     @product = Product.find(params[:id])
     @supplier = Company.find(params[:supplier_id])
+    @user = User.find(params[:user_id])
   end
 
   def update_product_price

@@ -11,6 +11,7 @@
     %hr
     =form_tag update_product_price_path(@product.id), method: :post do
       = hidden_field_tag "product[companies_supplier_id]",  @supplier.id
+      = hidden_field_tag "product[requester]",  @user.id
       .row
         .col-md-3
           = "#{@product._type.split("::").last}"
