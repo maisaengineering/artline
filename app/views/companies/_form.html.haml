@@ -1,8 +1,11 @@
 .row
   .col-md-3.mbtm15
     = text_field_tag("company[name]", nil, class: "form-control", placeholder: "Company Name")
-  .col-md-3.mbtm15
-    = text_field_tag("company[attention]", nil, class: "form-control", placeholder: "Attention")
+  .col-md-3.mbtm15{style: "width: 30%;"}
+    .row
+      .col-md-12#field
+        = text_field_tag("company[attention][]", nil, class: "attention", placeholder: "Attention")
+        %button#b1.btn#add-more{:type => "button"} +
 .row
   .col-md-3.mbtm15
     = text_field_tag("company[address]", nil, class: "form-control", placeholder: "Address")

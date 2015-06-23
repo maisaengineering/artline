@@ -15,6 +15,6 @@ class Price
   field  :requester, type: String
 
   def send_email_to_requester
-    SupplierMailer.reply_to_requester("#{requester}","#{companies_supplier_id}",supplier_cost).deliver_later
+    SupplierMailer.reply_to_requester("#{requester}","#{companies_supplier_id}",supplier_cost).deliver_now
   end
 end

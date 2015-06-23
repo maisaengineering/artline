@@ -5042,6 +5042,13 @@ span.customSelect.changed {
   border-bottom: 2px solid #ddd;
 }
 
+.attention{
+  height: 34px;
+  padding: 16px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
 // will_paginate css starts
 .flickr_pagination {
   //text-align: center;
@@ -5073,3 +5080,4 @@ span.customSelect.changed {
 .flickr_pagination .next_page {
   margin-left: 1em; }
 //  will_paginate css ends
+

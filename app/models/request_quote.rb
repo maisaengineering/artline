@@ -11,7 +11,7 @@ class RequestQuote
   field :item_id
 
   def send_email
-    SupplierMailer.quote("#{user_id}","#{supplier_id}",item_id).deliver_later
+    SupplierMailer.quote("#{user_id}","#{supplier_id}",item_id).deliver_now
   end
 
 end

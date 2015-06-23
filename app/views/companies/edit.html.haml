@@ -10,8 +10,20 @@
           .row
             .col-md-3.mbtm15
               = text_field_tag("company[name]", @company.name, class: "form-control", placeholder: "Company Name")
-            .col-md-3.mbtm15
-              = text_field_tag("company[attention]", @company.attention, class: "form-control", placeholder: "Attention")
+            - if @company.attention.kind_of?(Array)
+              .col-md-3.mbtm15{style: "width: 30%;"}
+                - @company.attention.each_with_index do |val,ind|
+                  .row
+                    .col-md-12#field
+                      = text_field_tag("company[attention][]", val, class: "attention", placeholder: "Attention")
+                      - if ind == 0
+                        %button#b1.btn#add-more{:type => "button"} +
+            - else
+              .col-md-3.mbtm15{style: "width: 30%;"}
+                .row
+                  .col-md-12#field
+                    = text_field_tag("company[attention][]", @company.attention, class: "attention", placeholder: "Attention")
+                    %button#b1.btn#add-more{:type => "button"} +
           .row
             .col-md-3.mbtm15
               = text_field_tag("company[address]", @company.address, class: "form-control", placeholder: "Address")
