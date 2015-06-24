@@ -1,0 +1,9 @@
+-#.row
+-#  .col-md-3.mbtm15
+-#    = text_field_tag("item[bulb][number]", nil, class: "form-control", placeholder: "Item Number")
+.row
+  .col-md-3.mbtm15.txt_area
+    = text_area_tag("project[items][][bulb][description]", nil, class: "form-control", placeholder: "Bulb Description")
+-#.row
+-#  .col-md-3.mbtm15
+-#    = text_field_tag("item[bulb][price]", nil, class: "form-control", placeholder: "Supplier Price")

@@ -8,4 +8,6 @@ class Project
   field :name
   field :date
 
+  attr_accessor :items
+
 end

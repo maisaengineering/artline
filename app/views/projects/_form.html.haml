@@ -13,7 +13,7 @@
   .col-md-3.mbtm15
     = text_field_tag("project[name]", nil, class: "form-control", placeholder: "Project Name")
   .col-md-3.mbtm15
-    = text_field_tag("project[date]", nil, class: "form-control", placeholder: "Date")
+    = date_field_tag("project[date]", Date.today, class: "form-control", placeholder: "Date")
 .row
   .col-md-3.mbtm15
     = select_tag("project[client_id]", options_for_select(Companies::Client.all.map{|c|[c.name, c.id]}.push('other')),prompt: "Choose Company" , class: "form-control", id:"project_client_id")

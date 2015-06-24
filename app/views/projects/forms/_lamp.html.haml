@@ -1,19 +1,24 @@
 .row
   .col-md-3.mbtm15
-    = text_field_tag("item[][tag]", nil, class: "form-control", placeholder: "Tag")
+    = text_field_tag("project[items][][tag]", nil, class: "form-control", placeholder: "Tag")
   .col-md-3.mbtm15
-    = text_field_tag("item[][quantity]", nil, class: "form-control", placeholder: "Quantity")
+    = text_field_tag("project[items][][quantity]", nil, class: "form-control", placeholder: "Quantity")
 .row
   .col-md-3.mbtm15
-    = select_tag("item[][item_number]", options_for_select(Lamp.all.map(&:number).push('other')),prompt: "Item Number" , class: "form-control lamb_no")
-  .col-md-3.mbtm15
-    = select_tag("item[][shade]", options_for_select(Shade.all.map(&:number).push('other')),prompt: "Shade Options" , class: "form-control shade_no" )
+    = select_tag("project[items][][number]", options_for_select(Price.where(:artline_item_number.exists=>true).all.map(&:artline_item_number).push('add')),prompt: "Item Number" , class: "form-control lamb_no", onchange:"new_item(this)", data:{name: 'Lamp'})
+.lamp
+
 .row
   .col-md-3.mbtm15
-    = select_tag("item[][bulb]", options_for_select(Bulb.all.map(&:number).push('other')),prompt: "Bulb Options" , class: "form-control bulb_no")
+    = select_tag("project[items][][shade]", options_for_select(Shade.all.map(&:number).push('add')),prompt: "Shade Options" , class: "form-control shade_no", onchange:"new_item(this)", data:{name: 'Shade'} )
+.shade
+.row
+  .col-md-3.mbtm15
+    = select_tag("project[items][][bulb]", options_for_select(Bulb.all.map(&:number).push('add')),prompt: "Bulb Options" , class: "form-control bulb_no", onchange:"new_item(this)", data:{name: 'Bulb'})
+.bulb
 .row
   .col-md-3.mbtm15.txt_area
-    = text_area_tag("item[][special_instructions]", nil, class: "form-control", placeholder: "Special Instructions")
+    = text_area_tag("project[items][][special_instructions]", nil, class: "form-control", placeholder: "Special Instructions")
 .row
   .col-md-3.mbtm15
     = label_tag(:tot_cost, "Total Cost:")

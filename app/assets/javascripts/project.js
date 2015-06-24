@@ -29,7 +29,7 @@ $(document).ready(function() {
         //e.preventDefault();
         $source_element = $('#select_product').closest('.row').clone(true)[0];
         $('#add_another_item').closest('.row').before($source_element)
-        //$($source_element).wrap( "<div class='row'></div>" )
+
 
     })
 });
@@ -52,5 +52,24 @@ getForm = function(element){
                 data: {item: item, index: $index}
             })
         }
+
+}
+
+new_item = function(element){
+    $val= $.trim($(element).val());
+    $index = $($(":input[class='"+$(element).attr('class')+"']")).index(element);
+    if($val=='add'){
+        var item = $val
+        var url = "/products/load_form"
+        $.ajax({
+            method: "GET",
+            url: url,
+            data: {item: $(element).attr('data-name'),
+                   index: $index,
+                   class_name: $(element).attr('data-name').toLowerCase()}
+        })
+    }else{
+        $("."+$(element).attr('data-name').toLowerCase()).eq($index).html("");
+    }
 
 }

@@ -10,10 +10,11 @@ class ProjectsController < ApplicationController
   end
 
   def create
+    byebug
     @project = Project.create(project_params)
     if @project.save
       flash[:notice] = "Successfully created."
-      redirect_to edit_projects_path
+      redirect_to projects_path
     else
       render :new
     end
@@ -40,7 +41,7 @@ class ProjectsController < ApplicationController
   private
 
   def project_params
-    params.require(:project).permit(params[:project].keys)
+    params.require(:project).permit(params[:project].keys+ [items:[]])
   end
 
 end

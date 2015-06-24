@@ -1,0 +1,13 @@
+-#.row
+-#  .col-md-3.mbtm15
+-#    = text_field_tag("item[shade][number]", nil, class: "form-control", placeholder: "Item Number")
+.row
+  .col-md-3.mbtm15.txt_area
+    = text_area_tag("project[items][][shade][description]", nil, class: "form-control", placeholder: "Shade Description")
+-#.row
+-#  .col-md-3.mbtm15
+-#    = text_field_tag("item[shade][price]", nil, class: "form-control", placeholder: "Supplier Price")
+.row
+  .fileUpload.btn.btn-primary
+    %span Upload image
+    = file_field_tag("project[items][][shade][image]", class: "upload")

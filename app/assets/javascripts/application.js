@@ -17,6 +17,7 @@
 //= require bootstrap-sprockets
 
 //= require product
+//= require company
 
 
 Turbolinks.pagesCached(0);
