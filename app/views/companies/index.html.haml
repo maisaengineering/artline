@@ -29,7 +29,7 @@
               #{company._type.split("::").last}
             %td
               .btn-group
-                = link_to("Update", edit_company_path(company.id), class: "btn btn-primary" )
-                = link_to("Delete", company_path(company.id), method: :delete, class: "btn btn-danger" )
+                = link_to("", edit_company_path(company.id), class: "btn glyphicon glyphicon-pencil black" )
+                = link_to("", company_path(company.id), method: :delete, class: "btn glyphicon glyphicon-trash red verticalLine" )
       .flickr_pagination
         = will_paginate @companys

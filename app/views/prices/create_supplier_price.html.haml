@@ -1,25 +1,26 @@
-%h1 Product Price
-%section.panel
-  .panel-body.ptop35
-    .row
-      .col-md-3
-        Supplier Name
-      .col-md-3
-        Supplier item number
-      .col-md-3
-        Price
-    %hr
-    =form_tag update_product_price_path(@product.id), method: :post do
-      = hidden_field_tag "product[companies_supplier_id]",  @supplier.id
-      = hidden_field_tag "product[requester]",  @user.id
+.price-body
+  %h1 Product Price
+  %section.panel
+    .panel-body.ptop35
       .row
         .col-md-3
-          = @supplier.name
+          Supplier Name
         .col-md-3
-          = text_field_tag("product[supplier_item_number]", nil, class: "form-control",  required: true)
+          Supplier item number
         .col-md-3
-          = text_field_tag("product[supplier_cost]",nil, class: "form-control",  required: true)
+          Price
       %hr
-      .row
-        .col-md-12
-          = submit_tag("SAVE", class: "btn btn-success")
+      =form_tag update_product_price_path(@product.id), method: :post do
+        = hidden_field_tag "product[companies_supplier_id]",  @supplier.id
+        = hidden_field_tag "product[requester]",  @user.id
+        .row
+          .col-md-3
+            = @supplier.name
+          .col-md-3
+            = text_field_tag("product[supplier_item_number]", nil, class: "form-control",  required: true)
+          .col-md-3
+            = text_field_tag("product[supplier_cost]",nil, class: "form-control",  required: true)
+        %hr
+        .row
+          .col-md-12
+            = submit_tag("Submit", class: "btn btn-success")
