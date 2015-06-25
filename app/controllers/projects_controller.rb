@@ -10,7 +10,6 @@ class ProjectsController < ApplicationController
   end
 
   def create
-    byebug
     @project = Project.create(project_params)
     if @project.save
       flash[:notice] = "Successfully created."

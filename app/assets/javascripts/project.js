@@ -40,7 +40,6 @@ getForm = function(element){
             $(element).closest('.row').nextAll().find('.child_product:first').remove();
         }
         $index = $('.select_product, .child_product').index(element);
-    console.log($index);
         $(element).closest('.row').nextAll(".product_form:first").remove();
         if($val != "" ){
 

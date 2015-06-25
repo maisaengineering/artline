@@ -13,6 +13,9 @@ Bulb = Products::Addons::Bulb
 Container = Products::Addons::Container
 Frame = Products::Addons::Frame
 Shade = Products::Addons::Shade
+MouldingCompany = Products::Addons::MouldingCompany
+Publisher = Products::Addons::Publisher
+AcrylicThickness = Products::Addons::AcrylicThickness
 # Other = Product::Other
 
 Client = Companies::Client

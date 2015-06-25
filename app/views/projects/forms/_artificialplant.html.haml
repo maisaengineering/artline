@@ -1,19 +1,26 @@
 .row
   .col-md-3.mbtm15
-    = text_field_tag("item[][tag]", nil, class: "form-control", placeholder: "Tag")
+    = text_field_tag("project[items][][tag]", nil, class: "form-control", placeholder: "Tag")
   .col-md-3.mbtm15
-    = text_field_tag("item[][quantity]", nil, class: "form-control", placeholder: "Quantity")
+    = text_field_tag("project[items][][quantity]", nil, class: "form-control", placeholder: "Quantity")
 .row
   .col-md-3.mbtm15
-    = select_tag("item[][item_nuber]", options_for_select(["other"]),prompt: "Item Number" , class: "form-control")
-  .col-md-3.mbtm15
-    = select_tag("item[][fire_rating]", options_for_select(["Yes", "No"]),prompt: "Fire Rating" , class: "form-control" )
+    = select_tag("project[items][][number]", options_for_select(Price.where(:artline_item_number.exists=>true).all.map(&:artline_item_number).push('add')),prompt: "Item Number" , class: "form-control artificialplant_no", onchange:"new_item(this)", data:{name: 'ArtificialPlant'})
+.row
+  .col-md-12
+    .artificialplant
 .row
   .col-md-3.mbtm15
-    = select_tag("item[][container_number]", options_for_select(["other"]),prompt: "Container Number" , class: "form-control")
+    = select_tag("project[items][][fire_rating]", options_for_select(["Yes", "No"]),prompt: "Fire Rating" , class: "form-control" )
+.row
+  .col-md-3.mbtm15
+    = select_tag("project[items][][container_number]", options_for_select(Container.all.map(&:number).push('add')),prompt: "Container Number" , class: "form-control container_no", onchange:"new_item(this)", data:{name: 'Container'})
+.row
+  .col-md-12
+    .container.pad0px
 .row
   .col-md-3.mbtm15.txt_area
-    = text_area_tag("item[][special_instructions]", nil, class: "form-control", placeholder: "Special Instructions")
+    = text_area_tag("project[items][][special_instructions]", nil, class: "form-control", placeholder: "Special Instructions")
 .row
   .col-md-3.mbtm15
     = label_tag(:tot_cost, "Total Cost:")
