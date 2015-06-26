@@ -6,11 +6,12 @@
 .row
   .col-md-3.mbtm15
     = select_tag("project[items][][publisher]", options_for_select(Companies::Supplier.all.map(&:name).push('add')),prompt: "Publisher" , class: "form-control supplier_no", onchange:"new_item(this)", data:{name: 'Supplier'})
+.row
+  .col-md-12
+    .supplier
+.row
   .col-md-3.mbtm15
     = select_tag("project[items][][image_number]", options_for_select(["other"]),prompt: "Image Number" , class: "form-control" )
-.row
-  .col-md-6
-    .supplier
 .row
   .col-md-3.mbtm15
     = text_field_tag("project[items][][title]", nil, class: "form-control", placeholder: "Title")

@@ -1,3 +1,23 @@
 .row
-  .col-md-3.mbtm15.txt_area
-    = text_field_tag("project[items][][publisher]", nil, class: "form-control", placeholder: "Publisher")
+  .col-md-3.mbtm15
+    = text_field_tag("project[items][][company][name]", nil, class: "form-control", placeholder: "Company Name")
+  .col-md-3.mbtm15{style: "width: 30%;"}
+    .row
+      .col-md-12#field
+        = text_field_tag("project[items][][company][attention][]", nil, class: "attention", placeholder: "Attention")
+        %button#b1.btn#add-more{:type => "button",onclick:"add_attention()"} +
+.row
+  .col-md-3.mbtm15
+    = text_field_tag("project[items][][company][address]", nil, class: "form-control", placeholder: "Address")
+  .col-md-3.mbtm15
+    = text_field_tag("project[items][][company][city]", nil, class: "form-control", placeholder: "City")
+.row
+  .col-md-3.mbtm15
+    = text_field_tag("project[items][][company][state]", nil, class: "form-control", placeholder: "State")
+  .col-md-3.mbtm15
+    = text_field_tag("project[items][][company][zip]", nil, class: "form-control", placeholder: "Zip")
+.row
+  .col-md-3.mbtm15
+    = phone_field_tag("project[items][][company][phone]", nil, class: "form-control", placeholder: "Phone")
+  .col-md-3.mbtm15
+    = email_field_tag("project[items][][company][email]", nil, class: "form-control", placeholder: "Email")
