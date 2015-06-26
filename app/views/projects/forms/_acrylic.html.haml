@@ -1,12 +1,12 @@
 = render 'projects/forms/similar_fields'
 .row
   .col-md-3.mbtm15
-    = select_tag("project[items][][acrylic_thickness]", options_for_select(AcrylicThickness.all.map(&:name).push('add')),prompt: "Acrylic Thickness" , class: "form-control acrylicthickness_no", onchange:"new_item(this)", data:{name: 'AcrylicThickness'})
+    = select_tag("project[items][][acrylic_thickness]", options_for_select(["1/4","1/2","add"]),prompt: "Acrylic Thickness" , class: "form-control acrylic_thickness_no", onchange:"new_field(this)", data:{name: 'Acrylic_Thickness'})
   .col-md-3.mbtm15
     = text_field_tag("project[items][][print_cost]", nil, class: "form-control", placeholder: "Print Cost")
 .row
-  .col-md-6
-    .acrylicthickness
+  .col-md-3
+    .acrylic_thickness
 .row
   .col-md-3.mbtm15.txt_area
     = text_area_tag("project[items][][special_instructions]", nil, class: "form-control", placeholder: "Special Instructions")

@@ -5,12 +5,12 @@
     = text_field_tag("project[items][][quantity]", nil, class: "form-control", placeholder: "Quantity")
 .row
   .col-md-3.mbtm15
-    = select_tag("project[items][][publisher]", options_for_select(Publisher.all.map(&:name).push('add')),prompt: "Publisher" , class: "form-control publisher_no", onchange:"new_item(this)", data:{name: 'Publisher'})
+    = select_tag("project[items][][publisher]", options_for_select(Companies::Supplier.all.map(&:name).push('add')),prompt: "Publisher" , class: "form-control supplier_no", onchange:"new_item(this)", data:{name: 'Supplier'})
   .col-md-3.mbtm15
     = select_tag("project[items][][image_number]", options_for_select(["other"]),prompt: "Image Number" , class: "form-control" )
 .row
   .col-md-6
-    .publisher
+    .supplier
 .row
   .col-md-3.mbtm15
     = text_field_tag("project[items][][title]", nil, class: "form-control", placeholder: "Title")

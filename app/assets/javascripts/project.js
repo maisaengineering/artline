@@ -35,22 +35,22 @@ $(document).ready(function() {
 });
 
 getForm = function(element){
-        $val= $.trim($(element).val());
-        if($(element).attr('id')=='select_product'){
-            $(element).closest('.row').nextAll().find('.child_product:first').remove();
-        }
-        $index = $('.select_product, .child_product').index(element);
-        $(element).closest('.row').nextAll(".product_form:first").remove();
-        if($val != "" ){
+    $val= $.trim($(element).val());
+    if($(element).attr('id')=='select_product'){
+        $(element).closest('.row').nextAll().find('.child_product:first').remove();
+    }
+    $index = $('.select_product, .child_product').index(element);
+    $(element).closest('.row').nextAll(".product_form:first").remove();
+    if($val != "" ){
 
-            var item = $val
-            var url = "/product_ajax_load"
-            $.ajax({
-                method: "GET",
-                url: url,
-                data: {item: item, index: $index}
-            })
-        }
+        var item = $val
+        var url = "/product_ajax_load"
+        $.ajax({
+            method: "GET",
+            url: url,
+            data: {item: item, index: $index}
+        })
+    }
 
 }
 
@@ -64,11 +64,28 @@ new_item = function(element){
             method: "GET",
             url: url,
             data: {item: $(element).attr('data-name'),
-                   index: $index,
-                   class_name: $(element).attr('data-name').toLowerCase()}
+                index: $index,
+                class_name: $(element).attr('data-name').toLowerCase()}
         })
     }else{
         $("."+$(element).attr('data-name').toLowerCase()).eq($index).html("");
     }
 
 }
+
+new_field = function(element){
+    $val= $.trim($(element).val());
+    $class_name = $(element).attr('data-name').toLowerCase()
+    $index = $($(":input[class='"+$(element).attr('class')+"']")).index(element);
+    if($val=='add') {
+        var str = $class_name.replace("_"," ");
+        place_holder = str.replace(/\b[a-z]/g, function(letter) {
+            return letter.toUpperCase();
+        });
+        $("."+$(element).attr('data-name').toLowerCase()).eq($index).append('<input type="text" name="project[items][][' + $class_name + ']" id="project_items__'+ $class_name +'" class="form-control mbtm15" placeholder="'+ place_holder +'">')
+    }
+    else{
+        $("."+$(element).attr('data-name').toLowerCase()).eq($index).html("").remove;
+    }
+}
+
