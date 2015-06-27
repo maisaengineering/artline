@@ -1,18 +1,18 @@
 = render 'projects/forms/similar_fields'
 .row
   .col-md-3.mbtm15
-    = select_tag("project[items][][board_option]", options_for_select(["Lite Board","Float Board","Boxed Board","Doublelite","add"]),prompt: "Board Options" , class: "form-control board_option_no", onchange:"new_field(this)",data:{name: 'Board_Option'})
+    = select_tag("project[item_list][][board_option]", options_for_select(["Lite Board","Float Board","Boxed Board","Doublelite","add"]),prompt: "Board Options" , class: "form-control board_option_no", onchange:"new_field(this)",data:{name: 'Board_Option'})
 .row
   .col-md-3
     .board_option
 .row
   .col-md-3.mbtm15
-    = text_field_tag("project[items][][print_cost]", nil, class: "form-control", placeholder: "Print Cost")
+    = text_field_tag("project[item_list][][print_cost]", nil, class: "form-control", placeholder: "Print Cost")
   .col-md-3.mbtm15
-    = text_field_tag("project[items][][board_cost]", nil, class: "form-control", placeholder: "Board Cost")
+    = text_field_tag("project[item_list][][board_cost]", nil, class: "form-control", placeholder: "Board Cost")
 .row
   .col-md-3.mbtm15.txt_area
-    = text_area_tag("project[items][][special_instructions]", nil, class: "form-control", placeholder: "Special Instructions")
+    = text_area_tag("project[item_list][][special_instructions]", nil, class: "form-control", placeholder: "Special Instructions")
 .row
   .col-md-3.mbtm15
     = label_tag(:tot_cost, "Total Cost:")

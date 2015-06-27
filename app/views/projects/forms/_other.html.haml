@@ -1,11 +1,11 @@
 .row
   .col-md-3.mbtm15
-    = text_field_tag("project[items][][tag]", nil, class: "form-control", placeholder: "Tag")
+    = text_field_tag("project[item_list][][tag]", nil, class: "form-control", placeholder: "Tag")
   .col-md-3.mbtm15
-    = text_field_tag("project[items][][quantity]", nil, class: "form-control", placeholder: "Quantity")
+    = text_field_tag("project[item_list][][quantity]", nil, class: "form-control", placeholder: "Quantity")
 .row
   .col-md-3.mbtm15.txt_area
-    = text_area_tag("project[items][][item_description]", nil, class: "form-control", placeholder: "Item Description")
+    = text_area_tag("project[item_list][][item_description]", nil, class: "form-control", placeholder: "Item Description")
 .row
   .col-md-3.mbtm15.txt_area
-    = text_area_tag("project[items][][special_instructions]", nil, class: "form-control", placeholder: "Special Instructions")
+    = text_area_tag("project[item_list][][special_instructions]", nil, class: "form-control", placeholder: "Special Instructions")

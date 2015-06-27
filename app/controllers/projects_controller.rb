@@ -10,7 +10,7 @@ class ProjectsController < ApplicationController
   end
 
   def create
-    @project = Project.create(project_params)
+    @project = Project.new(project_params.merge(company:company_params))
     if @project.save
       flash[:notice] = "Successfully created."
       redirect_to projects_path
@@ -40,7 +40,13 @@ class ProjectsController < ApplicationController
   private
 
   def project_params
-    params.require(:project).permit(params[:project].keys+ [items:[]])
+
+
+    params.require(:project).permit!
+  end
+
+  def company_params
+    params.require(:company).permit(params[:company].keys+ [attention:[]])
   end
 
 end

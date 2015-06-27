@@ -1,22 +1,22 @@
 .row
   .col-md-3.mbtm15
-    = text_field_tag("project[items][][tag]", nil, class: "form-control", placeholder: "Tag")
+    = text_field_tag("project[item_list][][tag]", nil, class: "form-control", placeholder: "Tag")
   .col-md-3.mbtm15
-    = text_field_tag("project[items][][quantity]", nil, class: "form-control", placeholder: "Quantity")
+    = text_field_tag("project[item_list][][quantity]", nil, class: "form-control", placeholder: "Quantity")
 .row
   .col-md-3.mbtm15
-    = select_tag("project[items][][publisher]", options_for_select(Companies::Supplier.all.map(&:name).push('add')),prompt: "Publisher" , class: "form-control supplier_no", onchange:"new_item(this)", data:{name: 'Supplier'})
+    = select_tag("project[item_list][][publisher]", options_for_select(Companies::Supplier.all.map(&:name).push('add')),prompt: "Publisher" , class: "form-control supplier_no", onchange:"new_item(this)", data:{name: 'Supplier'})
   .col-md-3.mbtm15
-    = select_tag("project[items][][image_number]", options_for_select(["other"]),prompt: "Image Number" , class: "form-control" )
+    = select_tag("project[item_list][][image_number]", options_for_select(["other"]),prompt: "Image Number" , class: "form-control" )
 .row
   .col-md-6
     .supplier
 .row
   .col-md-3.mbtm15
-    = text_field_tag("project[items][][title]", nil, class: "form-control", placeholder: "Title")
+    = text_field_tag("project[item_list][][title]", nil, class: "form-control", placeholder: "Title")
 .row
   .col-md-3.mbtm15
-    = text_field_tag("project[items][][image_width]", nil, class: "form-control", placeholder: "Image Width")
+    = text_field_tag("project[item_list][][image_width]", nil, class: "form-control", placeholder: "Image Width")
   .col-md-3.mbtm15
-    = text_field_tag("project[items][][image_height]", nil, class: "form-control", placeholder: "Image Height")
+    = text_field_tag("project[item_list][][image_height]", nil, class: "form-control", placeholder: "Image Height")
 

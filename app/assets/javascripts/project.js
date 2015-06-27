@@ -5,7 +5,7 @@ $(document).ready(function() {
         $val= $.trim($(this).val());
         $(this);
 
-        if($val=='other'){
+        if($val=='add'){
             $(this).closest('.row').remove();
             $('#company_name').closest('.row').show();
 
@@ -15,10 +15,15 @@ $(document).ready(function() {
                 url: "/companies/"+$(this).val(),
                 dataType: 'json',
                 success: function(data){
-                    fields = ["name", "attention", "address", "city", "state", "zip","phone", "email"]
+
+                    fields = ["name", "address", "city", "state", "zip","phone", "email"]
                     $.each(fields,  function( index, value ) {
                         $("#company_"+value).val(data[value]);
                     })
+
+                    $.each(data["attention"], function(index, value){
+                        $("#project_client_attention").append($("<option></option>").attr("value",value).text(value));
+                    });
                 }
             });
         }
@@ -82,7 +87,7 @@ new_field = function(element){
         place_holder = str.replace(/\b[a-z]/g, function(letter) {
             return letter.toUpperCase();
         });
-        $("."+$(element).attr('data-name').toLowerCase()).eq($index).append('<input type="text" name="project[items][][' + $class_name + ']" id="project_items__'+ $class_name +'" class="form-control mbtm15" placeholder="'+ place_holder +'">')
+        $("."+$(element).attr('data-name').toLowerCase()).eq($index).append('<input type="text" name="project[item_list][][' + $class_name + ']" id="project_item_list__'+ $class_name +'" class="form-control mbtm15" placeholder="'+ place_holder +'">')
     }
     else{
         $("."+$(element).attr('data-name').toLowerCase()).eq($index).html("").remove;

@@ -1,5 +1,7 @@
 <%unless params["class_name"].blank?%>
      $("."+"<%=params["class_name"]%>").eq(<%=params["index"].to_i%>).html("<%= j render(:partial => '/projects/forms/new_item/'+ params["item"].downcase ) %>");
+$("."+"<%=params["class_name"]%>").eq(<%=params["index"].to_i%>).prev('.row').remove();
+
 <%else%>
     $('.selected_item').empty().append("<%= j render(:partial => '/products/forms/'+ params[:item].downcase ) %>");
 <%end%>

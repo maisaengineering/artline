@@ -4,10 +4,59 @@ class Project
   include Mongoid::Timestamps
   include Mongoid::Attributes::Dynamic
 
+
   field :quote_number #Quote Number
   field :name
-  field :date
+  field :date, type: DateTime
+  field :client_id
+  field :client_attention
 
-  attr_accessor :items
+  attr_accessor :item_list, :new_attention
+
+
+  before_validation :generate_quote_number
+  before_save :update_new_attention, unless: Proc.new{|pro| pro.new_attention.blank?}
+
+  embeds_many :items
+
+  def item_list=(args)
+    args.map do |arg|
+      self.items.build(arg)
+    end
+  end
+
+  def company=(args)
+    if client_id.blank?
+      client = Client.create(args)
+    else
+      client = Client.find(client_id)
+      client.update(args)
+    end
+
+    unless client.errors.any?
+     self.client_id = client.id
+     self.client_attention = client.attention.first
+    else
+      errors.add(:company,client.errors.full_messages.join(','))
+    end
+  end
+
+
+private
+
+  def update_new_attention
+    client = Client.find(client_id)
+    client.add_to_set(attentions: new_attentions)
+    self.client_attention = new_attentions
+  end
+
+  def generate_quote_number
+    u_id = SecureRandom.uuid
+    loop do
+      break if self.class.where(quote_number: u_id).blank?
+      u_id = SecureRandom.uuid
+    end
+    self.quote_number ||= u_id
+  end
 
 end
