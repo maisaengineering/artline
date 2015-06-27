@@ -2,7 +2,7 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 @import "bootstrap/theme";
-//@import url(elegant-icons-style.css);
+@import url(bootstrap-multiselect.css);
 
 /*
 Template Name: Creative Bootstrap 3 Responsive Admin Template
@@ -5068,6 +5068,11 @@ span.customSelect.changed {
 .pad0px{
   padding: 0px;
 }
+
+.multiselect-container li a{
+  padding: 0px;
+}
+
 // will_paginate css starts
 .flickr_pagination {
   //text-align: center;
