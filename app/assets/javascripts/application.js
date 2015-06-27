@@ -18,6 +18,7 @@
 
 //= require product
 //= require company
+//= require bootstrap-multiselect
 
 
 Turbolinks.pagesCached(0);

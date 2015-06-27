@@ -5,6 +5,10 @@ class ProjectsController < ApplicationController
    # render text:"123"
   end
 
+  def show
+
+  end
+
   def new
     @project = Project.new
   end
