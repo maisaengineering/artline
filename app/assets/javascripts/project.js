@@ -61,7 +61,9 @@ getForm = function(element){
 
 new_item = function(element){
     $val= $.trim($(element).val());
+    $class_name= $(element).attr('data-name').toLowerCase();
     $index = $($(":input[class='"+$(element).attr('class')+"']")).index(element);
+    $index = $('.'+$class_name).index($(element).closest('.row').next('.'+$class_name));
     if($val=='add'){
         var item = $val
         var url = "/products/load_form"
@@ -70,7 +72,7 @@ new_item = function(element){
             url: url,
             data: {item: $(element).attr('data-name'),
                 index: $index,
-                class_name: $(element).attr('data-name').toLowerCase()}
+                class_name: $class_name}
         })
     }else{
         $("."+$(element).attr('data-name').toLowerCase()).eq($index).html("");

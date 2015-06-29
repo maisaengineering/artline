@@ -6,7 +6,6 @@ class Item
   embedded_in :project
 
   def new_product=(arg)
-    byebug
     product = eval(type).create(arg)
 
     unless product.errors.any?
