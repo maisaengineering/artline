@@ -2,11 +2,7 @@ class ProjectsController < ApplicationController
   before_action :authenticate_user!
   # load_and_authorize_resource
   def index
-   # render text:"123"
-  end
-
-  def show
-
+   @projects = Project.desc(:created_at).paginate(page: params[:page], per_page: 5)
   end
 
   def new

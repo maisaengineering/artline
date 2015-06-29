@@ -8,4 +8,24 @@
           %li
             %form.navbar-form
               %input.form-control{:placeholder => "Search", :type => "text"}
-    %h1 Projects Quote's
+    %section.panel
+      %header.panel-heading.no-border
+        Project's
+      %table.table.table-bordered
+        %thead
+          %tr
+            %th #
+            %th Project Name
+            %th Action
+        %tbody
+        - @projects.each_with_index do |project,index|
+          %tr
+            %td
+              #{index+1}
+            %td
+              = project.name
+            %td
+              .btn-group
+                = link_to("", edit_project_path(project.id), class: "btn glyphicon glyphicon-pencil" )
+      .flickr_pagination
+        = will_paginate @projects
