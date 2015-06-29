@@ -15,10 +15,12 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require bootstrap-sprockets
+//= require bootstrap-multiselect
 
 //= require product
 //= require company
-//= require bootstrap-multiselect
+//= require order
+
 
 
 Turbolinks.pagesCached(0);

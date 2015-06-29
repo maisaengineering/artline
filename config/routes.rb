@@ -16,6 +16,8 @@ Rails.application.routes.draw do
   resources :orders do
     collection do
       get 'tracking'
+      get 'status'
+      post 'create_order_tracking'
     end
   end
 

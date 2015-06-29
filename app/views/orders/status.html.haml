@@ -1,0 +1,29 @@
+%section.wrapper
+  .track-order
+    .panel-body
+      -#.row
+      -#  .col-md-5.pleft40
+      -#    = image_tag("avatar-small.png",size: "250x350")
+      -#    %figcaption
+      -#      Product Name
+      -#  .col-md-3{style: "line-height: 300px;"}
+      -#    product description
+      -#  .col-ms-4{style: "line-height: 300px;"}
+      -#    product price
+      = hidden_field_tag "stage", @shipment.stage
+      .row{style: "padding-top: 60px;"}
+        .col-md-12.text-center
+          %ol.progtrckr{"data-progtrckr-steps" => "5"}
+            %li First Stage
+            %li Second Stage
+            %li Third Stage
+            %li Fourth Stage
+      .row
+        .col-md-12.pleft145
+          .ptop7.show_details.order-details
+            Show details
+          .ptop7.hide_details.order-details{style: "display: none"}
+            Hide details
+      .panel.tab-container.order_desc{style: "display: none"}
+        .panel-content
+          = @shipment.description
