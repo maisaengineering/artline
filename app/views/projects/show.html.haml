@@ -6,25 +6,85 @@
       .product_layer
         .row
           .col-md-3
+            Serial No.
+          .col-md-3
             Product Name
           .col-md-3
-            Product label
+            Artline Number
           .col-md-3
             Supplier list
-        .row
-          .col-md-3
-            first
-          .col-md-3
-            second
-          .col-md-3
-            .example
-              %select#example-multiple-selected{:multiple => "multiple"}
-                %option{:value => "1"} Option 1
-                %option{:selected => "selected", :value => "2"} Option 2
-                %option{:selected => "selected", :value => "3"} Option 3
-                %option{:value => "4"} Option 4
-                %option{:value => "5"} Option 5
-                %option{:value => "6"} Option 6
+        #items_without_price
+          - @items[true].to_a.each_with_index do |item, index |
+            .row
+              .col-md-3
+                = index+1
+              .col-md-3
+                first
+              .col-md-3
+                = item["number"]
+              .col-md-3
+                .example
+                  -#= select_tag("suppliers", options_for_select(Companies::Supplier.all.map{|c|[c.name, c.id]}), class:"example-multiple-selected", multiple: true, data:{item_id: item.id})
+        #items_without_price
+          - @items[false].to_a.each_with_index do |item, index |
+
+            .row
+              .col-md-3
+                = index+1
+              .col-md-3
+                first
+              .col-md-3
+                = item["number"]
+              .col-md-3
+                .example
+                  = select_tag("suppliers", options_for_select(Companies::Supplier.all.map{|c|[c.name, c.id]}), class:"example-multiple-selected", multiple: true, data:{item_id: item.product_id.to_s})
+      .row
+        .col-md-4
+          = link_to "Send Customer Quote", "#"
+        .col-md-4
+          = link_to "Request Suppliers Quote", "#", id: "request_suppliers_quote"
+        .col-md-3
+
+
 
 :javascript
-  $('#example-multiple-selected').multiselect();
+  $('.example-multiple-selected').multiselect();
+
+
+
+  $("#request_suppliers_quote").click(function(e){
+      e.preventDefault();
+      $data = new Object();
+      $("#items_without_price select").each(function(index){
+        $select = $(this);
+        if($select.val()){
+          $.each($select.val(), function(index, value){
+            if($data[value]){
+               console.log($select.attr("data-item-id"));
+               $data[value] = $data[value].concat($select.attr("data-item-id"))
+            }else{
+               $data[value] = [$select.attr("data-item-id")]
+            }
+          });
+        }
+      });
+
+      if(!$.isEmptyObject($data)){
+        $.ajax({
+          url: "/projects/request_supplier_qoute",
+          method: 'POST',
+          dataType: 'json',
+          data: {rsq_data: $data},
+          success: function(data){
+            alert("Request Successfully sent")
+            location= data.redirect_url;
+          },
+          error: function(data){
+          }
+
+        })
+      }else{
+          alert("Oops! please choose atleast one supplier.");
+      }
+
+  })

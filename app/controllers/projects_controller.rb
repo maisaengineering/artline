@@ -24,7 +24,12 @@ class ProjectsController < ApplicationController
   end
 
   def show
-
+    @project = Project.find(params[:id])
+    if @project.blank?
+      render nothing: true, status:404
+    else
+      @items = @project.items.group_by{|item| !item["number"].blank?}
+    end
   end
 
   def edit
@@ -33,19 +38,26 @@ class ProjectsController < ApplicationController
 
   def update
   end
-  def destroy
 
+  def destroy
   end
 
   def product_ajax_load
+  end
 
+  def request_supplier_qoute
+    params[:rsq_data].each do |supplier_id, item_ids|
+      current_user.request_quotes.create(item_ids: item_ids,supplier_id: supplier_id)
+    end
+    respond_to do |format|
+      format.html
+      format.json {render json: {redirect_url: projects_path} }
+    end
   end
 
   private
 
   def project_params
-
-
     params.require(:project).permit!
   end
 

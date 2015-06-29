@@ -1,0 +1,27 @@
+.price-body
+  %h1 Product Price
+  %section.panel
+    .panel-body.ptop35
+      .row
+        .col-md-3
+          Supplier Name
+        .col-md-3
+          Supplier item number
+        .col-md-3
+          Price
+      %hr
+      =form_tag prices_path, method: :post do
+        = hidden_field_tag "supplier_id",  @resquest_quote.supplier_id
+        = hidden_field_tag "requester_id", @resquest_quote.user_id
+        - @resquest_quote.products.each do |product|
+          .row
+            .col-md-3
+              = product.description
+            .col-md-3
+              = text_field_tag("products[][supplier_item_number]", nil, class: "form-control",  required: true)
+            .col-md-3
+              = text_field_tag("products[][supplier_cost]",nil, class: "form-control",  required: true)
+        %hr
+        .row
+          .col-md-12
+            = submit_tag("Submit", class: "btn btn-success")

@@ -59,7 +59,7 @@ class CompaniesController < ApplicationController
 
   def create_request_quote
     params[:request_quote][:supplier_id].each do |supplier_id|
-      current_user.request_quotes.create(item_id: params[:request_quote][:item_id],supplier_id: supplier_id)
+      current_user.request_quotes.create(item_ids: params[:request_quote][:item_ids],supplier_id: supplier_id)
     end
     flash[:notice] = "Request successfully sent"
     redirect_to products_url

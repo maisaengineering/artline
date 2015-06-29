@@ -27,7 +27,7 @@
             %th
         %tbody
           = form_tag(create_request_quote_path, method: :post) do
-            = hidden_field_tag "request_quote[item_id]", @product.id
+            = hidden_field_tag "request_quote[item_ids]", @product.id
             - @suppliers.each do |supplier|
               %tr
                 %td

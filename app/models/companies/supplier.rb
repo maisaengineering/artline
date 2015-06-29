@@ -3,6 +3,7 @@ class Companies::Supplier < Company
   field :number
   field :name
 
+
   has_many :prices
   has_many :request_quotes
 

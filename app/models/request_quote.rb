@@ -8,10 +8,15 @@ class RequestQuote
 
   after_create :send_email
 
-  field :item_id
+  field :item_ids, type: Array
+
+  def products
+    Product.in(id: item_ids)
+  end
+
 
   def send_email
-    SupplierMailer.quote("#{user_id}","#{supplier_id}",item_id).deliver_now
+    SupplierMailer.quote(id, companies_supplier.email).deliver_now
   end
 
 end

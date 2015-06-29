@@ -4,37 +4,38 @@
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
   %body
-    - if user_signed_in?
-      %section
-        %header.header.dark-bg
-          .toggle-nav
-            .icon-reorder.tooltips{"data-original-title" => "Toggle Navigation", "data-placement" => "bottom"}
-          %a.logo{:href => ""}
-            ArtLine
-          .top-nav.notification-row
-            %ul.nav.pull-right.top-menu
-              %li.dropdown
-                %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
-                  %span.profile-ava
-                    = image_tag("avatar-small.png")
-                  %span.username
-                    = current_user.email
-                  %b.caret
-                %ul.dropdown-menu.extended.logout
-                  .log-arrow-up
-                  %li.eborder-top
-                    = link_to edit_user_registration_path(current_user) do
-                      %i.glyphicon.glyphicon-pencil
-                      Edit Profile
-                  %li
-                    = link_to destroy_user_session_path,method: :delete do
-                      %i.glyphicon.glyphicon-off
-                      Logout
-    - else
-      %section
-        %header.header.dark-bg
-          .toggle-nav
-            .icon-reorder.tooltips{"data-original-title" => "Toggle Navigation", "data-placement" => "bottom"}
-          %a.logo{:href => ""}
-            ArtLine
+    -#- if user_signed_in?
+    -#  %section
+    -#    %header.header.dark-bg
+    -#      .toggle-nav
+    -#        .icon-reorder.tooltips{"data-original-title" => "Toggle Navigation", "data-placement" => "bottom"}
+    -#      %a.logo{:href => ""}
+    -#        ArtLine
+    -#      .top-nav.notification-row
+    -#        %ul.nav.pull-right.top-menu
+    -#          %li.dropdown
+    -#            %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+    -#              %span.profile-ava
+    -#                = image_tag("avatar-small.png")
+    -#              %span.username
+    -#                = current_user.email
+    -#              %b.caret
+    -#            %ul.dropdown-menu.extended.logout
+    -#              .log-arrow-up
+    -#              %li.eborder-top
+    -#                = link_to edit_user_registration_path(current_user) do
+    -#                  %i.glyphicon.glyphicon-pencil
+    -#                  Edit Profile
+    -#              %li
+    -#                = link_to destroy_user_session_path,method: :delete do
+    -#                  %i.glyphicon.glyphicon-off
+    -#                  Logout
+    -#- else
+    %section#container
+      %header.header.dark-bg
+        .toggle-nav
+          .icon-reorder.tooltips{"data-original-title" => "Toggle Navigation", "data-placement" => "bottom"}
+        %a.logo{:href => ""}
+          ArtLine
+    .clearfix
     = yield

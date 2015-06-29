@@ -6,7 +6,12 @@ Rails.application.routes.draw do
 
   get '/dashboard' => 'home#index', as: :dashboard
 
-  resources :projects
+  resources :projects do
+    collection do
+      post 'request_supplier_qoute'
+    end
+  end
+
   resources :companies
   resources :products do
     collection do
@@ -30,8 +35,8 @@ Rails.application.routes.draw do
   post 'create_request_quote', to: "companies#create_request_quote", as: :create_request_quote
 
   get '/product_ajax_load', to: 'projects#product_ajax_load'
-  get '/product/:id/price', to: "prices#create_supplier_price", as: :product_price
-  post '/product/:id', to: "prices#update_product_price", as: :update_product_price
+  get '/quote_request/:id', to: "prices#new_supplier_price", as: :quote_request
+  post '/prices', to: "prices#create", as: :prices
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

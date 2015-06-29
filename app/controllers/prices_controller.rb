@@ -1,16 +1,17 @@
 class PricesController < ApplicationController
   before_action :authenticate_user!
-  layout "mailer", only: [:create_supplier_price]
+  layout "mailer", only: [:new_supplier_price]
 
-  def create_supplier_price
-    @product = Product.find(params[:id])
-    @supplier = Company.find(params[:supplier_id])
-    @user = User.find(params[:user_id])
+  def new_supplier_price
+    @resquest_quote = RequestQuote.find(params[:id])
+
   end
 
-  def update_product_price
-    @product = Product.find(params[:id])
-    @product_price = @product.prices.create(product_price_params)
+  def create
+    byebug
+    @product_price = Price.create(product_price_params)
+
+    product_price_params[products]
     if @product_price
       flash[:notice] = "price added successfully "
       redirect_to products_url
@@ -20,7 +21,7 @@ class PricesController < ApplicationController
   private
 
   def product_price_params
-    params.require(:product).permit(params[:product].keys)
+    params.require(:products).permit([:supplier_id, :requester_id, products:[]]+ params[:products].keys)
   end
 
 end
