@@ -7,9 +7,12 @@ Rails.application.routes.draw do
   get '/dashboard' => 'home#index', as: :dashboard
 
   resources :projects do
+    member do
+      get "customer_qoute"
+    end
     collection do
       post 'request_supplier_qoute'
-      get "customer_qoute"
+
     end
   end
 
