@@ -74,7 +74,7 @@ Rails.application.configure do
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
 
-  config.action_mailer.default_url_options = { host: 'https://artline.herokuapp.com/', port: 80 }
+  config.action_mailer.default_url_options = { host: 'artline.herokuapp.com'}
 
   config.action_mailer.delivery_method = :smtp
   # change to false to prevent email from being sent during development

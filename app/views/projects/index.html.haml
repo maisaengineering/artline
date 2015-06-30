@@ -16,6 +16,7 @@
           %tr
             %th #
             %th Project Name
+            %th Quote Number
             %th Action
         %tbody
         - @projects.each_with_index do |project,index|
@@ -23,7 +24,9 @@
             %td
               #{index+1}
             %td
-              = project.name
+              = link_to  project.name, project_path(project.id)
+            %td
+              = link_to project.quote_number, project_path(project.id)
             %td
               .btn-group
                 = link_to("", edit_project_path(project.id), class: "btn glyphicon glyphicon-pencil" )

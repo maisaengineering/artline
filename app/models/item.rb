@@ -51,4 +51,15 @@ class Item
     end
   end
 
+
+  def supplier_cost
+    item_price.supplier_cost
+
+  end
+
+  def item_price
+    @item_price ||= Price.find_by(artline_item_number: self["number"]) if respond_to?(:number)
+
+  end
+
 end

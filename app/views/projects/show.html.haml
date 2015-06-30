@@ -1,48 +1,68 @@
 %section#main-content.cus
   %section.wrapper
     %section.panel
-      %header.panel-heading.no-border
-        Product
       .product_layer
-        .row
-          .col-md-3
-            Serial No.
-          .col-md-3
-            Product Name
-          .col-md-3
-            Artline Number
-          .col-md-3
-            Supplier list
-        #items_without_price
-          - @items[true].to_a.each_with_index do |item, index |
+        - unless @items[true].blank?
+          #items_without_price
+            %header.panel-heading.no-border
+              Quoted Product's
             .row
               .col-md-3
-                = index+1
+                Serial No.
               .col-md-3
-                first
+                Product Name
               .col-md-3
-                = item["number"]
+                Artline Number
               .col-md-3
-                .example
-                  -#= select_tag("suppliers", options_for_select(Companies::Supplier.all.map{|c|[c.name, c.id]}), class:"example-multiple-selected", multiple: true, data:{item_id: item.id})
-        #items_without_price
-          - @items[false].to_a.each_with_index do |item, index |
+                Supplier Cost
 
+            - @items[true].to_a.each_with_index do |item, index |
+              .row
+                .col-md-3
+                  = index+1
+                .col-md-3
+                  = item.type
+                .col-md-3
+                  = item["number"]
+                .col-md-3
+                  = item.supplier_cost
+        - unless @items[false].blank?
+          #items_without_price
+            %header.panel-heading.no-border
+              Need Quoting
             .row
               .col-md-3
-                = index+1
+                Serial No.
               .col-md-3
-                first
+                Product Name
               .col-md-3
-                = item["number"]
+                Artline Number
               .col-md-3
-                .example
-                  = select_tag("suppliers", options_for_select(Companies::Supplier.all.map{|c|[c.name, c.id]}), class:"example-multiple-selected", multiple: true, data:{item_id: item.product_id.to_s})
+                Supplier List
+            - @items[false].to_a.each_with_index do |item, index |
+
+              .row
+                .col-md-3
+                  = index+1
+                .col-md-3
+                  = item.type
+                .col-md-3
+                  = item["number"]
+                .col-md-3
+                  .example
+                    = select_tag("suppliers", options_for_select(Companies::Supplier.all.map{|c|[c.name, c.id]}), class:"example-multiple-selected", multiple: true, data:{item_id: item.product_id.to_s})
+      %br
       .row
-        .col-md-4
-          = link_to "Send Customer Quote", "#"
-        .col-md-4
-          = link_to "Request Suppliers Quote", "#", id: "request_suppliers_quote"
+
+        - if @items[false].blank?
+          .col-md-4
+            %br
+            = link_to "Email Customer Quote", "#"
+            %br
+            = link_to "Download Customer Quote", "#"
+        - else
+          .col-md-4
+            = link_to "Request Suppliers Quote", "#", id: "request_suppliers_quote"
         .col-md-3
 
 
