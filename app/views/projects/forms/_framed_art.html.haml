@@ -1,3 +1,4 @@
+= hidden_field_tag "project[item_list][][type]", "Artwork"
 .row
   .col-md-3.mbtm15
     = text_field_tag("project[item_list][][tag]", nil, class: "form-control", placeholder: "Tag")
@@ -5,12 +6,12 @@
     = text_field_tag("project[item_list][][quantity]", nil, class: "form-control", placeholder: "Quantity")
 .row
   .col-md-3.mbtm15
-    = select_tag("project[item_list][][publisher]", options_for_select(Companies::Supplier.all.map(&:name).push('add')),prompt: "Publisher" , class: "form-control supplier_no", onchange:"new_item(this)", data:{name: 'Supplier'})
-  .col-md-3.mbtm15
-    = select_tag("project[item_list][][image_number]", options_for_select(["other"]),prompt: "Image Number" , class: "form-control" )
+    = select_tag("project[item_list][][supplier_id]", options_for_select(Companies::Supplier.all.map{|s|[s.name, s.id]}.push('add')),prompt: "Publisher" , class: "form-control supplier_no", onchange:"new_item(this)", data:{name: 'Supplier'})
+.supplier
 .row
-  .col-md-6
-    .supplier
+  .col-md-3.mbtm15
+    = select_tag("project[item_list][][number]", options_for_select(Artwork.where(:artline_item_number.exists=>true).all.map(&:id).push('add')),prompt: "Image Number" , class: "form-control" , onchange:"new_item(this)", data:{name: 'Artwork'})
+.artwork
 .row
   .col-md-3.mbtm15
     = text_field_tag("project[item_list][][title]", nil, class: "form-control", placeholder: "Title")
@@ -46,15 +47,12 @@
     = text_field_tag("project[item_list][][glass_united_inches]", nil, class: "form-control", placeholder: "Glass United Inches")
 .row
   .col-md-3.mbtm15
-    = select_tag("project[item_list][][moulding_company]", options_for_select(MouldingCompany.all.map(&:name).push('add')),prompt: "Moulding Company" , class: "form-control mouldingcompany_no", onchange:"new_item(this)", data:{name: 'MouldingCompany'})
+    = select_tag("project[item_list][][moulding_company_id]", options_for_select(MouldingCompany.all.map{|m|[m.name, m.id]}.push('add')),prompt: "Moulding Company" , class: "form-control mouldingcompany_no", onchange:"new_item(this)", data:{name: 'MouldingCompany'})
+.mouldingcompany
+.row
   .col-md-3.mbtm15
-    = select_tag("project[item_list][][frame_number]", options_for_select(Frame.all.map(&:number).push('add')),prompt: "Frame Number" , class: "form-control frame_no", onchange:"new_item(this)", data:{name: 'Frame'} )
-.row
-  .col-md-6
-    .mouldingcompany
-.row
-  .col-md-12
-    .frame
+    = select_tag("project[item_list][][frame_id]", options_for_select(Frame.all.map{|f|[f.supplier_item_number, f.id]}.push('add')),prompt: "Frame Number" , class: "form-control frame_no", onchange:"new_item(this)", data:{name: 'Frame'} )
+.frame
 .row
   .col-md-3.mbtm15
     = text_field_tag("project[item_list][][category]", nil, class: "form-control", placeholder: "Category")

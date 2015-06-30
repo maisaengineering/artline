@@ -89,10 +89,7 @@ new_field = function(element){
         place_holder = str.replace(/\b[a-z]/g, function(letter) {
             return letter.toUpperCase();
         });
-        $("."+$(element).attr('data-name').toLowerCase()).eq($index).append('<input type="text" name="project[item_list][][' + $class_name + ']" id="project_item_list__'+ $class_name +'" class="form-control mbtm15" placeholder="'+ place_holder +'">')
-    }
-    else{
-        $("."+$(element).attr('data-name').toLowerCase()).eq($index).html("").remove;
+        $(element).replaceWith('<input type="text" name="project[item_list][][' + $class_name + ']" id="project_item_list__'+ $class_name +'" class="form-control" placeholder="'+ place_holder +'">')
     }
 }
 

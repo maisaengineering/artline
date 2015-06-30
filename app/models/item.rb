@@ -68,4 +68,22 @@ class Item
     end
   end
 
+  def new_supplier=(arg)
+    supplier = Supplier.create(arg)
+    unless supplier.errors.any?
+      self["supplier_id"] = supplier.id
+    else
+      errors.add(:name, supplier.errors.full_messages.join(', '))
+    end
+  end
+
+  def new_artwork=(arg)
+    artwork = Artwork.create(arg)
+    unless artwork.errors.any?
+      self["number"] = artwork.id
+    else
+      errors.add(:name, artwork.errors.full_messages.join(', '))
+    end
+  end
+
 end
