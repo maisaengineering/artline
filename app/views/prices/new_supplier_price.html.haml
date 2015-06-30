@@ -1,10 +1,10 @@
-.price-body
+%section.wrapper
   %h1 Product Price
   %section.panel
     .panel-body.ptop35
       .row
         .col-md-3
-          Supplier Name
+          Product
         .col-md-3
           Supplier item number
         .col-md-3
@@ -16,7 +16,7 @@
         - @resquest_quote.products.each do |product|
           .row
             .col-md-3
-              = product.description
+              = product["description"]
             .col-md-3
               = text_field_tag("products[][supplier_item_number]", nil, class: "form-control",  required: true)
             .col-md-3

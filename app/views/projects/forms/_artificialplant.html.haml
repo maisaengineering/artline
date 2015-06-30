@@ -1,5 +1,6 @@
 .row
   .col-md-3.mbtm15
+    = hidden_field_tag "project[item_list][][type]", "ArtificialPlant"
     = text_field_tag("project[item_list][][tag]", nil, class: "form-control", placeholder: "Tag")
   .col-md-3.mbtm15
     = text_field_tag("project[item_list][][quantity]", nil, class: "form-control", placeholder: "Quantity")
@@ -12,7 +13,7 @@
     = select_tag("project[item_list][][fire_rating]", options_for_select(["Yes", "No"]),prompt: "Fire Rating" , class: "form-control" )
 .row
   .col-md-3.mbtm15
-    = select_tag("project[item_list][][container_number]", options_for_select(Container.all.map(&:number).push('add')),prompt: "Container Number" , class: "form-control container_no", onchange:"new_item(this)", data:{name: 'Container'})
+    = select_tag("project[item_list][][container_id]", options_for_select(Container.all.map{|c|[c.container_name, c.id]}.push('add')),prompt: "Container Number" , class: "form-control container_no", onchange:"new_item(this)", data:{name: 'Container'})
 .container.pad0px
 .row
   .col-md-3.mbtm15.txt_area

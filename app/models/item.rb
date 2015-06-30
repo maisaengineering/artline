@@ -51,15 +51,21 @@ class Item
     end
   end
 
-
   def supplier_cost
     item_price.supplier_cost
-
   end
 
   def item_price
     @item_price ||= Price.find_by(artline_item_number: self["number"]) if respond_to?(:number)
+  end
 
+  def new_container=(arg)
+    container = Container.create(arg)
+    unless container.errors.any?
+      self["container_id"] = container.id
+    else
+      errors.add(:name, container.errors.full_messages.join(', '))
+    end
   end
 
 end
