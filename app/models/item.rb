@@ -51,4 +51,13 @@ class Item
     end
   end
 
+  def new_container=(arg)
+    container = Container.create(arg)
+    unless container.errors.any?
+      self["container_id"] = container.id
+    else
+      errors.add(:name, container.errors.full_messages.join(', '))
+    end
+  end
+
 end
