@@ -8,19 +8,17 @@ class PricesController < ApplicationController
   end
 
   def create
-    @product_price = Price.create(product_price_params)
-
-    product_price_params[products]
-    if @product_price
-      flash[:notice] = "price added successfully "
-      redirect_to products_url
+    comm_params = product_price_params.slice("supplier_id","requester_id")
+    product_price_params["products"].each do |product|
+      Price.create(product.merge(comm_params))
     end
+    render text: "Successfully Updated."
   end
 
   private
 
   def product_price_params
-    params.require(:products).permit([:supplier_id, :requester_id, products:[]]+ params[:products].keys)
+    params.permit!
   end
 
 end
