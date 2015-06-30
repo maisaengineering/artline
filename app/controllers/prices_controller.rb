@@ -8,7 +8,6 @@ class PricesController < ApplicationController
   end
 
   def create
-    byebug
     @product_price = Price.create(product_price_params)
 
     product_price_params[products]
