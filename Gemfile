@@ -52,3 +52,4 @@ gem 'cancan'
 gem 'carrierwave-mongoid', require: 'carrierwave/mongoid'
 gem "will_paginate_mongoid"
 gem 'delayed_job_mongoid'
+gem 'prawn-rails'
