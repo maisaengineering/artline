@@ -17,7 +17,7 @@
           = hidden_field_tag "products[][product_id]", product.id
           .row
             .col-md-3
-              = product["description"]
+              = product["type"]
             .col-md-3
               = text_field_tag("products[][supplier_item_number]", nil, class: "form-control",  required: true)
             .col-md-3
