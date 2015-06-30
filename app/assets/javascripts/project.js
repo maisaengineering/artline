@@ -20,8 +20,9 @@ $(document).ready(function() {
                     $.each(fields,  function( index, value ) {
                         $("#company_"+value).val(data[value]);
                     })
-
+                    $("#project_client_attention option").not('option:eq(0)').remove();
                     $.each(data["attention"], function(index, value){
+
                         $("#project_client_attention").append($("<option></option>").attr("value",value).text(value));
                     });
                 }

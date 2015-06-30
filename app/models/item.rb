@@ -3,6 +3,8 @@ class Item
   include Mongoid::Timestamps
   include Mongoid::Attributes::Dynamic
 
+  field :number
+
   embedded_in :project
 
   def new_product=(arg)
