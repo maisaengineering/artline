@@ -51,6 +51,15 @@ class ProjectsController < ApplicationController
     end
   end
 
+  def customer_qoute
+    @project = Project.find(params[:id])
+    if @project.blank?
+      render nothing: true, status:404
+    else
+      @items = @project.items.group_by{|item| !item["number"].blank?}
+    end
+  end
+
   private
 
   def project_params
