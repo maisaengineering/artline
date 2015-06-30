@@ -57,9 +57,11 @@
         - if @items[false].blank?
           .col-md-4
             %br
-            = link_to "Email Customer Quote", "#"
+            = link_to "Email Customer Quote",'#' #send_quotation_project_url(@project.id), remote:true
             %br
             = link_to "Download Customer Quote", customer_qoute_project_url(@project.id, format: 'pdf'), target: "_blank"
+            %br
+            = link_to "Place Order", "#"
         - else
           .col-md-4
             = link_to "Request Suppliers Quote", "#", id: "request_suppliers_quote"

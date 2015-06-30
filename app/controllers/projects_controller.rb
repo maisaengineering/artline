@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: ["customer_qoute"]
   # load_and_authorize_resource
   def index
    @projects = Project.desc(:created_at).paginate(page: params[:page], per_page: 5)
@@ -57,6 +57,16 @@ class ProjectsController < ApplicationController
       render nothing: true, status:404
     else
       @items = @project.items.group_by{|item| !item["number"].blank?}
+    end
+  end
+
+  def send_quotation
+    @project = Project.find(params[:id])
+    if @project.blank?
+      render nothing: true, status:404
+    else
+      ClientMailer.quote(@project.id).deliver_now
+      render js:"alert('Successfully, Sent Quotation to client')"
     end
   end
 

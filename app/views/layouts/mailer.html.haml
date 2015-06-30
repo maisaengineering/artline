@@ -1,14 +1,3 @@
 %hmtl
-  %head
-    %title Artline
-    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
-    = javascript_include_tag 'application', 'data-turbolinks-track' => true
   %body
-    %section
-      %header.header.dark-bg
-        .toggle-nav
-          .icon-reorder.tooltips{"data-original-title" => "Toggle Navigation", "data-placement" => "bottom"}
-        %a.logo{:href => ""}
-          ArtLine
-    .clearfix
     = yield
