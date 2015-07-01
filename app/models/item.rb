@@ -79,13 +79,4 @@ class Item
     end
   end
 
-  def new_artwork=(arg)
-    artwork = Artwork.create(arg)
-    unless artwork.errors.any?
-      self["number"] = artwork.id
-    else
-      errors.add(:name, artwork.errors.full_messages.join(', '))
-    end
-  end
-
 end
