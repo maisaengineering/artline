@@ -1,5 +1,6 @@
 class ProjectsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: ["customer_qoute"]
+  before_action :set_project, only:  [:show, :destroy, :customer_qoute, :send_quotation]
   # load_and_authorize_resource
   def index
    @projects = Project.desc(:created_at).paginate(page: params[:page], per_page: 5)
@@ -20,7 +21,6 @@ class ProjectsController < ApplicationController
   end
 
   def show
-    @project = Project.find(params[:id])
     if @project.blank?
       render nothing: true, status:404
     else
@@ -36,6 +36,10 @@ class ProjectsController < ApplicationController
   end
 
   def destroy
+     if @project.destroy
+       flash[:notice] = "Project successfully deleted"
+       redirect_to projects_url
+     end
   end
 
   def product_ajax_load
@@ -52,7 +56,6 @@ class ProjectsController < ApplicationController
   end
 
   def customer_qoute
-    @project = Project.find(params[:id])
     if @project.blank?
       render nothing: true, status:404
     else
@@ -60,7 +63,20 @@ class ProjectsController < ApplicationController
     end
   end
 
+  def send_quotation
+    if @project.blank?
+      render nothing: true, status:404
+    else
+      ClientMailer.quote(@project.id).deliver_now
+      render js:"alert('Successfully, Sent Quotation to client')"
+    end
+  end
+
   private
+
+  def set_project
+    @project = Project.find(params[:id])
+  end
 
   def project_params
     params.require(:project).permit!

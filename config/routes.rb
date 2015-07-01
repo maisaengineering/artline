@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   resources :projects do
     member do
       get "customer_qoute"
+      get "send_quotation"
     end
     collection do
       post 'request_supplier_qoute'

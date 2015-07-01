@@ -30,5 +30,6 @@
             %td
               .btn-group
                 = link_to("", edit_project_path(project.id), class: "btn glyphicon glyphicon-pencil" )
+                = link_to("", project_path(project.id),method: :delete, class: "btn glyphicon glyphicon-trash red verticalLine")
       .flickr_pagination
         = will_paginate @projects

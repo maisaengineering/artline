@@ -44,25 +44,26 @@
                     = item["type"]
                   %td
                     = item["number"]
-                  %td
-                    .example
-                      = select_tag("suppliers", options_for_select(Companies::Supplier.all.map{|c|[c.name, c.id]}), class:"example-multiple-selected", multiple: true, data:{item_id: item.product_id.to_s})
-
-      .row
+                  %td{style: "width: 36%"}
+                    = select_tag("suppliers", options_for_select(Companies::Supplier.all.map{|c|[c.name, c.id]}), class:"example-multiple-selected", multiple: true, data:{item_id: item.product_id.to_s})
         - if @items[false].blank?
-          .col-md-3
+          .col-md-12
             %p
-              = link_to "Email Customer Quote", "#", class: "btn btn-primary"
+              = link_to "Email Customer Quote",'#',class: "btn btn-primary" #send_quotation_project_url(@project.id), remote:true
+          .col-md-12
             %p
               = link_to "Download Customer Quote", customer_qoute_project_url(@project.id, format: 'pdf'), target: "_blank",class: "btn btn-primary"
+          .col-md-12
+            %p
+              = link_to "Place Order", "#",class: "btn btn-primary"
         - else
-          .col-md-3
+          .col-md-12
             = link_to "Request Suppliers Quote", "#", id: "request_suppliers_quote",class: "btn btn-primary"
-
-
-
 :javascript
-  $('.example-multiple-selected').multiselect();
+  $('.example-multiple-selected').multiselect({
+      buttonWidth: '293px',
+      maxHeight: 192,
+  });
 
 
 
