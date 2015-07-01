@@ -10,7 +10,7 @@
 .supplier
 .row
   .col-md-3.mbtm15
-    = select_tag("project[item_list][][number]", options_for_select(Artwork.where(:artline_item_number.exists=>true).all.map(&:id).push('add')),prompt: "Image Number" , class: "form-control" , onchange:"new_item(this)", data:{name: 'Artwork'})
+    = select_tag("project[item_list][][number]", options_for_select(Price.where(:artline_item_number.exists=>true).all.map(&:id).push('add')),prompt: "Image Number" , class: "form-control" , onchange:"new_item(this)", data:{name: 'Artwork'})
 .artwork
 .row
   .col-md-3.mbtm15
