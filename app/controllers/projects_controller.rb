@@ -68,7 +68,9 @@ class ProjectsController < ApplicationController
       render nothing: true, status:404
     else
       ClientMailer.quote(@project.id).deliver_now
-      render js:"alert('Successfully, Sent Quotation to client')"
+      flash[:notice] = "Successfully Sent to Client"
+
+      redirect_to project_path(@project)
     end
   end
 
