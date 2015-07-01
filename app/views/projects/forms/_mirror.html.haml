@@ -1,3 +1,4 @@
+= hidden_field_tag "project[item_list][][type]", "Mirror"
 .row
   .col-md-3.mbtm15
     = text_field_tag("project[item_list][][tag]", nil, class: "form-control", placeholder: "Tag")
@@ -28,7 +29,7 @@
 .mouldingcompany
 .row
   .col-md-3.mbtm15
-    = select_tag("project[item_list][][frame_id]", options_for_select(Frame.all.map{|f|[f.supplier_item_number, f.id]}.push('add')),prompt: "Frame Number" , class: "form-control frame_no",id: "frame", onchange:"new_item(this)", data:{name: 'Frame'} )
+    = select_tag("project[item_list][][frame_id]", options_for_select(Price.where(:artline_item_number.exists=>true).all.map(&:id).push('add')),prompt: "Frame Number" , class: "form-control frame_no",id: "frame", onchange:"new_item(this)", data:{name: 'Frame'} )
 .frame
 .row
   .col-md-3.mbtm15

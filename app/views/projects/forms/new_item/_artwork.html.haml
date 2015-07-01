@@ -1,24 +1,24 @@
+-#.row
+-#  .col-md-3.mbtm15
+-#    = text_field_tag("project[item_list][][new_artwork][pub_item_num]", nil, class: "form-control", placeholder: "Publisher Item Number")
+-#  .col-md-3.mbtm15
+-#    = text_field_tag("project[item_list][][new_artwork][artline_num]", nil, class: "form-control", placeholder: "Artline Item Number")
 .row
   .col-md-3.mbtm15
-    = text_field_tag("project[item_list][][new_artwork][pub_item_num]", nil, class: "form-control", placeholder: "Publisher Item Number")
+    = text_field_tag("project[item_list][][new_product][title]", nil, class: "form-control", placeholder: "Title")
   .col-md-3.mbtm15
-    = text_field_tag("project[item_list][][new_artwork][artline_num]", nil, class: "form-control", placeholder: "Artline Item Number")
+    = text_field_tag("project[item_list][][new_product][artist]", nil, class: "form-control", placeholder: "Artist")
 .row
   .col-md-3.mbtm15
-    = text_field_tag("project[item_list][][new_artwork][title]", nil, class: "form-control", placeholder: "Title")
+    = text_field_tag("project[item_list][][new_product][width]", nil, class: "form-control", placeholder: "Image Width")
   .col-md-3.mbtm15
-    = text_field_tag("project[item_list][][new_artwork][artist]", nil, class: "form-control", placeholder: "Artist")
+    = text_field_tag("project[item_list][][new_product][height]", nil, class: "form-control", placeholder: "Image Height")
 .row
   .col-md-3.mbtm15
-    = text_field_tag("project[item_list][][new_artwork][width]", nil, class: "form-control", placeholder: "Image Width")
+    = text_field_tag("project[item_list][][new_product][print_cost]", nil, class: "form-control", placeholder: "Print Cost")
   .col-md-3.mbtm15
-    = text_field_tag("project[item_list][][new_artwork][height]", nil, class: "form-control", placeholder: "Image Height")
-.row
-  .col-md-3.mbtm15
-    = text_field_tag("project[item_list][][new_artwork][print_cost]", nil, class: "form-control", placeholder: "Print Cost")
-  .col-md-3.mbtm15
-    = text_field_tag("project[item_list][][new_artwork][rights_cost]", nil, class: "form-control", placeholder: "Image Rights Cost")
+    = text_field_tag("project[item_list][][new_product][rights_cost]", nil, class: "form-control", placeholder: "Image Rights Cost")
 .row
   .fileUpload.btn.btn-primary.mbtm15
     %span Upload image
-    = file_field_tag("project[item_list][][new_artwork][source]", class: "upload")
+    = file_field_tag("project[item_list][][new_product][source]", class: "upload")
