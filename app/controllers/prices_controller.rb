@@ -1,5 +1,5 @@
 class PricesController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:new_supplier_price]
   layout "mailer", only: [:new_supplier_price]
 
   def new_supplier_price
