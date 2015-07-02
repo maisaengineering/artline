@@ -1,6 +1,6 @@
 .row
   .col-md-3.mbtm15
-    = text_field_tag("company[name]", nil, class: "form-control", placeholder: "Company Name")
+    = text_field_tag("company[name]", nil, class: "form-control", placeholder: "Company Name", required: true)
   .col-md-3.mbtm15{style: "width: 30%;"}
     .row
       .col-md-12#field
@@ -8,17 +8,17 @@
         %button#b1.btn#add-more{:type => "button"} +
 .row
   .col-md-3.mbtm15
-    = text_field_tag("company[address]", nil, class: "form-control", placeholder: "Address")
+    = text_field_tag("company[address]", nil, class: "form-control", placeholder: "Address", required: true)
   .col-md-3.mbtm15
-    = text_field_tag("company[city]", nil, class: "form-control", placeholder: "City")
+    = text_field_tag("company[city]", nil, class: "form-control", placeholder: "City", required: true)
 .row
   .col-md-3.mbtm15
-    = text_field_tag("company[state]", nil, class: "form-control", placeholder: "State")
+    = text_field_tag("company[state]", nil, class: "form-control", placeholder: "State", required: true)
   .col-md-3.mbtm15
-    = text_field_tag("company[zip]", nil, class: "form-control", placeholder: "Zip")
+    = text_field_tag("company[zip]", nil, class: "form-control", placeholder: "Zip", required: true)
 .row
   .col-md-3.mbtm15
-    = phone_field_tag("company[phone]", nil, class: "form-control", placeholder: "Phone")
+    = phone_field_tag("company[phone]", nil, class: "form-control", placeholder: "Phone", required: true)
   .col-md-3.mbtm15
-    = email_field_tag("company[email]", nil, class: "form-control", placeholder: "Email")
+    = email_field_tag("company[email]", nil, class: "form-control", placeholder: "Email", required: true)
 .row{style: "display:none;"}

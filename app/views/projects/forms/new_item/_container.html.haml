@@ -5,9 +5,9 @@
 -#    = text_field_tag("ArtlineItemNumber", nil, class: "form-control", placeholder: "Artline Item Number")
 .row
   .col-md-3.mbtm15
-    = text_field_tag("project[item_list][][new_container][container_name]", nil, class: "form-control", placeholder: "Container Name")
+    = text_field_tag("project[item_list][][new_container][container_name]", nil, class: "form-control", placeholder: "Container Name", required: true)
   .col-md-3.mbtm15
-    = text_field_tag("project[item_list][][new_container][supplier_cost]", nil, class: "form-control", placeholder: "Supplier Cost")
+    = text_field_tag("project[item_list][][new_container][supplier_cost]", nil, class: "form-control", placeholder: "Supplier Cost", required: true)
 .row
   .fileUpload.btn.btn-primary.mbtm15
     %span Upload image

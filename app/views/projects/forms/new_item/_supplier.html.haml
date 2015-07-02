@@ -1,24 +1,24 @@
 .row
   .col-md-3.mbtm15
-    = text_field_tag("project[item_list][][new_supplier][name]", nil, class: "form-control", placeholder: "Company Name")
+    = text_field_tag("project[item_list][][new_supplier][name]", nil, class: "form-control", placeholder: "Company Name", required: true)
   .col-md-3.mbtm15{style: "width: 30%;"}
     .row
       .col-md-12#field
-        = text_field_tag("project[item_list][][new_supplier][attention][]", nil, class: "attention", placeholder: "Attention")
+        = text_field_tag("project[item_list][][new_supplier][attention][]", nil, class: "attention", placeholder: "Attention", required: true)
         %button#b1.btn#add-more{:type => "button",onclick:"add_attention()"} +
 .row
   .col-md-3.mbtm15
-    = text_field_tag("project[item_list][][new_supplier][address]", nil, class: "form-control", placeholder: "Address")
+    = text_field_tag("project[item_list][][new_supplier][address]", nil, class: "form-control", placeholder: "Address", required: true)
   .col-md-3.mbtm15
-    = text_field_tag("project[item_list][][new_supplier][city]", nil, class: "form-control", placeholder: "City")
+    = text_field_tag("project[item_list][][new_supplier][city]", nil, class: "form-control", placeholder: "City", required: true)
 .row
   .col-md-3.mbtm15
-    = text_field_tag("project[item_list][][new_supplier][state]", nil, class: "form-control", placeholder: "State")
+    = text_field_tag("project[item_list][][new_supplier][state]", nil, class: "form-control", placeholder: "State", required: true)
   .col-md-3.mbtm15
-    = text_field_tag("project[item_list][][new_supplier][zip]", nil, class: "form-control", placeholder: "Zip")
+    = text_field_tag("project[item_list][][new_supplier][zip]", nil, class: "form-control", placeholder: "Zip", required: true)
 .row
   .col-md-3.mbtm15
-    = phone_field_tag("project[item_list][][new_supplier][phone]", nil, class: "form-control", placeholder: "Phone")
+    = phone_field_tag("project[item_list][][new_supplier][phone]", nil, class: "form-control", placeholder: "Phone", required: true)
   .col-md-3.mbtm15
-    = email_field_tag("project[item_list][][new_supplier][email]", nil, class: "form-control", placeholder: "Email")
+    = email_field_tag("project[item_list][][new_supplier][email]", nil, class: "form-control", placeholder: "Email", required: true)
 

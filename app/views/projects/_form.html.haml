@@ -11,21 +11,21 @@
     = label_tag(:Quote, "Quote Number:")
 .row
   .col-md-3.mbtm15
-    = text_field_tag("project[name]", nil, class: "form-control", placeholder: "Project Name")
+    = text_field_tag("project[name]", nil, class: "form-control", placeholder: "Project Name", required: true)
   .col-md-3.mbtm15
-    = date_field_tag("project[date]", Date.today, class: "form-control", placeholder: "Date")
+    = date_field_tag("project[date]", Date.today, class: "form-control", placeholder: "Date", required: true)
 .row
   .col-md-3.mbtm15
-    = select_tag("project[client_id]", options_for_select(Companies::Client.all.map{|c|[c.name, c.id]}.push('add')),prompt: "Choose Company" , class: "form-control", id:"project_client_id")
+    = select_tag("project[client_id]", options_for_select(Companies::Client.all.map{|c|[c.name, c.id]}.push('add')),prompt: "Choose Company" , class: "form-control", id:"project_client_id", required: true)
   .col-md-3.mbtm15
-    = select_tag("project[client_attention]", options_for_select([]),prompt: "Attention" , class: "form-control" )
+    = select_tag("project[client_attention]", options_for_select([]),prompt: "Attention" , class: "form-control", required: true )
 = render 'companies/form'
 .row
   .col-md-3.mbtm15
-    = select_tag("project[sales_rep]", options_for_select([ "New", "None"]),prompt: "Sales Rep" , class: "form-control", placeholder: "Attention" )
+    = select_tag("project[sales_rep]", options_for_select([ "New", "None"]),prompt: "Sales Rep" , class: "form-control", placeholder: "Attention" , required: true)
 .row
   .col-md-3.mbtm15
-    = select_tag("select_product", options_for_select(Categories.to_a.map(&:reverse)),prompt: "Select Product",  onchange:"getForm(this)", class: "form-control select_product" )
+    = select_tag("select_product", options_for_select(Categories.to_a.map(&:reverse)),prompt: "Select Product",  onchange:"getForm(this)", class: "form-control select_product", required: true)
 
 .row
   .col-md-3.mbtm15

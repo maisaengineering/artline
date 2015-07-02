@@ -1,8 +1,8 @@
 .row
   .col-md-3.mbtm15
-    = text_field_tag("project[item_list][][new_product][plant_name]", nil, class: "form-control", placeholder: "Plant Name")
+    = text_field_tag("project[item_list][][new_product][plant_name]", nil, class: "form-control", placeholder: "Plant Name", required: true)
   .col-md-3.mbtm15
-    = text_field_tag("project[item_list][][new_product][size]", nil, class: "form-control", placeholder: "Size")
+    = text_field_tag("project[item_list][][new_product][size]", nil, class: "form-control", placeholder: "Size", required: true)
 .row
   .fileUpload.btn.btn-primary.mbtm15
     %span Upload image

@@ -1,9 +1,9 @@
 .row
   .col-md-3.mbtm15
-    = text_area_tag("project[item_list][][new_product][description]", nil, class: "form-control", placeholder: "Lamp Description")
+    = text_area_tag("project[item_list][][new_product][description]", nil, class: "form-control", placeholder: "Lamp Description", required: true)
 .row
   .col-md-3.mbtm15.txt_area
-    = text_field_tag("project[item_list][][new_product][size]", nil, class: "form-control", placeholder: "Lamp Size")
+    = text_field_tag("project[item_list][][new_product][size]", nil, class: "form-control", placeholder: "Lamp Size", required: true)
 .row
   .fileUpload.btn.btn-primary
     %span Upload image
