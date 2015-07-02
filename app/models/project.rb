@@ -40,7 +40,7 @@ class Project
       client = Client.create(args)
     else
       client = Client.find(client_id)
-      client.update(args)
+      client.update(args.reject{|k, v| k.eql?("attention")})
     end
 
     unless client.errors.any?
