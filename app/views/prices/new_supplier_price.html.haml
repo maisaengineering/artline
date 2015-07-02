@@ -3,15 +3,15 @@
   %section.panel
     .panel-body.ptop35
       .row
-        .col-md-3
+        .col-md-2
           Product
-        .col-md-3
+        .col-md-2
           Supplier item number
-        .col-md-3
+        .col-md-2
           Price
-        .col-md-3
+        .col-md-2
           Shipping Cost
-        .col-md-3
+        .col-md-2
           Additional Note(optional)
       %hr
       =form_tag prices_path, method: :post do
@@ -20,15 +20,15 @@
         - @resquest_quote.products.each do |product|
           = hidden_field_tag "products[][product_id]", product.id
           .row
-            .col-md-3
-              = product["type"]
-            .col-md-3
+            .col-md-2
+              = product["_type"].split("::").last
+            .col-md-2
               = text_field_tag("products[][supplier_item_number]", nil, class: "form-control",  required: true)
-            .col-md-3
+            .col-md-2
               = text_field_tag("products[][supplier_cost]",nil, class: "form-control",  required: true)
-            .col-md-3
+            .col-md-2
               = text_field_tag("products[][shipping_cost]",nil, class: "form-control",  required: true)
-            .col-md-3
+            .col-md-2
               = text_area_tag("products[][supplier_note]", nil, class: "form-control")
         %hr
         .row

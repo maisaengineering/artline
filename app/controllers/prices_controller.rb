@@ -4,7 +4,6 @@ class PricesController < ApplicationController
 
   def new_supplier_price
     @resquest_quote = RequestQuote.find(params[:id])
-
   end
 
   def create

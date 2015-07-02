@@ -17,7 +17,7 @@ class Price
   attr_accessor :products
 
   before_validation :assign_artine_number
-  # before_create :update_projects
+  before_create :update_projects
   after_create :send_email_to_requester
 
   def send_email_to_requester
