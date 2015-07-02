@@ -78,10 +78,9 @@
 
   var $$inputs_changed = false;
   $("#items_with_price tr.quotations").each(function(e){
-     $tds = $(this).find('td')
-     //console.log(eval($tds.eq(3).find("select option:selected").text()))
+     $tds = $(this).find('td');
      x = eval($tds.eq(2).find("input").val()) * eval($tds.eq(3).find("select option:selected").text()) + eval($tds.eq(4).find("input").val());
-     $tds.eq(5).text(x)
+     $tds.eq(5).text(x);
 
   });
 
