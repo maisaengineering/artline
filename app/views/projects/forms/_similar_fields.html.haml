@@ -1,23 +1,23 @@
 = hidden_field_tag "project[item_list][][type]", "Artwork"
 .row
   .col-md-3.mbtm15
-    = text_field_tag("project[item_list][][tag]", nil, class: "form-control", placeholder: "Tag")
+    = text_field_tag("project[item_list][][tag]", nil, class: "form-control", placeholder: "Tag", required: true)
   .col-md-3.mbtm15
-    = text_field_tag("project[item_list][][quantity]", nil, class: "form-control", placeholder: "Quantity")
+    = text_field_tag("project[item_list][][quantity]", nil, class: "form-control", placeholder: "Quantity", required: true)
 .row
   .col-md-3.mbtm15
-    = select_tag("project[item_list][][supplier_id]", options_for_select(Companies::Supplier.all.map{|s|[s.name, s.id]}.push('add')),prompt: "Publisher" , class: "form-control supplier_no", onchange:"new_item(this)", data:{name: 'Supplier'})
+    = select_tag("project[item_list][][supplier_id]", options_for_select(Companies::Supplier.all.map{|s|[s.name, s.id]}.push('add')),prompt: "Publisher" , class: "form-control supplier_no", onchange:"new_item(this)", data:{name: 'Supplier'}, required: true)
 .supplier
 .row
   .col-md-3.mbtm15
-    = select_tag("project[item_list][][number]", options_for_select(Price.where(:artline_item_number.exists=>true).all.map(&:id).push('add')),prompt: "Image Number" , class: "form-control" , onchange:"new_item(this)", data:{name: 'Artwork'})
+    = select_tag("project[item_list][][number]", options_for_select(Price.where(:artline_item_number.exists=>true).all.map(&:id).push('add')),prompt: "Image Number" , class: "form-control" , onchange:"new_item(this)", data:{name: 'Artwork'}, required: true)
 .artwork
 .row
   .col-md-3.mbtm15
-    = text_field_tag("project[item_list][][title]", nil, class: "form-control", placeholder: "Title")
+    = text_field_tag("project[item_list][][title]", nil, class: "form-control", placeholder: "Title", required: true)
 .row
   .col-md-3.mbtm15
-    = text_field_tag("project[item_list][][image_width]", nil, class: "form-control", placeholder: "Image Width")
+    = text_field_tag("project[item_list][][image_width]", nil, class: "form-control", placeholder: "Image Width", required: true)
   .col-md-3.mbtm15
-    = text_field_tag("project[item_list][][image_height]", nil, class: "form-control", placeholder: "Image Height")
+    = text_field_tag("project[item_list][][image_height]", nil, class: "form-control", placeholder: "Image Height", required: true)
 

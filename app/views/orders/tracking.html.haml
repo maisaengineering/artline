@@ -9,12 +9,12 @@
         = form_tag(create_order_tracking_orders_path, method: :post) do
           .row
             .col-md-3.mbtm15
-              = text_field_tag("shipment[po_number]", nil, class: "form-control", placeholder: "PO Number")
+              = text_field_tag("shipment[po_number]", nil, class: "form-control", placeholder: "PO Number", required: true)
           .row
             .col-md-3.mbtm15
-              = select_tag("shipment[stage]", options_for_select(Order::STAGE.to_a.map(&:reverse)),prompt:"Tracking stage", class: "form-control")
+              = select_tag("shipment[stage]", options_for_select(Order::STAGE.to_a.map(&:reverse)),prompt:"Tracking stage", class: "form-control", required: true)
           .row
             .col-md-6.mbtm15
-              = text_area_tag("shipment[description]", nil, class: "form-control", placeholder: "Description")
+              = text_area_tag("shipment[description]", nil, class: "form-control", placeholder: "Description", required: true)
           .actions
             = submit_tag("Submit", class: "btn btn-primary submit")
