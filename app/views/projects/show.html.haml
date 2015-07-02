@@ -29,7 +29,8 @@
                       = text_field_tag "project[item_list][][quantity]", item["quantity"]
                       X
                     %td
-                      = select_tag("project[item_list][][number]", options_for_select(Price.where(product_id: item["product_id"]).asc(:supplier_cost).map{|c|["#{c.supplier_cost.to_f} + #{c.shipping_cost.to_f}", c.artline_item_number]}, item.number), class:"example-multiple-selected")
+                      = item["number"]
+                      = select_tag("project[item_list][][number]", options_for_select(Price.any_of({product_id: item["product_id"]},{artline_item_number: item["number"]}).asc(:supplier_cost).map{|c|["#{c.supplier_cost.to_f} + #{c.shipping_cost.to_f}", c.artline_item_number]}, item.number), class:"example-multiple-selected")
                     %td
                       +
                       = text_field_tag "project[item_list][][additional_charges]", item["additional_charges"]||0
@@ -128,7 +129,6 @@
   })
 
   $("#items_with_price tr.quotations input").change(function(){
-     console.log($$inputs_changed);
      $$inputs_changed = true;
 
      $tds = $(this).closest("tr").find('td')

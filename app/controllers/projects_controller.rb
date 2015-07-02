@@ -24,7 +24,7 @@ class ProjectsController < ApplicationController
     if @project.blank?
       render nothing: true, status:404
     else
-      @items = @project.items.group_by{|item| !item["number"].blank?}
+      @items = @project.items.group_by{|item| !item["number"].blank? || !!item["quoted"] }
     end
   end
 
