@@ -9,6 +9,10 @@
           Supplier item number
         .col-md-3
           Price
+        .col-md-3
+          Shipping Cost
+        .col-md-3
+          Additional Note(optional)
       %hr
       =form_tag prices_path, method: :post do
         = hidden_field_tag "supplier_id",  @resquest_quote.supplier_id
@@ -22,6 +26,10 @@
               = text_field_tag("products[][supplier_item_number]", nil, class: "form-control",  required: true)
             .col-md-3
               = text_field_tag("products[][supplier_cost]",nil, class: "form-control",  required: true)
+            .col-md-3
+              = text_field_tag("products[][shipping_cost]",nil, class: "form-control",  required: true)
+            .col-md-3
+              = text_area_tag("products[][supplier_note]", nil, class: "form-control")
         %hr
         .row
           .col-md-12

@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     end
     collection do
       post 'request_supplier_qoute'
+      get 'search'
 
     end
   end

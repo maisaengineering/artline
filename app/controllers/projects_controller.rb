@@ -1,6 +1,6 @@
 class ProjectsController < ApplicationController
   before_action :authenticate_user!, except: ["customer_qoute"]
-  before_action :set_project, only:  [:show, :destroy, :customer_qoute, :send_quotation]
+  before_action :set_project, only:  [:show, :destroy, :customer_qoute, :send_quotation, :update]
   # load_and_authorize_resource
   def index
    @projects = Project.desc(:created_at).paginate(page: params[:page], per_page: 5)
@@ -33,6 +33,10 @@ class ProjectsController < ApplicationController
   end
 
   def update
+    @project.update(project_params)
+    flash[:notice] = "Successfully Updated"  unless @project.errors.any?
+    redirect_to :back
+
   end
 
   def destroy
@@ -72,6 +76,11 @@ class ProjectsController < ApplicationController
 
       redirect_to project_path(@project)
     end
+  end
+
+  def search
+    @projects = Project.where("$text"=>{"$search"=>params["key"]}).paginate(page: params[:page], per_page: 5)
+    render 'index'
   end
 
   private

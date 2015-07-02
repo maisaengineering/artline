@@ -3,27 +3,40 @@
     %section.panel
       .product_layer
         - unless @items[true].blank?
-          #items_without_price
+          #items_with_price
             %header.panel-heading.no-border
               Quoted Product's
-            %table.table.table-bordered
-              %thead
-                %tr
-                  %th #
-                  %th Product Name
-                  %th Artline Number
-                  %th Supplier Cost
-              %tbody
-              - @items[true].to_a.each_with_index do |item, index |
-                %tr
-                  %td
-                    #{index+1}
-                  %td
-                    = item["type"]
-                  %td
-                    = item["number"]
-                  %td
-                    = item.supplier_cost
+            = form_tag project_path(@project), method: :put do
+              %table.table.table-bordered
+                %thead
+                  %tr
+                    %th #
+                    %th Product Name
+                    %th Quantity
+                    %th Supplier Quotes (product_cost + shipping cost)
+                    %th Additional Charges
+                    %th Client Price
+                %tbody
+
+                - @items[true].to_a.each_with_index do |item, index |
+                  = hidden_field_tag "project[item_list][][id]", item.id
+                  %tr.quotations
+                    %td
+                      #{index+1}
+                    %td
+                      = item["type"]
+                    %td
+                      = text_field_tag "project[item_list][][quantity]", item["quantity"]
+                      X
+                    %td
+                      = select_tag("project[item_list][][number]", options_for_select(Price.where(product_id: item["product_id"]).asc(:supplier_cost).map{|c|["#{c.supplier_cost.to_f} + #{c.shipping_cost.to_f}", c.artline_item_number]}, item.number), class:"example-multiple-selected")
+                    %td
+                      +
+                      = text_field_tag "project[item_list][][additional_charges]", item["additional_charges"]||0
+                    %td.client_price
+              .col-md-12
+                %p
+                  = submit_tag "Save", class: "btn btn-primary "
         - unless @items[false].blank?
           #items_without_price
             %header.panel-heading.no-border
@@ -47,6 +60,7 @@
                   %td{style: "width: 36%"}
                     = select_tag("suppliers", options_for_select(Companies::Supplier.all.map{|c|[c.name, c.id]}), class:"example-multiple-selected", multiple: true, data:{item_id: item.product_id.to_s})
         - if @items[false].blank?
+
           .col-md-12
             %p
               = link_to "Email Customer Quote",send_quotation_project_url(@project.id),class: "btn btn-primary"
@@ -60,12 +74,21 @@
           .col-md-12
             = link_to "Request Suppliers Quote", "#", id: "request_suppliers_quote",class: "btn btn-primary"
 :javascript
+
+
+  var $$inputs_changed = false;
+  $("#items_with_price tr.quotations").each(function(e){
+     $tds = $(this).find('td')
+     //console.log(eval($tds.eq(3).find("select option:selected").text()))
+     x = eval($tds.eq(2).find("input").val()) * eval($tds.eq(3).find("select option:selected").text()) + eval($tds.eq(4).find("input").val());
+     $tds.eq(5).text(x)
+
+  });
+
   $('.example-multiple-selected').multiselect({
       buttonWidth: '293px',
       maxHeight: 192,
   });
-
-
 
   $("#request_suppliers_quote").click(function(e){
       e.preventDefault();
@@ -103,3 +126,13 @@
       }
 
   })
+
+  $("#items_with_price tr.quotations input").change(function(){
+     console.log($$inputs_changed);
+     $$inputs_changed = true;
+
+     $tds = $(this).closest("tr").find('td')
+     x = eval($tds.eq(2).find("input").val()) * eval($tds.eq(3).find("select option:selected").text()) + eval($tds.eq(4).find("input").val());
+     $tds.eq(5).text(x)
+  })
+

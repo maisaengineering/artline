@@ -6,8 +6,8 @@
           %li
             = link_to "Create Project", new_project_path,class:'btn'
           %li
-            %form.navbar-form
-              %input.form-control{:placeholder => "Search", :type => "text"}
+            = form_tag '/projects/search', method: 'get' do
+              %input.form-control{:placeholder => "Search", :type => "text", name: "key"}
     %section.panel
       %header.panel-heading.no-border
         Project's
