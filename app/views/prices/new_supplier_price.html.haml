@@ -25,9 +25,9 @@
             .col-md-2
               = text_field_tag("products[][supplier_item_number]", nil, class: "form-control",  required: true)
             .col-md-2
-              = text_field_tag("products[][supplier_cost]",nil, class: "form-control",  required: true)
+              = number_field_tag("products[][supplier_cost]",nil, class: "form-control",  required: true,min: 0)
             .col-md-2
-              = text_field_tag("products[][shipping_cost]",nil, class: "form-control",  required: true)
+              = number_field_tag("products[][shipping_cost]",nil, class: "form-control",  required: true,min: 0)
             .col-md-2
               = text_area_tag("products[][supplier_note]", nil, class: "form-control")
         %hr
