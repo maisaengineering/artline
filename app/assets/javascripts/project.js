@@ -1,5 +1,6 @@
 $(document).ready(function() {
     $('#company_name').closest('.row').hide();
+    $(".sales_rep").closest('.row').hide()
     $("#project_client_id").change(function(e){
         e.preventDefault();
         $val= $.trim($(this).val());
@@ -95,3 +96,13 @@ new_field = function(element){
 }
 
 
+add_sales_rep = function(element){
+  var name = $(element).val()
+    if(name == "add"){
+      $(".sales_rep").closest('.row').show()
+      $(".sales_rep").append('<input type="text" name="project[new_sales_rep][name]" class="form-control" placeholder= "New Sales Representative" required="required">')
+    }
+    else{
+        $(".sales_rep").empty().closest('.row').hide()
+    }
+}

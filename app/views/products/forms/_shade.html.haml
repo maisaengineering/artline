@@ -1,0 +1,21 @@
+= form_for @product, as: :product, url:( @product.new_record? ? products_path(@product) : product_path(@product)) do |f|
+  = hidden_field_tag :item_type, @product.class
+  - if @product.errors.present?
+    #error_explanation
+      %h2 #{@product.errors.count} error prohibited this user from being saved:
+      %ul
+        - @product.errors.full_messages.each do |error|
+          %li
+            = "#{error}"
+  .row
+    .col-md-3.mbtm15
+      = f.text_field :description, class: "form-control", placeholder: "Shade description",required: true
+  .row
+    .col-md-2.fileUpload.btn.btn-primary.mbtm15
+      %span Upload image
+      = f.file_field :source, class: "upload",onchange: "upload_img(this)"
+    .col-md-4.file-name{style: "padding-top: 5px; padding-left: 5px;"}
+      %span
+  = f.submit nil, class: "btn btn-success mbtm15"
+
+

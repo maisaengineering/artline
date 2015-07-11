@@ -5,7 +5,7 @@
       %div.panel-body.ptop35
         .row
           .col-md-3.mbtm15
-            = select_tag("product_type", options_for_select(Categories.to_a.map(&:reverse)),include_blank: "Product Type" , class: "form-control")
+            = select_tag("product_type", options_for_select(Addons.to_a.map(&:reverse)),include_blank: "Product Type" , class: "form-control")
         .row
           .col-md-12.selected_item
 
