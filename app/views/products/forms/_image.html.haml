@@ -9,14 +9,18 @@
             = "#{error}"
   .row
     .col-md-3.mbtm15
-      = f.text_field :title, class: "form-control", placeholder: "Title",required: true
+      = f.label :title
+      = f.text_field :title, class: "form-control", required: true
     .col-md-3.mbtm15
-      = f.text_field :artist, class: "form-control", placeholder: "Artist",required: true
+      = f.label :artist
+      = f.text_field :artist, class: "form-control", required: true
   .row
     .col-md-3.mbtm15
-      = f.text_field :width, class: "form-control", placeholder: "Width",required: true
+      = f.label :width
+      = f.text_field :width, class: "form-control", required: true
     .col-md-3.mbtm15
-      = f.text_field :height, class: "form-control", placeholder: "Height",required: true
+      = f.label :height
+      = f.text_field :height, class: "form-control", required: true
   .row
     .col-md-2.fileUpload.btn.btn-primary.mbtm15
       %span Upload image

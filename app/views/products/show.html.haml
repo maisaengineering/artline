@@ -6,12 +6,14 @@
       %table.table.table-bordered
         %thead
           %tr
-            %th #
+            %th Type
             %th Action
         %tbody
           %tr
             %td
-              = @product._type
+              = @product._type.split("::").last
+              - if @product.has_attribute?(:source) && @product.source.present?
+                = image_tag(@product.source, class: "product_mini_img" )
             %td
               .btn-group
                 = link_to("", edit_product_path(@product.id), class: "btn glyphicon glyphicon-pencil black")

@@ -24,6 +24,8 @@
               #{index+1}
             %td
               = link_to("#{product._type.split("::").last}", product_path(product.id) )
+              - if product.has_attribute?(:source) && product.source.present?
+                = image_tag(product.source, class: "product_mini_img" )
             %td
               .btn-group
                 = link_to("", edit_product_path(product.id), class: "btn glyphicon glyphicon-pencil black" )

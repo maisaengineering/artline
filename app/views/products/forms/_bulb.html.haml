@@ -9,7 +9,8 @@
             = "#{error}"
   .row
     .col-md-3.mbtm15
-      = f.text_field :description, class: "form-control", placeholder: "Bulb Description",required: true
+      = f.label :description
+      = f.text_field :description, class: "form-control",required: true
   = f.submit nil, class: "btn btn-success mbtm15"
 
 

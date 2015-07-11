@@ -33,11 +33,10 @@ $(document).ready(function() {
 
 
     $('#add_another_item').click(function(e){
-        //e.preventDefault();
+        e.preventDefault();
         $source_element = $('#select_product').closest('.row').clone(true)[0];
+        $($source_element).find('select').removeAttr('required');
         $('#add_another_item').closest('.row').before($source_element)
-
-
     })
 });
 
