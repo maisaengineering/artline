@@ -22,7 +22,10 @@
 = render 'companies/form'
 .row
   .col-md-3.mbtm15
-    = select_tag("project[sales_rep]", options_for_select([ "New", "None"]),prompt: "Sales Rep" , class: "form-control", placeholder: "Attention" , required: true)
+    = select_tag("project[sales_rep]", options_for_select(SalesRep.pluck(:name).push("add","None")),prompt: "Sales Rep", onchange:"add_sales_rep(this)" , class: "form-control", placeholder: "Attention" , required: true)
+.row
+  .col-md-3.mbtm15
+    .sales_rep
 .row
   .col-md-3.mbtm15
     = select_tag("select_product", options_for_select(Categories.to_a.map(&:reverse)),prompt: "Select Product",  onchange:"getForm(this)", class: "form-control select_product", required: true)

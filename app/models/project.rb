@@ -12,6 +12,7 @@ class Project
   field :client_attention
   field :company_name
   field :company_email
+  field :sales_rep
 
   attr_accessor :item_list, :new_attention
 
@@ -51,6 +52,11 @@ class Project
     else
       errors.add(:company,client.errors.full_messages.join(','))
     end
+  end
+
+  def new_sales_rep=(args)
+    sales_rep = SalesRep.create(args)
+    self.sales_rep = sales_rep.name
   end
 
 
