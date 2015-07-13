@@ -73,6 +73,69 @@
         - else
           .col-md-12
             = link_to "Request Suppliers Quote", "#", id: "request_suppliers_quote",class: "btn btn-primary"
+
+%section#main-content.cus
+  %section.wrapper
+    %section.panel
+      .row.product
+        .col-md-6
+          .row
+            .col-md-12
+              .project_details
+                Product details :
+              %div
+                %span.project_details
+                  Name :
+                =  ""
+                &nbsp; &nbsp; &nbsp;
+                %span.project_details
+                  Artline Number :
+                =  ""
+              .row
+                .col-md-3{style: "padding-right: 0px;"}
+                  = image_tag("", class: "product-img")
+                  = "Size: "
+                .col-md-9
+                  Description comes here
+              .project_details
+                Shade :
+              .row
+                .col-md-3{style: "padding-right: 0px;"}
+                  = image_tag("", class: "product-img")
+                .col-md-9
+                  Shade Description comes here
+              .project_details
+                Bulb :
+              .row
+                .col-md-12
+                  Bulb description comes here
+        .col-md-2
+          .project_details
+            Quantity
+          .mtop20
+            = "3"
+        .col-md-2
+          .project_details
+            Each Price
+          .mtop20
+            = "25"
+        .col-md-2
+          .project_details
+            Price
+          .mtop20
+            = "75"
+      %hr
+      .row.m0px.pbtn20
+        .col-md-4
+          = select_tag("suppliers", options_for_select(Companies::Supplier.all.map{|c|[c.name, c.id]}), class:"example-multiple-selected", multiple: true)
+        .col-md-2{style: "float: right; margin-right: 30px"}
+          %span.project_details
+            Total Price :
+          = "125"
+
+
+
+
 :javascript
 
 
