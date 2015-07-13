@@ -18,29 +18,3 @@
               .btn-group
                 = link_to("", edit_product_path(@product.id), class: "btn glyphicon glyphicon-pencil black")
                 = link_to("", product_path(@product.id), method: :delete, class: "btn glyphicon glyphicon-trash red verticalLine")
-  - if @suppliers.present?
-    %section.panel
-      %header.panel-heading.no-border
-        List
-      %table.table.table-bordered
-        %thead
-          %tr
-            %th Supplier Name
-            %th
-        %tbody
-          = form_tag(create_request_quote_path, method: :post) do
-            = hidden_field_tag "request_quote[item_ids][]", @product.id
-            - @suppliers.each do |supplier|
-              %tr
-                %td
-                  = supplier.name
-                - if supplier.prices.present?
-                  %td
-                    - supplier.prices.each do |price|
-                      = "#{price.supplier_cost}"
-                - else
-                  %td
-                    = check_box_tag "request_quote[supplier_id][]", "#{supplier.id}"
-            %tr
-              %td
-                = submit_tag("Get supplier quota", class: "btn btn-primary")
