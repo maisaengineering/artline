@@ -9,11 +9,14 @@
             = "#{error}"
   .row
     .col-md-3.mbtm15
-      = f.text_field :size, class: "form-control", placeholder: "Size",required: true
+      = f.label :size
+      = f.text_field :size, class: "form-control",required: true
   .row
     .col-md-3.mbtm15
-      = f.text_field :finish, class: "form-control", placeholder: "Finish",required: true
+      = f.label :finish
+      = f.text_field :finish, class: "form-control",required: true
   .row
     .col-md-3.mbtm15
+      = f.label :category
       = f.text_field :category, class: "form-control", placeholder: "Category"
   = f.submit nil, class: "btn btn-success mbtm15"
