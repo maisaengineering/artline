@@ -4,7 +4,7 @@ class ClientMailer < ApplicationMailer
     @client = Client.find(@project.client_id)
 
     rfqs = @project.rfqs
-    items = @project.items.group_by{|item| !item["number"].blank? || !@fqs.in(item_ids_quoted: [item.id.to_s]).blank? }
+    items = @project.items.group_by{|item| !item["number"].blank? || !rfqs.in(item_ids_quoted: [item.id.to_s]).blank? }
     i=0
     product = items[true].map do |item|
       client_price = Price.find_by(artline_item_number: item["number"]).client_cost(item["additional_charge"].to_i)

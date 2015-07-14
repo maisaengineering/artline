@@ -46,4 +46,8 @@ class Products::ArtificialPlant < Product
   def description
     name
   end
+
+  def details
+    "#{description} \n size: #{size} \n Container: #{container.name}"
+  end
 end

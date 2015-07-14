@@ -4,4 +4,8 @@ class Product
   include Mongoid::Attributes::Dynamic
 
   has_many :prices
+
+  def details
+
+  end
 end
