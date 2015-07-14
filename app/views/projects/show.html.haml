@@ -11,11 +11,11 @@
                 %thead
                   %tr
                     %th #
-                    %th Product Name
+                    %th Product details
                     %th Quantity
-                    %th Supplier Quotes (product_cost + shipping cost)
-                    %th Additional Charges
-                    %th Client Price
+                    %th Each Price
+                    %th Service Tax
+                    %th  Price
                 %tbody
 
                 - @items[true].to_a.each_with_index do |item, index |
@@ -24,16 +24,51 @@
                     %td
                       #{index+1}
                     %td
-                      = item["type"]
+                      .row
+                        .col-md-12
+                          %div
+                            %span.project_details
+                              Name :
+                            = item["type"]
+                            &nbsp; &nbsp; &nbsp;
+
+                          .row
+                            .col-md-5{style: "padding-right: 0px;"}
+                              - unless item.product.source.file.blank?
+                                = image_tag(item.product.source.url, class: "product-img")
+                              = "Size: #{item.product.size}"
+                            .col-md-7
+                              = item.product["description"]
+                          - item.product.addons.each do |addon|
+                            .project_details
+                              #{addon}:
+                            - addon = item.product.instance_eval(addon)
+                            .row
+                              .col-md-3{style: "padding-right: 0px;"}
+                                - unless addon.source.file.blank?
+                                  = image_tag(addon.source.url, class: "product-img")
+                              .col-md-9
+                                = addon.description
                     %td
-                      = text_field_tag "project[item_list][][quantity]", item["quantity"]
+                      = number_field_tag "project[item_list][][quantity]", item["quantity"]
                       X
                     %td
-                      = select_tag("project[item_list][][number]", options_for_select(Price.any_of({product_id: item["product_id"]},{artline_item_number: item["number"]}).asc(:supplier_cost).map{|c|["#{c.supplier_cost.to_f} + #{c.shipping_cost.to_f}", c.artline_item_number]}, item.number), class:"example-multiple-selected")
+                      = select_tag("project[item_list][][number]", options_for_select(Price.any_of({product_id: item["product_id"]},{artline_item_number: item["number"]}).asc(:supplier_cost).map{|c|["#{c.companies_supplier.name}($#{c.supplier_cost.to_f})", c.artline_item_number]}, item.number), class:"example-multiple-selected")
                     %td
                       +
-                      = text_field_tag "project[item_list][][additional_charges]", item["additional_charges"]||0
+                      =  number_field_tag "project[item_list][][additional_charges]", item["additional_charges"]||2
+                      ="%"
                     %td.client_price
+                  %tr
+                    %td
+                    %td
+                    %td{colspan:3} Shipping Cost
+                    %td
+                  %tr
+                    %td
+                    %td
+                    %td{colspan:3} Total
+                    %td.total_client_price
               .col-md-12
                 %p
                   = submit_tag "Save", class: "btn btn-primary "
@@ -45,8 +80,8 @@
               %thead
                 %tr
                   %th #
-                  %th Product Name
-                  %th Artline Number
+                  %th Product details
+                  %th Quantity
                   %th Supplier List
               %tbody
               - @items[false].to_a.each_with_index do |item, index |
@@ -54,9 +89,33 @@
                   %td
                     #{index+1}
                   %td
-                    = item["type"]
+                    .row
+                      .col-md-12
+                        %div
+                          %span.project_details
+                            Name :
+                          = item["type"]
+                          &nbsp; &nbsp; &nbsp;
+
+                        .row
+                          .col-md-4{style: "padding-right: 0px;"}
+                            - unless item.product.source.file.blank?
+                              = image_tag(item.product.source.url, class: "product-img")
+                            = "Size: #{item.product.size}"
+                          .col-md-8
+                            = item.product["description"]
+                        - item.product.addons.each do |addon|
+                          .project_details
+                            #{addon}:
+                          - addon = item.product.instance_eval(addon)
+                          .row
+                            .col-md-3{style: "padding-right: 0px;"}
+                              - unless addon.source.file.blank?
+                                = image_tag(addon.source.url, class: "product-img")
+                            .col-md-9
+                              = addon.description
                   %td
-                    = item["number"]
+                    = number_field_tag "project[item_list][][quantity]", item["quantity"]
                   %td{style: "width: 36%"}
                     = select_tag("suppliers", options_for_select(Companies::Supplier.all.map{|c|[c.name, c.id]}), class:"example-multiple-selected", multiple: true, data:{item_id: item.id.to_s})
         - if @items[false].blank?
@@ -74,66 +133,6 @@
           .col-md-12
             = link_to "Request Suppliers Quote", "#", id: "request_suppliers_quote",class: "btn btn-primary"
 
-%section#main-content.cus
-  %section.wrapper
-    - unless @items[true].blank?
-      %section.panel#items_without_price
-        - @items[true].to_a.each_with_index do |item, index |
-
-          .row.product
-            .col-md-6
-              .row
-                .col-md-12
-                  .project_details
-                    Product details :
-                  %div
-                    %span.project_details
-                      Name :
-                    = item["type"]
-                    &nbsp; &nbsp; &nbsp;
-                    %span.project_details
-                      Supplier :
-                    = select_tag("project[item_list][][number]", options_for_select(Price.any_of({product_id: item["product_id"]},{artline_item_number: item["number"]}).asc(:supplier_cost).map{|c|["#{c.supplier_cost.to_f} + #{c.shipping_cost.to_f}", c.artline_item_number]}, item.number), class:"example-multiple-selected")
-                  .row
-                    .col-md-3{style: "padding-right: 0px;"}
-                      - unless item.product.source.file.blank?
-                        = image_tag(item.product.source.url, class: "product-img")
-                      = "Size: #{item.product.size}"
-                    .col-md-9
-                      = item.product["description"]
-                  - item.product.addons.each do |addon|
-                    .project_details
-                      #{addon}:
-                    - addon = item.product.instance_eval(addon)
-                    .row
-                      .col-md-3{style: "padding-right: 0px;"}
-                        - unless addon.source.file.blank?
-                          = image_tag(addon.source.url, class: "product-img")
-                      .col-md-9
-                        = addon.description
-            .col-md-2
-              .project_details
-                Quantity
-              .mtop20
-                = text_field_tag "project[item_list][][quantity]", item["quantity"]
-            .col-md-2
-              .project_details
-                Each Price
-              .mtop20
-                = "25"
-            .col-md-2
-              .project_details
-                Price
-              .mtop20
-                = "75"
-        %hr
-        .row.m0px.pbtn20
-          .col-md-4
-            -#= select_tag("suppliers", options_for_select(Companies::Supplier.all.map{|c|[c.name, c.id]}), class:"example-multiple-selected", multiple: true)
-          .col-md-2{style: "float: right; margin-right: 30px"}
-            %span.project_details
-              Total Price :
-            = "125"
 
 
 
@@ -144,8 +143,13 @@
   var $$inputs_changed = false;
   $("#items_with_price tr.quotations").each(function(e){
      $tds = $(this).find('td');
-     x = eval($tds.eq(2).find("input").val()) * eval($tds.eq(3).find("select option:selected").text()) + eval($tds.eq(4).find("input").val());
+
+     x = eval($tds.eq(2).find("input").val()) * eval($tds.eq(3).find("select option:selected").text().match(/\$\d+.\d+/)[0].replace("$",''));
+     x += x*eval($tds.eq(4).find("input").val())/100;
      $tds.eq(5).text(x);
+     total = 0
+     $('.client_price').each(function(e){total += eval($(this).text())})
+     $('.total_client_price').text(total);
 
   });
 
@@ -195,7 +199,11 @@
      $$inputs_changed = true;
 
      $tds = $(this).closest("tr").find('td')
-     x = eval($tds.eq(2).find("input").val()) * eval($tds.eq(3).find("select option:selected").text()) + eval($tds.eq(4).find("input").val());
+     x = eval($tds.eq(2).find("input").val()) * eval($tds.eq(3).find("select option:selected").text().match(/\$\d+.\d+/)[0].replace("$",''));
+     x += x*eval($tds.eq(4).find("input").val())/100;
      $tds.eq(5).text(x)
+     total = 0
+     $('.client_price').each(function(e){total += eval($(this).text())})
+     $('.total_client_price').text(total);
   })
 
