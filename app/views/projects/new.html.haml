@@ -3,7 +3,7 @@
     %h1 New Project
     %section.panel
       %div.panel-body.ptop35
-        = form_tag("/projects", method: :post) do
+        = form_tag("/projects", method: :post, multipart:true) do
           = render 'form'
 
 

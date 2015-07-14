@@ -20,8 +20,9 @@ class Project
   before_validation :generate_quote_number
   before_save :update_new_attention, unless: Proc.new{|pro| pro.new_attention.blank?}
 
+  belongs_to :user
   embeds_many :items
-
+  embeds_many :rfqs, class_name: 'RFQ'
   index({"quote_number"=> 'text', "name"=> 'text', "company_name"=>'text', "company_email"=>'text'},{background: true})
 
   def item_list=(args)

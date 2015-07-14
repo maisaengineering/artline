@@ -7,7 +7,7 @@ class User
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_many :request_quotes
+  has_many :projects
 
   ROLES = %w[super_admin project_manager]
 

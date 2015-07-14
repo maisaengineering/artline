@@ -10,24 +10,20 @@
         .col-md-2
           Price
         .col-md-2
-          Shipping Cost
-        .col-md-2
           Additional Note(optional)
       %hr
       =form_tag prices_path, method: :post do
-        = hidden_field_tag "supplier_id",  @resquest_quote.supplier_id
-        = hidden_field_tag "requester_id", @resquest_quote.user_id
-        - @resquest_quote.products.each do |product|
-          = hidden_field_tag "products[][product_id]", product.id
+        = hidden_field_tag "rsq_id", @rfq.id
+        - @rfq.items_to_quote.each do |item|
+          = hidden_field_tag "products[][product_id]", item["product_id"]
+          = hidden_field_tag "products[][item_id]", item["_id"]
           .row
             .col-md-2
-              = product["_type"].split("::").last
+              = item["type"].split("::").last
             .col-md-2
               = text_field_tag("products[][supplier_item_number]", nil, class: "form-control",  required: true)
             .col-md-2
               = number_field_tag("products[][supplier_cost]",nil, class: "form-control",  required: true,min: 0)
-            .col-md-2
-              = number_field_tag("products[][shipping_cost]",nil, class: "form-control",  required: true,min: 0)
             .col-md-2
               = text_area_tag("products[][supplier_note]", nil, class: "form-control")
         %hr

@@ -13,5 +13,47 @@ class Products::Lamp < Product
     %w(description size)
   end
 
+  def addons
+    %w(shade bulb)
+  end
+
+  def number=(arg)
+    price = Price.find_by(artline_item_number:arg)
+    if price and price.product
+      self.description = price.product.description
+      self.size = price.product.size
+    end
+  end
+
+  def shade=(arg)
+    product= Shade.create(arg)
+    unless product.errors.any?
+      self.shade_id = product.id
+    else
+      errors.add(:shade, product.errors.full_messages.join(', '))
+    end
+    byebug
+  end
+
+  def bulb=(arg)
+    product= Shade.create(arg)
+    unless product.errors.any?
+      self.bulb_id = product.id
+    else
+      errors.add(:bulb, product.errors.full_messages.join(', '))
+    end
+  end
+
+  def shade
+    Shade.find(shade_id)
+  end
+
+  def bulb
+    Bulb.find(bulb_id)
+  end
+
+  def self.artine_item_numbers
+    Price.in(product_id: Lamp.only(:_id).all.map(:_id)).only(:artline_item_number).map(&:artline_item_number)
+  end
 
 end

@@ -6,8 +6,7 @@
     = text_field_tag("project[item_list][][quantity]", nil, class: "form-control", placeholder: "Quantity", required: true)
 .row
   .col-md-3.mbtm15
-    -#TODO need to changed type specific
-    = select_tag("project[item_list][][product][existing][number]", options_for_select(Price.where(:artline_item_number.exists=>true).all.map(&:artline_item_number).push('add')),prompt: "Item Number" , class: "form-control lamb_no", onchange:"new_item(this)", data:{name: 'Lamp'}, required: true)
+    = select_tag("project[item_list][][product][existing][number]", options_for_select(Lamp.artine_item_numbers.push('add')),prompt: "Item Number" , class: "form-control lamb_no", onchange:"new_item(this)", data:{name: 'Lamp'}, required: true)
 .lamp
 
 .row

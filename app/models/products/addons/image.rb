@@ -5,6 +5,4 @@ class Products::Addons::Image < Products::Addon
   field :width
   field :height
 
-  mount_uploader :source, SourceUploader
-
 end

@@ -10,28 +10,36 @@ class Price
   field :supplier_item_number
   field :supplier_cost, type: Float
   field :client_cost, type: Float
-  field :requester_id, type: String
+  field :project_id, type: String
   field :shipping_cost, type: Float
   field :supplier_note
 
-  attr_accessor :products
+  attr_accessor :rsq_id, :item_id
 
   before_validation :assign_artine_number
   before_create :update_projects
   after_create :send_email_to_requester
 
   def send_email_to_requester
-    SupplierMailer.reply_to_requester("#{requester_id}","#{supplier_id}",supplier_cost).deliver_now
+    SupplierMailer.reply_to_requester("#{rfq.project.user_id}","#{supplier_id}",supplier_cost).deliver_now
   end
 
   def assign_artine_number
+    self.project_id = rfq.project.id
+    self.supplier_id = rfq.supplier_id
     self.artline_item_number = "#{companies_supplier.number.to_s}#{supplier_item_number.to_s}"
   end
 
+  def rfq
+    @rfq||= Project.elem_match(rfqs:{_id: BSON::ObjectId.from_string(rsq_id)}).first.rfqs.find(rsq_id)
+  end
+
+
   def update_projects
-    Project.elem_match(items:{product_id: product_id}).each do |project|
-      project.items.where(product_id: product_id, :quoted.exists=>false).update_all(quoted: true)
-      # project.items.where(product_id: product_id).map{|itm| itm.unset(:product_id)}
+    if rfq
+      byebug
+      rfq.pull(item_ids_to_quote: item_id)
+      rfq.push(item_ids_quoted: item_id)
     end
   end
 

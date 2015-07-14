@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     member do
       get "customer_qoute"
       get "send_quotation"
+      post "rfq"
     end
     collection do
       post 'request_supplier_qoute'

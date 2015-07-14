@@ -9,7 +9,7 @@ class Item
 
   def product=(arg)
     if arg.include?('new')
-      product = eval(type).new(arg)
+      product = eval(type).new(arg['new'])
       product.assign_attributes(arg['existing'])
     else
       price = Price.find_by(artline_item_number:arg['existing']['number'] )
@@ -27,6 +27,10 @@ class Item
     else
       errors.add(:new_item, product.errors.full_messages.join(', '))
     end
+  end
+
+  def product
+    @product ||= Product.find(self["product_id"])
   end
 
   # def new_product=(arg)

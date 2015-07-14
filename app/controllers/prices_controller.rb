@@ -3,11 +3,12 @@ class PricesController < ApplicationController
   layout "mailer", only: [:new_supplier_price]
 
   def new_supplier_price
-    @resquest_quote = RequestQuote.find(params[:id])
+    project= Project.elem_match(rfqs: {_id: BSON::ObjectId.from_string(params[:id])}).first
+    @rfq = project.rfqs.find(params[:id])
   end
 
   def create
-    comm_params = product_price_params.slice("supplier_id","requester_id")
+    comm_params = product_price_params.slice( "rsq_id")
     product_price_params["products"].each do |product|
       Price.create(product.merge(comm_params))
     end
