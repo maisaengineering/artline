@@ -1,32 +1,60 @@
 %section.wrapper
-  %h1 Product Price
+  %h1 Need Quotation
   %section.panel
     .panel-body.ptop35
-      .row
-        .col-md-2
-          Product
-        .col-md-2
-          Supplier item number
-        .col-md-2
-          Price
-        .col-md-2
-          Additional Note(optional)
-      %hr
-      =form_tag prices_path, method: :post do
-        = hidden_field_tag "rsq_id", @rfq.id
-        - @rfq.items_to_quote.each do |item|
-          = hidden_field_tag "products[][product_id]", item["product_id"]
-          = hidden_field_tag "products[][item_id]", item["_id"]
-          .row
-            .col-md-2
-              = item["type"].split("::").last
-            .col-md-2
-              = text_field_tag("products[][supplier_item_number]", nil, class: "form-control",  required: true)
-            .col-md-2
-              = number_field_tag("products[][supplier_cost]",nil, class: "form-control",  required: true,min: 0)
-            .col-md-2
-              = text_area_tag("products[][supplier_note]", nil, class: "form-control")
-        %hr
-        .row
-          .col-md-12
-            = submit_tag("Submit", class: "btn btn-success")
+
+      %table.table.table-bordered
+        %thead
+          %tr
+            %th #
+            %th Product details
+            %th Quantity
+            %th Supplier item number
+            %th Each Cost
+            %th Additional Note(optional)
+        =form_tag prices_path, method: :post do
+          = hidden_field_tag "rsq_id", @rfq.id
+          %tbody
+            - @rfq.items_to_quote.to_a.each_with_index do |item, index |
+              = hidden_field_tag "products[][product_id]", item["product_id"]
+              = hidden_field_tag "products[][item_id]", item["_id"]
+              %tr
+                %td
+                  #{index+1}
+                %td
+                  .row
+                    .col-md-12
+                      %div
+                        %span.project_details
+                          Name :
+                        = item["type"]
+                        &nbsp; &nbsp; &nbsp;
+
+                      .row
+                        .col-md-4{style: "padding-right: 0px;"}
+                          - unless item.product.source.file.blank?
+                            = image_tag(item.product.source.url, class: "product-img")
+                          = "Size: #{item.product.size}"
+                        .col-md-8
+                          = item.product.description
+                      - item.product.addons.each do |addon|
+                        .project_details
+                          #{addon}:
+                        - addon = item.product.instance_eval(addon)
+                        .row
+                          .col-md-3{style: "padding-right: 0px;"}
+                            - unless addon.source.file.blank?
+                              = image_tag(addon.source.url, class: "product-img")
+                          .col-md-9
+                            = addon.details
+                %td
+                  = item["quantity"]
+                %td
+                  = text_field_tag("products[][supplier_item_number]", nil, class: "form-control",  required: true)
+                %td
+                  = number_field_tag("products[][supplier_cost]",nil, class: "form-control",:step => 'any',  required: true,min: 0)
+                %td
+                  = text_area_tag("products[][supplier_note]", nil, class: "form-control")
+            .tr
+              %td{colspan:6}
+                = submit_tag("Submit", class: "btn btn-success")

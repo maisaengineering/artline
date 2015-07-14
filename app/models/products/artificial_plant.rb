@@ -1,7 +1,7 @@
 class Products::ArtificialPlant < Product
 
 
-  field :plant_name
+  field :name
   field :size
   field :container_id
 
@@ -20,7 +20,7 @@ class Products::ArtificialPlant < Product
   def number=(arg)
     price = Price.find_by(artline_item_number:arg)
     if price and price.product
-      self.plant_name = price.product.plant_name
+      self.name = price.product.name
       self.size = price.product.size
     end
   end
@@ -41,5 +41,9 @@ class Products::ArtificialPlant < Product
 
   def self.artine_item_numbers
     Price.in(product_id: ArtificialPlant.pluck(:id)).pluck(:artline_item_number)
+  end
+
+  def description
+    name
   end
 end

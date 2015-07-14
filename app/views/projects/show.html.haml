@@ -48,7 +48,7 @@
                                 - unless addon.source.file.blank?
                                   = image_tag(addon.source.url, class: "product-img")
                               .col-md-9
-                                = addon.description
+                                = addon.details
                     %td
                       = number_field_tag "project[item_list][][quantity]", item["quantity"]
                       X
@@ -103,7 +103,7 @@
                               = image_tag(item.product.source.url, class: "product-img")
                             = "Size: #{item.product.size}"
                           .col-md-8
-                            = item.product["description"]
+                            = item.product.description
                         - item.product.addons.each do |addon|
                           .project_details
                             #{addon}:
@@ -113,7 +113,7 @@
                               - unless addon.source.file.blank?
                                 = image_tag(addon.source.url, class: "product-img")
                             .col-md-9
-                              = addon.description
+                              = addon.details
                   %td
                     = number_field_tag "project[item_list][][quantity]", item["quantity"]
                   %td{style: "width: 36%"}

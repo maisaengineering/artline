@@ -87,22 +87,22 @@ class Item
     @item_price ||= Price.find_by(artline_item_number: self["number"]) if respond_to?(:number)
   end
 
-  def new_container=(arg)
-    container = Container.create(arg)
-    unless container.errors.any?
-      self["container_id"] = container.id
-    else
-      errors.add(:name, container.errors.full_messages.join(', '))
-    end
-  end
+  # def new_container=(arg)
+  #   container = Container.create(arg)
+  #   unless container.errors.any?
+  #     self["container_id"] = container.id
+  #   else
+  #     errors.add(:name, container.errors.full_messages.join(', '))
+  #   end
+  # end
 
-  def new_supplier=(arg)
-    supplier = Supplier.create(arg)
-    unless supplier.errors.any?
-      self["supplier_id"] = supplier.id
-    else
-      errors.add(:name, supplier.errors.full_messages.join(', '))
-    end
-  end
+  # def new_supplier=(arg)
+  #   supplier = Supplier.create(arg)
+  #   unless supplier.errors.any?
+  #     self["supplier_id"] = supplier.id
+  #   else
+  #     errors.add(:name, supplier.errors.full_messages.join(', '))
+  #   end
+  # end
 
 end

@@ -41,7 +41,6 @@ class Price
 
   def update_projects
     if rfq
-      byebug
       rfq.pull(item_ids_to_quote: item_id)
       rfq.push(item_ids_quoted: item_id)
     end
