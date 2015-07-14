@@ -35,7 +35,7 @@ class Products::Lamp < Product
   end
 
   def bulb=(arg)
-    product= Shade.create(arg)
+    product= Bulb.create(arg)
     unless product.errors.any?
       self.bulb_id = product.id
     else
