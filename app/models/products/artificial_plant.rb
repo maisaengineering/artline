@@ -9,6 +9,14 @@ class Products::ArtificialPlant < Product
   #need image source field source
   mount_uploader :source, SourceUploader
 
+  def field_names
+    %w(plant_name size)
+  end
+
+  def addons
+    %w(container)
+  end
+
   def number=(arg)
     price = Price.find_by(artline_item_number:arg)
     if price and price.product
