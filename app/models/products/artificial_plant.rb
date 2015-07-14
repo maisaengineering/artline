@@ -12,7 +12,7 @@ class Products::ArtificialPlant < Product
   def number=(arg)
     price = Price.find_by(artline_item_number:arg)
     if price and price.product
-      self.description = price.product.description
+      self.plant_name = price.product.plant_name
       self.size = price.product.size
     end
   end
@@ -22,7 +22,7 @@ class Products::ArtificialPlant < Product
     unless product.errors.any?
       self.container_id = product.id
     else
-      errors.add(:shade, product.errors.full_messages.join(', '))
+      errors.add(:container, product.errors.full_messages.join(', '))
     end
   end
 
@@ -32,6 +32,6 @@ class Products::ArtificialPlant < Product
 
 
   def self.artine_item_numbers
-    Price.in(product_id: Lamp.pluck(:id)).pluck(:artline_item_number)
+    Price.in(product_id: ArtificialPlant.pluck(:id)).pluck(:artline_item_number)
   end
 end
