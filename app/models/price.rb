@@ -9,9 +9,9 @@ class Price
   field :artline_item_number
   field :supplier_item_number
   field :supplier_cost, type: Float
-  field :client_cost, type: Float
+  # field :client_cost, type: Float
   field :project_id, type: String
-  field :shipping_cost, type: Float
+  # field :shipping_cost, type: Float
   field :supplier_note
 
   attr_accessor :rsq_id, :item_id
@@ -32,6 +32,10 @@ class Price
 
   def rfq
     @rfq||= Project.elem_match(rfqs:{_id: BSON::ObjectId.from_string(rsq_id)}).first.rfqs.find(rsq_id)
+  end
+
+  def client_cost(percentage=2)
+    !supplier_cost.blank? ? supplier_cost+ supplier_cost : 0
   end
 
 

@@ -77,7 +77,17 @@ class ProjectsController < ApplicationController
     if @project.blank?
       render nothing: true, status:404
     else
-      @items = @project.items.group_by{|item| !item["number"].blank?}
+      @rfqs = @project.rfqs
+      @items = @project.items.group_by{|item| !item["number"].blank? || !@rfqs.in(item_ids_quoted: [item.id.to_s]).blank? }
+      i=0
+      @product = @items[true].map do |item|
+        client_price = Price.find_by(artline_item_number: item["number"]).client_cost(item["additional_charge"].to_i)
+        product_details = "#{item['type']} : \n #{item.product.details}"
+        [i+=1, product_details, item["quantity"], client_price, client_price * item["quantity"].to_i ]
+      end if @items[true]
+      @product.push(["","","","Shipping Cost", 0])
+      @product.push(["","","","Total", @product.map{|x| x.last}.inject(:+)])
+
     end
   end
 

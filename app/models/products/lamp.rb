@@ -51,6 +51,10 @@ class Products::Lamp < Product
     Bulb.find(bulb_id)
   end
 
+  def details
+    "#{description} \n size: #{size} \n Shade: #{shade.description}\n Bulb: #{bulb.description}"
+  end
+
   def self.artine_item_numbers
     Price.in(product_id: Lamp.only(:_id).all.map(:_id)).only(:artline_item_number).map(&:artline_item_number)
   end
