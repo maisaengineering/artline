@@ -32,7 +32,6 @@ class Products::Lamp < Product
     else
       errors.add(:shade, product.errors.full_messages.join(', '))
     end
-    byebug
   end
 
   def bulb=(arg)
