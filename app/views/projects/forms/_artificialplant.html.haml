@@ -6,14 +6,14 @@
     = text_field_tag("project[item_list][][quantity]", nil, class: "form-control", placeholder: "Quantity", required: true)
 .row
   .col-md-3.mbtm15
-    = select_tag("project[item_list][][number]", options_for_select(Price.where(:artline_item_number.exists=>true).all.map(&:artline_item_number).push('add')),prompt: "Item Number" , class: "form-control artificialplant_no", onchange:"new_item(this)", data:{name: 'ArtificialPlant'}, required: true)
+    = select_tag("project[item_list][][product][existing][number]", options_for_select(ArtificialPlant.artine_item_numbers.push("add")),prompt: "Item Number" , class: "form-control artificialplant_no", onchange:"new_item(this)", data:{name: 'ArtificialPlant'}, required: true)
 .artificialplant
 .row
   .col-md-3.mbtm15
     = select_tag("project[item_list][][fire_rating]", options_for_select(["Yes", "No"]),prompt: "Fire Rating" , class: "form-control", required: true )
 .row
   .col-md-3.mbtm15
-    = select_tag("project[item_list][][container_id]", options_for_select(Price.where(:artline_item_number.exists=>true).all.map(&:id).push('add')),prompt: "Container Number" , class: "form-control container_no", onchange:"new_item(this)", data:{name: 'Container'}, required: true)
+    = select_tag("project[item_list][][product][existing][container_id]", options_for_select(Container.pluck(:name,:id).push('add')),prompt: "Container Number" , class: "form-control container_no", onchange:"new_item(this)", data:{name: 'Container'}, required: true)
 .container.pad0px
 .row
   .col-md-3.mbtm15.txt_area
