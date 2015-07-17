@@ -34,4 +34,9 @@ $(document).ready(function() {
             $("." + $class_name).empty()
         }
     }
+
+    upload_img = function(input){
+        var filename = input.files[0]
+        $('.file-name span').html(filename.name);
+    }
 });
