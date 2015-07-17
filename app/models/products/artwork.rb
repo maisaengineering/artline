@@ -9,8 +9,75 @@ class Products::Artwork < Product
   field :height   #image height
   field :print_cost
   field :rights_cost
+  field :supplier_id
+  field :moulding_company_id
+  field :frame_id
 
    #need image source field source
   mount_uploader :source, SourceUploader
+
+  def field_names
+    %w(title artist width height print_cost rights_cost source)
+  end
+
+  def addons
+    %w(frame)
+  end
+
+  def number=(arg)
+    price = Price.find_by(artline_item_number:arg)
+    if price and price.product
+      self.title = price.product.title
+      self.artist = price.product.artist
+      self.width = price.product.width
+      self.height = price.product.height
+      self.print_cost = price.product.print_cost
+      self.rights_cost = price.product.rights_cost
+      self.source = price.product.source
+    end
+  end
+
+  def supplier=(arg)
+    supplier= Supplier.create(arg)
+    unless supplier.errors.any?
+      self.supplier_id = supplier.id
+    else
+      errors.add(:supplier, product.errors.full_messages.join(', '))
+    end
+  end
+
+  def moulding_company=(arg)
+    company = MouldingCompany.create(arg)
+    unless company.errors.any?
+      self.moulding_company_id = company.id
+    else
+      errors.add(:moulding_company, product.errors.full_messages.join(', '))
+    end
+  end
+
+  def frame=(arg)
+    frame = Frame.create(arg)
+    unless frame.errors.any?
+      self.frame_id = frame.id
+    else
+      errors.add(:frame, product.errors.full_messages.join(', '))
+    end
+  end
+
+  def supplier
+    Supplier.find(supplier_id)
+  end
+
+  def moulding_company
+    MouldingCompany.find(moulding_company_id)
+  end
+
+  def frame
+    Frame.find(frame_id)
+  end
+
+  def self.artine_item_numbers
+    Price.in(product_id: Artwork.pluck(:id)).pluck(:artline_item_number)
+  end
 
 end

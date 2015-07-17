@@ -23,6 +23,7 @@ Rails.application.routes.draw do
   resources :products do
     collection do
       get 'load_form'
+      get 'load_addons'
     end
   end
   resources :orders do

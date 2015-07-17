@@ -4,7 +4,9 @@
       #top_menu.nav.search-row.txt-clr
         %ul.nav.top-menu
           %li
-            = link_to "Add Item", new_product_path,class:'btn'
+            = link_to "Add addon", new_product_path(type: "addon"),class:'btn'
+          %li
+            = link_to "Add Item", new_product_path(type: "item"),class:'btn'
           %li
             %form.navbar-form
               %input.form-control{:placeholder => "Search", :type => "text"}

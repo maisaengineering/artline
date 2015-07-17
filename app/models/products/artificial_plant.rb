@@ -3,6 +3,7 @@ class Products::ArtificialPlant < Product
 
   field :name
   field :size
+  field :fire_rating
   field :container_id
 
 

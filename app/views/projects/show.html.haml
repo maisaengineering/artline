@@ -122,7 +122,8 @@
 
           .col-md-12
             %p
-              = link_to "Email Customer Quote",send_quotation_project_url(@project.id),class: "btn btn-primary"
+              -#= link_to "Email Customer Quote",send_quotation_project_url(@project.id),class: "btn btn-primary"
+              %button.btn.btn-primary{"data-target" => "#emailsModal", "data-toggle" => "modal", :type => "button"} Email Customer Quote
           .col-md-12
             %p
               = link_to "Download Customer Quote", customer_qoute_project_url(@project.id, format: 'pdf'), target: "_blank",class: "btn btn-primary"
@@ -133,12 +134,26 @@
           .col-md-12
             = link_to "Request Suppliers Quote", "#", id: "request_suppliers_quote",class: "btn btn-primary"
 
-
+#emailsModal.modal.fade{"aria-labelledby" => "exampleModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-dialog{:role => "document"}
+    .modal-content
+      .modal-header
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+          %span{"aria-hidden" => "true"} &times;
+        %h4#exampleModalLabel.modal-title From: Artline
+      .modal-body
+        = form_tag(send_quotation_project_url(@project.id), method: :get) do
+          .form-group
+            %div
+              = label_tag "Recipient:"
+            = text_field_tag "emails", @project.client.email, class: "form-control","data-role"=>"tagsinput"
+            .modal-footer.email_model_footer
+              %button.btn.btn-default{"data-dismiss" => "modal", type: "button"} Close
+              = submit_tag "Send message", class: "btn btn-primary"
 
 
 
 :javascript
-
 
   var $$inputs_changed = false;
   $("#items_with_price tr.quotations").each(function(e){

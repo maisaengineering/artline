@@ -3,6 +3,7 @@
 @import "bootstrap";
 @import "bootstrap/theme";
 @import "bootstrap-multiselect";
+@import "bootstrap-tagsinput";
 
 /*
 Template Name: Creative Bootstrap 3 Responsive Admin Template
@@ -5146,6 +5147,15 @@ span.customSelect.changed {
 .product-desc{
   display: inline-block;
 }
+
+.email_model_footer{
+  background: #ffffff;
+  margin-top: 10px;
+}
+.bootstrap-tagsinput{
+  width: 100%;
+}
+
   // will_paginate css starts
 .flickr_pagination {
   //text-align: center;

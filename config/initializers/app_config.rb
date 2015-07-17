@@ -4,9 +4,8 @@ Categories = {"Artwork"=>"Artwork", "Mirror"=>"Mirror",
 Childrens={"Artwork"=>{"framed_art"=>"Framed Art", "acrylic"=>"Acrylic",
                        "aluminum"=>"Aluminum", "colorboard"=>"Colorboard",
                        "vinyl"=>"Vinyl"}}
-Addons = {"Bulb"=>"Bulb", "Container"=>"Container",
-          "Frame"=> "Frame", "Image"=> "Image",
-          "Shade"=>"Shade"}
+Addons = {"Bulb"=>"Bulb", "Container"=>"Container","Frame"=> "Frame",
+          "Image"=> "Image", "Shade"=>"Shade","Other" => "Other"}
 
 Artwork = Products::Artwork
 ArtificialPlant = Products::ArtificialPlant
@@ -17,7 +16,7 @@ Container = Products::Addons::Container
 Frame = Products::Addons::Frame
 Image = Products::Addons::Image
 Shade = Products::Addons::Shade
-# Other = Product::Other
+Other = Products::Other
 
 Client = Companies::Client
 Supplier = Companies::Supplier

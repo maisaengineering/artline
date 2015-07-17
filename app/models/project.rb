@@ -60,6 +60,10 @@ class Project
     self.sales_rep = sales_rep.name
   end
 
+  def client
+    Client.find(client_id)
+  end
+
 
 private
 

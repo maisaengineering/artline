@@ -9,15 +9,25 @@
             = "#{error}"
   .row
     .col-md-3.mbtm15
+      = f.label :description
       = f.text_field :description, class: "form-control", placeholder: "Description",required: true
     .col-md-3.mbtm15
+      = f.label :size
       = f.text_field :size, class: "form-control", placeholder: "Size",required: true
   .row
     .col-md-2.fileUpload.btn.btn-primary.mbtm15
       %span Upload image
-      = f.file_field :source, class: "upload",onchange: "upload_img(this)"
-    .col-md-4.file-name{style: "padding-top: 5px; padding-left: 5px"}
-      %span
+      = f.file_field :source, class: "upload"
+  .row
+    .col-md-3.mbtm15
+      = f.label :shade
+      = f.select :shade_id, options_for_select(Shade.all.map{|x| [x["description"],x["_id"]]}.push("add"),@product.shade_id),{:prompt => "Shade"} , class:"form-control", onchange:"new_item(this)", data:{name: 'Shade'},required: true
+  .shade
+  .row
+    .col-md-3.mbtm15
+      = f.label :bulb
+      = f.select :bulb_id, options_for_select(Bulb.all.map{|x| [x["description"],x["_id"]]}.push("add"),@product.bulb_id),{:prompt => "Bulb"}, class: "form-control", onchange:"new_item(this)", data:{name: 'Bulb'},required: true
+  .bulb
   = f.submit nil, class: "btn btn-success mbtm15"
 
 

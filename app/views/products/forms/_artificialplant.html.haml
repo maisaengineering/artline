@@ -9,15 +9,22 @@
             = "#{error}"
   .row
     .col-md-3.mbtm15
-      = f.text_field :name, class: "form-control", placeholder: "Plant Name",required: true
+      = f.label :name
+      = f.text_field :name, class: "form-control", required: true
     .col-md-3.mbtm15
-      = f.text_field :size, class: "form-control", placeholder: "Size",required: true
+      = f.label :size
+      = f.text_field :size, class: "form-control", required: true
   .row
     .col-md-2.fileUpload.btn.btn-primary.mbtm15
       %span Upload image
-      = f.file_field :source, class: "upload",onchange: "upload_img(this)"
-    .col-md-4.file-name{style: "padding-top: 5px; padding-left: 5px;"}
-      %span
+      = f.file_field :source, class: "upload"
+  .row
+    .col-md-3.mbtm15
+      = f.select :fire_rating, options_for_select(["Yes", "No"],@product.fire_rating),{:prompt => "Fire Rating"} , class: "form-control",required: true
+  .row
+    .col-md-3.mbtm15
+      = f.select :container_id, options_for_select(Container.pluck(:name,:id).push('add'),@product.container_id),{prompt: "Container"} , class: "form-control container_no", onchange:"new_item(this)", data:{name: 'Container'}, required: true
+  .container.pad0px
   = f.submit nil, class: "btn btn-success mbtm15"
 
 

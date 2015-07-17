@@ -1,0 +1,8 @@
+.row
+  .col-md-3.mbtm15.txt_area
+    = label_tag "Shade Description"
+    = text_area_tag("[product][shade][description]", nil, class: "form-control", required: true)
+.row
+  .col-md-2.fileUpload.btn.btn-primary.mbtm15
+    %span Upload image
+    = file_field_tag("[product][shade][source]", class: "upload")

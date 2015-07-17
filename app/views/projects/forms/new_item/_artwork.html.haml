@@ -5,20 +5,20 @@
 -#    = text_field_tag("project[item_list][][new_artwork][artline_num]", nil, class: "form-control", placeholder: "Artline Item Number")
 .row
   .col-md-3.mbtm15
-    = text_field_tag("project[item_list][][new_product][title]", nil, class: "form-control", placeholder: "Title", required: true)
+    = text_field_tag("project[item_list][][product][new][title]", nil, class: "form-control", placeholder: "Title", required: true)
   .col-md-3.mbtm15
-    = text_field_tag("project[item_list][][new_product][artist]", nil, class: "form-control", placeholder: "Artist", required: true)
+    = text_field_tag("project[item_list][][product][new][artist]", nil, class: "form-control", placeholder: "Artist", required: true)
 .row
   .col-md-3.mbtm15
-    = text_field_tag("project[item_list][][new_product][width]", nil, class: "form-control", placeholder: "Image Width", required: true)
+    = text_field_tag("project[item_list][][product][new][width]", nil, class: "form-control", placeholder: "Image Width", required: true)
   .col-md-3.mbtm15
-    = text_field_tag("project[item_list][][new_product][height]", nil, class: "form-control", placeholder: "Image Height", required: true)
+    = text_field_tag("project[item_list][][product][new][height]", nil, class: "form-control", placeholder: "Image Height", required: true)
 .row
   .col-md-3.mbtm15
-    = text_field_tag("project[item_list][][new_product][print_cost]", nil, class: "form-control", placeholder: "Print Cost", required: true)
+    = text_field_tag("project[item_list][][product][new][print_cost]", nil, class: "form-control", placeholder: "Print Cost", required: true)
   .col-md-3.mbtm15
-    = text_field_tag("project[item_list][][new_product][rights_cost]", nil, class: "form-control", placeholder: "Image Rights Cost", required: true)
+    = text_field_tag("project[item_list][][product][new][rights_cost]", nil, class: "form-control", placeholder: "Image Rights Cost", required: true)
 .row
   .fileUpload.btn.btn-primary.mbtm15
     %span Upload image
-    = file_field_tag("project[item_list][][new_product][source]", class: "upload")
+    = file_field_tag("project[item_list][][product][new][source]", class: "upload")

@@ -92,10 +92,11 @@ class ProjectsController < ApplicationController
   end
 
   def send_quotation
+    emails = params[:emails].split(',')
     if @project.blank?
       render nothing: true, status:404
     else
-      ClientMailer.quote(@project.id).deliver_now
+      ClientMailer.quote(@project.id,emails).deliver_now
       flash[:notice] = "Successfully Sent to Client"
 
       redirect_to project_path(@project)

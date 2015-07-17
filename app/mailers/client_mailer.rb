@@ -1,5 +1,5 @@
 class ClientMailer < ApplicationMailer
-  def quote(project_id)
+  def quote(project_id,emails)
     @project = Project.find(project_id)
     @client = Client.find(@project.client_id)
 
@@ -22,7 +22,7 @@ class ClientMailer < ApplicationMailer
      pdf.table product.unshift(["#", "Product","Quantity", "Each price" , "Price"]),:header => true if product
 
     attachments["artline_quote_#{@project.quote_number}.pdf"] = pdf.render
-    mail(from: ENV['SENDER'],to: @client.email,subject: 'Artline Quotation')
+    mail(from: ENV['SENDER'],to: emails,subject: 'Artline Quotation')
   end
 
 end

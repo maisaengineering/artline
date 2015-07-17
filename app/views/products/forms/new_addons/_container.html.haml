@@ -1,0 +1,8 @@
+.row
+  .col-md-3.mbtm15
+    = label_tag "Container Name"
+    = text_field_tag("[product][container][name]", nil, class: "form-control",  required: true)
+.row
+  .col-md-2.fileUpload.btn.btn-primary.mbtm15
+    %span Upload image
+    = file_field_tag("[product][container][source]", class: "upload")

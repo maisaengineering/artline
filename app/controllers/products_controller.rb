@@ -3,10 +3,11 @@ class ProductsController < ApplicationController
   before_action :set_product, only: [:show,:edit, :update, :destroy]
 
   def index
-    @products = Product.order_by(created_at: "desc").paginate(page: params[:page], per_page: 5)
+    @products = Product.where(:_type.ne =>  "Products::Mirror").order_by(created_at: "desc").paginate(page: params[:page], per_page: 5)
   end
 
   def new
+    @type = params[:type]
     # @product = Product.new
   end
 
@@ -47,6 +48,10 @@ class ProductsController < ApplicationController
     @product = eval(params[:item]).new
   end
 
+  def load_addons
+
+  end
+
   private
 
   def set_product
@@ -54,7 +59,7 @@ class ProductsController < ApplicationController
   end
 
   def product_params
-    params.require(:product).permit(params[:product].keys)
+    params.require(:product).permit!
   end
 
 end
