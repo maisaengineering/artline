@@ -19,6 +19,10 @@
     = select_tag("project[client_id]", options_for_select(Companies::Client.all.map{|c|[c.name, c.id]}.push('add')),prompt: "Choose Company" , class: "form-control", id:"project_client_id", required: true)
   .col-md-3.mbtm15
     = select_tag("project[client_attention]", options_for_select([]),prompt: "Attention" , class: "form-control", required: true )
+.row
+  .col-md-3
+  .col-md-3
+    .company_client
 = render 'companies/form'
 .row
   .col-md-3.mbtm15

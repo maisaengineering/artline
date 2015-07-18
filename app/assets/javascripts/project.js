@@ -3,6 +3,7 @@ $(document).ready(function() {
     $(".sales_rep").closest('.row').hide()
     $("#project_client_id").change(function(e){
         e.preventDefault();
+        $(".company_client").empty()
         $val= $.trim($(this).val());
         $(this);
 
@@ -23,13 +24,21 @@ $(document).ready(function() {
                     })
                     $("#project_client_attention option").not('option:eq(0)').remove();
                     $.each(data["attention"], function(index, value){
-
                         $("#project_client_attention").append($("<option></option>").attr("value",value).text(value));
-                    });
+                    })
+                    $("#project_client_attention").append($("<option></option>").attr("value","add").text("add"));
                 }
             });
         }
     });
+    $("#project_client_attention").change(function(){
+        if($(this).val() == "add"){
+            $(".company_client").append('<input type="text" name="company[new_attention_name]" id="new_company_attention" class="attention mbtm15" placeholder="Attention">')
+        }
+        else{
+            $(".company_client").empty()
+        }
+    })
 
 
     $('#add_another_item').click(function(e){

@@ -40,6 +40,7 @@ class Project
   def company=(args)
     if client_id.blank?
       client = Client.create(args)
+      self.client_attention = client.attention.first
     else
       client = Client.find(client_id)
       client.update(args.reject{|k, v| k.eql?("attention")})
@@ -47,7 +48,10 @@ class Project
 
     unless client.errors.any?
       self.client_id = client.id
-      self.client_attention = client.attention.first
+      if args[:new_attention_name].present?
+        client.push(attention: args[:new_attention_name])
+        self.client_attention = args[:new_attention_name]
+      end
       self.company_name= client.name
       self.company_email= client.email
     else
