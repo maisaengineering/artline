@@ -7,6 +7,6 @@ prawn_document(:page_layout => :landscape) do |pdf|
   pdf.move_down 50
   pdf.text "Artline Quote Number: #{@project.quote_number}"
   pdf.move_down 12
-  pdf.table @product.unshift(["#", "Product","Quantity", "Each price" , "Price"]),:header => true if @product
+  pdf.table @product.unshift(["#", "Product","Quantity", "Price per Item" , "Price"]),:header => true if @product
 
 end

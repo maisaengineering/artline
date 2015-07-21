@@ -78,10 +78,11 @@ private
   end
 
   def generate_quote_number
-    u_id = SecureRandom.uuid
+    count = Project.count
+    u_id = "#{name.slice(0..2).to_s.upcase}#{Time.now.day}#{count}"
     loop do
       break if self.class.where(quote_number: u_id).blank?
-      u_id = SecureRandom.uuid
+      u_id = "#{name.slice(0..2).to_s.upcase}#{Time.now.day}#{count+=1}"
     end
     self.quote_number ||= u_id
   end

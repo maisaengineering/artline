@@ -56,7 +56,7 @@ class Products::Lamp < Product
   end
 
   def self.artine_item_numbers
-    Price.in(product_id: Lamp.only(:_id).all.map(:_id)).only(:artline_item_number).map(&:artline_item_number)
+    Price.in(product_id: only(:id).all.map(&:id)).only(:artline_item_number).map(&:artline_item_number)
   end
 
 end

@@ -41,7 +41,7 @@ class Products::ArtificialPlant < Product
 
 
   def self.artine_item_numbers
-    Price.in(product_id: ArtificialPlant.pluck(:id)).pluck(:artline_item_number)
+    Price.in(product_id: pluck(:id)).pluck(:artline_item_number)
   end
 
   def description

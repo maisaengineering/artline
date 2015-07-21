@@ -19,7 +19,7 @@ class ClientMailer < ApplicationMailer
                               bottom_margin: 10, background_scale: 300)
 
 
-     pdf.table product.unshift(["#", "Product","Quantity", "Each price" , "Price"]),:header => true if product
+     pdf.table product.unshift(["#", "Product","Quantity", "Price per Item" , "Price"]),:header => true if product
 
     attachments["artline_quote_#{@project.quote_number}.pdf"] = pdf.render
     mail(from: ENV['SENDER'],to: emails,subject: 'Artline Quotation')
