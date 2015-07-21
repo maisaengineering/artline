@@ -18,3 +18,60 @@
               .btn-group
                 = link_to("", edit_product_path(@product.id), class: "btn glyphicon glyphicon-pencil black")
                 = link_to("", product_path(@product.id), method: :delete, class: "btn glyphicon glyphicon-trash red verticalLine")
+    - if Categories.keys.include?@product._type.split("::").last
+      .col-md-6
+        %header.panel-heading.no-border
+          Quoted supplier's list
+        %table.table.table-bordered.panel
+          %thead
+            %tr
+              %th Supplier name
+              %th Price
+          %tbody
+            - @quoted.each do |q|
+              %tr
+                %td
+                  = q.companies_supplier.name
+                %td
+                  .row{style: "display: none;"}
+                    .col-md-8{style: "padding-right: 0px"}
+                      = hidden_field_tag "product_id", q.product_id
+                      = hidden_field_tag "supplier_id", q.supplier_id
+                      = number_field_tag("price", nil, class: "form-control price_border",  required: true,autofocus: true)
+                    %button.btn-success{style: "padding: 5px;",onclick:  "update_price(this)"}
+                      .glyphicon.glyphicon-ok
+                  .price_field
+                    %span.price
+                      = q.supplier_cost
+                    &nbsp
+                    %button.glyphicon.glyphicon-pencil.black.edit_product_price{onclick: "edit_price(this)"}
+
+      - if @non_quoted_supplier.count > 0
+        .col-md-6
+          %header.panel-heading.no-border
+            Add Quote
+          .panel
+            =form_tag prices_path, method: :post,style: "padding: 15px;" do
+              = hidden_field_tag "created_by_admin", "yes"
+              = hidden_field_tag "products[][product_id]", @product.id
+              .row.mbtm15
+                .col-md-4
+                  Name :
+                  %b
+                    = @product._type.split("::").last
+              .row.mbtm15
+                .col-md-6
+                  Supplier
+                  = select_tag("products[][supplier_id]", options_for_select(@non_quoted_supplier.map{|c|[c.name, c.id]}),prompt: "Supplier" , class: "form-control", required: true)
+                .col-md-6
+                  Supplier item number
+                  = text_field_tag("products[][supplier_item_number]", nil, class: "form-control",  required: true)
+              .row.mbtm15
+                .col-md-6
+                  Each Cost
+                  = number_field_tag("products[][supplier_cost]", nil, class: "form-control",min: 0,  required: true)
+              .row.mbtm15
+                .col-md-6.txt_area
+                  Additional Note(optional)
+                  = text_area_tag("products[][supplier_note]", nil, class: "form-control")
+              = submit_tag("Submit", class: "btn btn-success")
