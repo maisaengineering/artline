@@ -71,7 +71,7 @@
                   Each Cost
                   = number_field_tag("products[][supplier_cost]", nil, class: "form-control",min: 0,  required: true)
               .row.mbtm15
-                .col-md-6.txt_area
+                .col-md-12
                   Additional Note(optional)
                   = text_area_tag("products[][supplier_note]", nil, class: "form-control")
               = submit_tag("Submit", class: "btn btn-success")

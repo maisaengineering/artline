@@ -19,7 +19,8 @@
                 %tbody
 
                 - @items[true].to_a.each_with_index do |item, index |
-                  = hidden_field_tag "project[item_list][][id]", item.id
+                  .items_with_prices
+                    = hidden_field_tag "project[item_list][][id]", item.id
                   %tr.quotations
                     %td
                       #{index+1}
@@ -129,10 +130,31 @@
               = link_to "Download Customer Quote", customer_qoute_project_url(@project.id, format: 'pdf'), target: "_blank",class: "btn btn-primary"
           .col-md-12
             %p
-              = link_to "Place Order", "#",class: "btn btn-primary"
+              -#= link_to "Place Order", "#",class: "btn btn-primary"
+              %button.btn.btn-primary{"data-target" => "#PlaceOrderModal", "data-toggle" => "modal", :type => "button"} Place Order
         - else
           .col-md-12
             = link_to "Request Suppliers Quote", "#", id: "request_suppliers_quote",class: "btn btn-primary"
+
+#PlaceOrderModal.modal.fade{"aria-labelledby" => "exampleModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-dialog{:role => "document"}
+    .modal-content
+      .modal-header
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+          %span{"aria-hidden" => "true"} &times;
+        %h4#exampleModalLabel.modal-title From: Artline
+      .modal-body
+        .form-group
+          %div
+            PO NUMBER :
+          = text_field_tag "po_number", nil, class: "form-control"
+          %span.po_error{style: "color: red; display: none"}
+            please enter process order number
+          %span.errors{style: "color: red; display: none"}
+          .modal-footer.email_model_footer
+            %button.btn.btn-default{"data-dismiss" => "modal", type: "button"} Close
+            %button.btn.btn-success.place_order Submit
+
 
 #emailsModal.modal.fade{"aria-labelledby" => "exampleModalLabel", :role => "dialog", :tabindex => "-1"}
   .modal-dialog{:role => "document"}
@@ -154,6 +176,42 @@
 
 
 :javascript
+
+
+    $(".place_order").click(function(e){
+        e.preventDefault();
+        var po_num = $("#po_number").val();
+
+        if (po_num == ""){
+            $('.errors').hide();
+            $(".po_error").show();
+        }
+        else{
+            $(".po_error").hide();
+            var items_ids = $.map($(".items_with_prices input"),function(n){
+                        return n.value
+                         });
+            $.ajax({
+              method: "POST",
+              dataType: 'json',
+              url: location + "/create_order",
+              data: {items_ids: items_ids,po_number: po_num},
+              success: function(data){
+                if(data.message.length > 0){
+                  $('.errors').show().html(data.message)
+                }
+                else{
+                  alert("Successfully created")
+                  location.reload();
+                }
+              },
+              error: function(data){
+              alert(data[message])
+              alert(data)
+              }
+            });
+        }
+    })
 
   var $$inputs_changed = false;
   $("#items_with_price tr.quotations").each(function(e){

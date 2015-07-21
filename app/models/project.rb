@@ -13,9 +13,11 @@ class Project
   field :company_name
   field :company_email
   field :sales_rep
+  field :po_number
 
   attr_accessor :item_list, :new_attention
 
+  validates :po_number, uniqueness: true
 
   before_validation :generate_quote_number
   before_save :update_new_attention, unless: Proc.new{|pro| pro.new_attention.blank?}
@@ -23,6 +25,7 @@ class Project
   belongs_to :user
   embeds_many :items
   embeds_many :rfqs, class_name: 'RFQ'
+  embeds_many :orders
   index({"quote_number"=> 'text', "name"=> 'text', "company_name"=>'text', "company_email"=>'text'},{background: true})
 
   def item_list=(args)

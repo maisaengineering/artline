@@ -51,8 +51,8 @@ Rails.application.configure do
       :address => "smtp.yandex.ru",
       :port => 25,
       :enable_starttls_auto => true,
-      :user_name => '*****',
-      :password => '*****',
+      :user_name => 'labs@maisasolutions.com',
+      :password => 'yan@dexPRIDE786',
       :authentication => :plain
   }
 end

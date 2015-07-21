@@ -12,4 +12,8 @@ class SupplierMailer < ApplicationMailer
     mail(from: ENV['SENDER'],to: @user.email,subject: 'Quotation')
   end
 
+  def place_order()
+
+  end
+
 end
