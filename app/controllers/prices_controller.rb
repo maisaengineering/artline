@@ -12,7 +12,18 @@ class PricesController < ApplicationController
     product_price_params["products"].each do |product|
       Price.create(product.merge(comm_params))
     end
-    render text: "Successfully Updated."
+    if params[:created_by_admin].eql?("yes")
+      flash[:noice] = "Successfully Updated"
+      redirect_to products_url
+    else
+      render text: "Successfully Updated."
+    end
+  end
+
+  def update
+   @price = Price.where(product_id: params[:product_id], supplier_id: params[:supplier_id])
+   @price = @price.update(supplier_cost: params[:supplier_cost]) if @price
+   render nothing: true
   end
 
   private

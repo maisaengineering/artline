@@ -5156,6 +5156,17 @@ span.customSelect.changed {
   width: 100%;
 }
 
+.edit_product_price{
+  background-color: transparent;
+  border: none;
+}
+
+.price_border{
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+
+
   // will_paginate css starts
 .flickr_pagination {
   //text-align: center;

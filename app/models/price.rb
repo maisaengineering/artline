@@ -16,9 +16,10 @@ class Price
 
   attr_accessor :rsq_id, :item_id
 
-  before_validation :assign_artine_number
-  before_create :update_projects
-  after_create :send_email_to_requester
+  before_validation :assign_artine_number, unless: Proc.new{|pro| pro.rfq.nil?}
+  before_create :update_projects, unless: Proc.new{|pro| pro.rfq.nil?}
+  before_create :add_artine_number, if:  Proc.new{|pro| pro.rfq.nil?}
+  after_create :send_email_to_requester, unless: Proc.new{|pro| pro.rfq.nil?}
 
   def send_email_to_requester
     SupplierMailer.reply_to_requester("#{rfq.project.user_id}","#{supplier_id}",supplier_cost).deliver_now
@@ -30,8 +31,12 @@ class Price
     self.artline_item_number = "#{companies_supplier.number.to_s}#{supplier_item_number.to_s}"
   end
 
+  def add_artine_number
+    self.artline_item_number = "#{companies_supplier.number.to_s}#{supplier_item_number.to_s}"
+  end
+
   def rfq
-    @rfq||= Project.elem_match(rfqs:{_id: BSON::ObjectId.from_string(rsq_id)}).first.rfqs.find(rsq_id)
+    @rfq||= Project.elem_match(rfqs:{_id: BSON::ObjectId.from_string(rsq_id)}).first.rfqs.find(rsq_id) if rsq_id.present?
   end
 
   def client_cost(percentage=2)

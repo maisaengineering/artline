@@ -45,6 +45,7 @@ Rails.application.routes.draw do
   get '/product_ajax_load', to: 'projects#product_ajax_load'
   get '/quote_request/:id', to: "prices#new_supplier_price", as: :quote_request
   post '/prices', to: "prices#create", as: :prices
+  patch '/prices/:id', to: "prices#update", as: :price
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

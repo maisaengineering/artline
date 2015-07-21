@@ -21,7 +21,11 @@ class ProductsController < ApplicationController
   end
 
   def show
-   @suppliers = Supplier.all
+    #@suppliers = Supplier.all
+    if Categories.keys.include?@product._type.split("::").last
+      @quoted = Price.where(product_id: @product.id)
+      @non_quoted_supplier = Companies::Supplier.nin(id: @quoted.pluck(:supplier_id))
+    end
   end
 
   def edit
