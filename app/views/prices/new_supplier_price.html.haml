@@ -55,6 +55,12 @@
                   = number_field_tag("products[][supplier_cost]",nil, class: "form-control",:step => 'any',  required: true,min: 0)
                 %td
                   = text_area_tag("products[][supplier_note]", nil, class: "form-control")
-            .tr
-              %td{colspan:6}
-                = submit_tag("Submit", class: "btn btn-success")
+              %tr
+                %td{colspan:4}
+                %td
+                  Shipping Cost (*if any?)
+                %td
+                  = number_field_tag("shipping_cost", 0, class: "form-control",:step => 'any',  required: true,min: 0)
+              %tr
+                %td{colspan:6}
+                  = submit_tag("Submit", class: "btn btn-success")

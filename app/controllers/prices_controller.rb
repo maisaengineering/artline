@@ -12,6 +12,11 @@ class PricesController < ApplicationController
     product_price_params["products"].each do |product|
       Price.create(product.merge(comm_params))
     end
+    project = Project.elem_match(rfqs:{_id: BSON::ObjectId.from_string(params["rsq_id"])}).first
+    if project
+      rsq= project.rfqs.find(params["rsq_id"])
+      rsq.update(shipping_cost: params["shipping_cost"]) if rsq
+    end
     if params[:created_by_admin].eql?("yes")
       flash[:noice] = "Successfully Updated"
       redirect_to products_url

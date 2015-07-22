@@ -6,7 +6,7 @@ class RFQ
   field :supplier_id
   field :item_ids_to_quote, type: Array, default:[]
   field :item_ids_quoted, type: Array, default:[]
-
+  field :shipping_cost, type: Float
   embedded_in :project
 
   after_create :send_email

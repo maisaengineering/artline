@@ -3,7 +3,7 @@ class ProjectsController < ApplicationController
   before_action :set_project, only:  [:show, :destroy, :customer_qoute, :send_quotation, :update, :rfq, :create_order]
   # load_and_authorize_resource
   def index
-   @projects = Project.desc(:created_at).paginate(page: params[:page], per_page: 5)
+   @projects = Project.where(:po_number.exists=>false).desc(:created_at).paginate(page: params[:page], per_page: 5)
   end
 
   def new
@@ -78,16 +78,16 @@ class ProjectsController < ApplicationController
     suppliers= Hash[Price.collection.aggregate({"$match"=>{artline_item_number:{"$in"=> items.keys}}},
                                                {"$group"=>{_id:"$supplier_id", numbers:{"$addToSet"=>"$artline_item_number"}}}).map(&:values)]
 
-    if @project.update(po_number: params[:po_number])
+    if @project
       suppliers.each do |k, v|
         @project.orders.create(supplier_id: k, item_ids: items.slice(*v).values)
       end
     end
-
-      respond_to do |format|
+    @project.update(po_number: params[:po_number])
+    respond_to do |format|
       format.html
       format.json {render json: {message: @project.errors.full_messages.to_sentence} }
-      end
+    end
   end
 
   def customer_qoute

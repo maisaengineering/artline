@@ -17,7 +17,7 @@ class Project
 
   attr_accessor :item_list, :new_attention
 
-  validates :po_number, uniqueness: true
+  validates :po_number, uniqueness: true, :allow_nil => true, :allow_blank => true
 
   before_validation :generate_quote_number
   before_save :update_new_attention, unless: Proc.new{|pro| pro.new_attention.blank?}
@@ -26,7 +26,7 @@ class Project
   embeds_many :items
   embeds_many :rfqs, class_name: 'RFQ'
   embeds_many :orders
-  index({"quote_number"=> 'text', "name"=> 'text', "company_name"=>'text', "company_email"=>'text'},{background: true})
+  index({"quote_number"=> 'text', "name"=> 'text', "company_name"=>'text', "company_email"=>'text', "po_number"=>'text'},{background: true})
 
   def item_list=(args)
     args.map do |arg|

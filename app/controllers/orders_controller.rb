@@ -1,8 +1,8 @@
 class OrdersController < ApplicationController
-  layout "mailer", only: [:status]
+  layout "mailer", only: [:status, :show]
 
   def index
-
+    @projects = Project.where(:po_number.exists=>true).desc(:created_at).paginate(page: params[:page], per_page: 5)
   end
 
   def create_order_tracking
@@ -12,6 +12,12 @@ class OrdersController < ApplicationController
       redirect_to orders_url
     end
   end
+
+  def show
+    project= Project.elem_match(orders: {_id: BSON::ObjectId.from_string(params[:id])}).first
+    @order = project.orders.find(params[:id]) if project
+    render nothing: true unless @order
+   end
 
   def tracking
 
