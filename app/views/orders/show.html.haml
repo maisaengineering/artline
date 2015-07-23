@@ -53,9 +53,20 @@
                 = @order.prices[item["number"]].to_f
               %td
                 = @order.prices[item["number"]].to_f * item["quantity"].to_f
-            %tr
-              %td{colspan:4}
-              %td
-                Total
-              %td
+            -#%tr
+            -#  %td{colspan:4}
+            -#  %td
+            -#    Total
+            -#  %td
+      = form_for(@order, method: :patch) do |f|
+        .row
+          .col-md-3.mbtm15
+            = f.label :shipment_date
+            = f.date_field :shipment_date, class: "form-control",required: true
+        .row
+          .col-md-6.mbtm15
+            = f.label :shipment_details
+            = f.text_area :shipment_details, class: "form-control",required: true
+        -#= f.submit "Update", class: "btn btn-success"
+        = f.submit nil, class: "btn btn-success"
 

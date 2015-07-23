@@ -78,12 +78,13 @@ class ProjectsController < ApplicationController
     suppliers= Hash[Price.collection.aggregate({"$match"=>{artline_item_number:{"$in"=> items.keys}}},
                                                {"$group"=>{_id:"$supplier_id", numbers:{"$addToSet"=>"$artline_item_number"}}}).map(&:values)]
 
-    if @project
+    @project[:po_number] = params[:po_number]
+    if @project.valid?
       suppliers.each do |k, v|
         @project.orders.create(supplier_id: k, item_ids: items.slice(*v).values)
       end
+      @project.save
     end
-    @project.update(po_number: params[:po_number])
     respond_to do |format|
       format.html
       format.json {render json: {message: @project.errors.full_messages.to_sentence} }

@@ -27,4 +27,8 @@ class Order
    @prices =  Hash[Price.in(artline_item_number: items.map(&:number)).map{|price| [price.artline_item_number, price.supplier_cost ]}]
   end
 
+  def supplier
+    Supplier.find(supplier_id)
+  end
+
 end

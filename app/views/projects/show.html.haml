@@ -19,8 +19,7 @@
                 %tbody
 
                 - @items[true].to_a.each_with_index do |item, index |
-                  .items_with_prices
-                    = hidden_field_tag "project[item_list][][id]", item.id
+                  = hidden_field_tag "project[item_list][][id]", item.id,class: "items_with_prices"
                   %tr.quotations
                     %td
                       #{index+1}
@@ -188,7 +187,7 @@
         }
         else{
             $(".po_error").hide();
-            var items_ids = $.map($(".items_with_prices input"),function(n){
+            var items_ids = $.map($(".items_with_prices"),function(n){
                         return n.value
                          });
             $.ajax({
@@ -204,10 +203,6 @@
                   alert("Successfully created")
                   location.reload();
                 }
-              },
-              error: function(data){
-              alert(data[message])
-              alert(data)
               }
             });
         }
