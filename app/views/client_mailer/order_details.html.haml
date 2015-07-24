@@ -1,5 +1,13 @@
 %p
-  hi
-  = @customer.full_name ","
+  = "Dear #{@project.user.full_name },"
 %p
-  your order has been conormed.
+  = "Thank you for your order #{@project.po_number}. To check the status of your order, please click on the following link:"
+  %p
+    = link_to(tracking_orders_url(@project.id),tracking_orders_url(id: @project.id),target: "_blank")
+%p
+  Please let us know if you have any questions
+
+%p
+  Sincerely,
+  %br
+  signature.

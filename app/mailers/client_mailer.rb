@@ -26,8 +26,8 @@ class ClientMailer < ApplicationMailer
   end
 
   def order_details(id)
-    @customer = User.find(id)
-    mail(to: @customer.email,subject: 'Order Details')
+    @project  = Project.find(id)
+    mail(to: @project.user.email,subject: 'Order Details')
   end
 
 end

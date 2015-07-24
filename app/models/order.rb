@@ -12,14 +12,9 @@ class Order
   field :shipment_details
 
   after_create :place_order_to_supplier
-  after_create :send_email_to_customer
 
   def place_order_to_supplier
     SupplierMailer.place_order(id, supplier_id).deliver_now
-  end
-
-  def send_email_to_customer
-    ClientMailer.order_details(project.user.id).deliver_now
   end
 
   STAGE = { 1 =>  "First Stage", 2 => "Second Stage", 3 => "Third Stage", 4 => "Fourth Stage"}

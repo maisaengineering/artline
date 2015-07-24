@@ -89,6 +89,7 @@ class ProjectsController < ApplicationController
         @project.orders.create(supplier_id: k, item_ids: items.slice(*v).values)
       end
       @project.save
+      ClientMailer.order_details(@project.id).deliver_now
     end
     respond_to do |format|
       format.html

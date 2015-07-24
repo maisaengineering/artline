@@ -1,7 +1,7 @@
 class OrdersController < ApplicationController
-  before_action :authenticate_user!, except: [:show]
+  before_action :authenticate_user!, except: [:show,:tracking]
   before_action :set_order, only: [:show, :update]
-  layout "mailer", only: [:show]
+  layout "mailer", only: [:show,:tracking]
 
   def index
     @projects = Project.where(:po_number.exists=>true).desc(:created_at).paginate(page: params[:page], per_page: 5)
@@ -28,7 +28,7 @@ class OrdersController < ApplicationController
   end
 
   def tracking
-
+    @project = Project.find(params[:id])
   end
 
   def status
