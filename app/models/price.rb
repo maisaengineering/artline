@@ -40,7 +40,7 @@ class Price
   end
 
   def client_cost(percentage=2)
-    !supplier_cost.blank? ? supplier_cost+ supplier_cost : 0
+    !supplier_cost.blank? ? supplier_cost+ (supplier_cost*percentage/100) : 0
   end
 
 

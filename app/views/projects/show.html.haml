@@ -53,22 +53,51 @@
                       = number_field_tag "project[item_list][][quantity]", item["quantity"]
                       X
                     %td
-                      = select_tag("project[item_list][][number]", options_for_select(Price.any_of({product_id: item["product_id"]},{artline_item_number: item["number"]}).asc(:supplier_cost).map{|c|["#{c.companies_supplier.name}($#{c.supplier_cost.to_f})", c.artline_item_number]}, item.number), class:"example-multiple-selected")
+                      = select_tag("project[item_list][][number]", options_for_select(Price.where(product_id: item["product_id"],project_id: @project.id).asc(:supplier_cost).map{|c|["#{c.companies_supplier.name}($#{c.supplier_cost.to_f})", c.artline_item_number]}, item.number), class:"example-multiple-selected")
                     %td
                       +
                       =  number_field_tag "project[item_list][][additional_charges]", item["additional_charges"]||2
                       ="%"
                     %td.client_price
+                - unless  @saved_rfqs.blank?
                   %tr
-                    %td
-                    %td
-                    %td{colspan:3} Shipping Cost
-                    %td
-                  %tr
-                    %td
-                    %td
-                    %td{colspan:3} Total
-                    %td.total_client_price
+                    %td{colspan:6}
+                      .row
+                        .col-md-9
+                          %b{style: "float: right;"}
+                            Shippling Cost :
+                      - @saved_rfqs.each do |rfq|
+                        .row
+                          .col-md-3
+                          .col-md-3
+                          .col-md-3
+                            %span{style: "float: right;"}
+                              = "#{rfq.supplier.name} :"
+                          .col-md-3
+                            %span{style: "float: right;"}
+                              - if rfq.shipping_cost?
+                                .shipping_cost
+                                  = rfq.shipping_cost
+                              - else
+                                not yet received
+                %tr
+                  %td{colspan:6}
+                    .row
+                      .col-md-9
+                        %b{style: "float: right;"}
+                          Total :
+                      .col-md-3
+                        .total_client_price{style: "float: right;"}
+                -#%tr
+                -#  %td
+                -#  %td
+                -#  %td{colspan:3} Shipping Cost
+                -#  %td
+                -#%tr
+                -#  %td
+                -#  %td
+                -#  %td{colspan:3} Total
+                -#  %td.total_client_price
               .col-md-12
                 %p
                   = submit_tag "Save", class: "btn btn-primary "
@@ -214,10 +243,13 @@
 
      x = eval($tds.eq(2).find("input").val()) * eval($tds.eq(3).find("select option:selected").text().match(/\$\d+.\d+/)[0].replace("$",''));
      x += x*eval($tds.eq(4).find("input").val())/100;
+     x = x.toFixed(2)
      $tds.eq(5).text(x);
      total = 0
+     shp_cost = 0
+     $('.shipping_cost').each(function(e){shp_cost += eval($(this).text())})
      $('.client_price').each(function(e){total += eval($(this).text())})
-     $('.total_client_price').text(total);
+     $('.total_client_price').text((total + shp_cost).toFixed(2));
 
   });
 
@@ -269,10 +301,13 @@
      $tds = $(this).closest("tr").find('td')
      x = eval($tds.eq(2).find("input").val()) * eval($tds.eq(3).find("select option:selected").text().match(/\$\d+.\d+/)[0].replace("$",''));
      x += x*eval($tds.eq(4).find("input").val())/100;
+     x = x.toFixed(2)
      $tds.eq(5).text(x)
      total = 0
+     shp_cost = 0
+     $('.shipping_cost').each(function(e){shp_cost += eval($(this).text())})
      $('.client_price').each(function(e){total += eval($(this).text())})
-     $('.total_client_price').text(total);
+     $('.total_client_price').text((total + shp_cost).toFixed(2));
   })
 
 
