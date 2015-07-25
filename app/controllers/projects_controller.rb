@@ -1,6 +1,6 @@
 class ProjectsController < ApplicationController
   before_action :authenticate_user!, except: ["customer_qoute"]
-  before_action :set_project, only:  [:show, :destroy, :customer_qoute, :send_quotation, :update, :rfq, :create_order]
+  before_action :set_project, only:  [:show, :destroy, :customer_qoute, :send_quotation, :update, :rfq, :create_order, :edit]
   # load_and_authorize_resource
   def index
    @projects = Project.where(:po_number.exists=>false).desc(:created_at).paginate(page: params[:page], per_page: 5)

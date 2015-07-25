@@ -18,7 +18,7 @@
 //= require bootstrap-tagsinput
 //= require bootstrap-multiselect
 
-//= require product
+
 //= require company
 //= require order
 
