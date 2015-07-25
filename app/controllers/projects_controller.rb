@@ -3,7 +3,7 @@ class ProjectsController < ApplicationController
   before_action :set_project, only:  [:show, :destroy, :customer_qoute, :send_quotation, :update, :rfq, :create_order, :edit]
   # load_and_authorize_resource
   def index
-   @projects = Project.where(:po_number.exists=>false).desc(:created_at).paginate(page: params[:page], per_page: 5)
+    @projects = Project.where(:po_number.exists=>false).desc(:created_at).paginate(page: params[:page], per_page: 5)
   end
 
   def new
@@ -26,6 +26,10 @@ class ProjectsController < ApplicationController
     else
       @rfqs = @project.rfqs
       @items = @project.items.group_by{|item| !item["number"].blank? || !@rfqs.in(item_ids_quoted: [item.id.to_s]).blank? }
+      if @items[true].present?
+        supplier_id =Price.in(artline_item_number: @items[true].map(&:number)).map(&:supplier_id).uniq
+        @saved_rfqs = @project.rfqs.in(supplier_id: supplier_id)
+      end
     end
   end
 
@@ -41,10 +45,10 @@ class ProjectsController < ApplicationController
   end
 
   def destroy
-     if @project.destroy
-       flash[:notice] = "Project successfully deleted"
-       redirect_to projects_url
-     end
+    if @project.destroy
+      flash[:notice] = "Project successfully deleted"
+      redirect_to projects_url
+    end
   end
 
   def product_ajax_load
@@ -62,9 +66,10 @@ class ProjectsController < ApplicationController
 
   def rfq
     params[:rsq_data].each do |supplier_id, item_ids|
-      rfq_var=@project.rfqs.find_or_initialize_by(supplier_id: supplier_id)
-      rfq_var.item_ids_to_quote = (rfq_var.item_ids_to_quote.to_a + item_ids).uniq
-      rfq_var.save
+      rfqs = @project.rfqs.create(supplier_id: supplier_id,item_ids_to_quote: item_ids )
+      # rfq_var=@project.rfqs.find_or_initialize_by(supplier_id: supplier_id)
+      # rfq_var.item_ids_to_quote = (rfq_var.item_ids_to_quote.to_a + item_ids).uniq
+      # rfq_var.save
     end
 
     respond_to do |format|
@@ -78,12 +83,14 @@ class ProjectsController < ApplicationController
     suppliers= Hash[Price.collection.aggregate({"$match"=>{artline_item_number:{"$in"=> items.keys}}},
                                                {"$group"=>{_id:"$supplier_id", numbers:{"$addToSet"=>"$artline_item_number"}}}).map(&:values)]
 
-    if @project
+    @project[:po_number] = params[:po_number]
+    if @project.valid?
       suppliers.each do |k, v|
         @project.orders.create(supplier_id: k, item_ids: items.slice(*v).values)
       end
+      @project.save
+      ClientMailer.order_details(@project.id).deliver_now
     end
-    @project.update(po_number: params[:po_number])
     respond_to do |format|
       format.html
       format.json {render json: {message: @project.errors.full_messages.to_sentence} }
@@ -97,13 +104,19 @@ class ProjectsController < ApplicationController
       @rfqs = @project.rfqs
       @items = @project.items.group_by{|item| !item["number"].blank? || !@rfqs.in(item_ids_quoted: [item.id.to_s]).blank? }
       i=0
-      @product = @items[true].map do |item|
-        client_price = Price.find_by(artline_item_number: item["number"]).client_cost(item["additional_charge"].to_i)
-        product_details = "#{item['type']} : \n #{item.product.details}"
-        [i+=1, product_details, item["quantity"], client_price, client_price * item["quantity"].to_i ]
-      end if @items[true]
-      @product.push(["","","","Shipping Cost", 0])
-      @product.push(["","","","Total", @product.map{|x| x.last}.inject(:+)])
+      shipping_cost = 0
+      if @items[true]
+        @product = @items[true].map do |item|
+          client_price = Price.find_by(artline_item_number: item["number"]).client_cost(item["additional_charges"].to_i)
+          product_details = "#{item['type']} : \n #{item.product.details}"
+          [i+=1, product_details, item["quantity"], client_price.round(2), (client_price * item["quantity"].to_i).round(2) ]
+        end
+        supplier_id =Price.in(artline_item_number: @items[true].map(&:number)).map(&:supplier_id).uniq
+        saved_rfqs = @project.rfqs.in(supplier_id: supplier_id)
+        shipping_cost = saved_rfqs.sum(:shipping_cost).round(2)
+      end
+      @product.push(["","","","Shipping Cost", shipping_cost])
+      @product.push(["","","","Total", (@product.map{|x| x.last}.inject(:+)).round(2)])
 
     end
   end

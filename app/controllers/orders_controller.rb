@@ -1,5 +1,7 @@
 class OrdersController < ApplicationController
-  layout "mailer", only: [:status, :show]
+  before_action :authenticate_user!, except: [:show,:tracking]
+  before_action :set_order, only: [:show, :update]
+  layout "mailer", only: [:show,:tracking]
 
   def index
     @projects = Project.where(:po_number.exists=>true).desc(:created_at).paginate(page: params[:page], per_page: 5)
@@ -14,23 +16,38 @@ class OrdersController < ApplicationController
   end
 
   def show
-    project= Project.elem_match(orders: {_id: BSON::ObjectId.from_string(params[:id])}).first
-    @order = project.orders.find(params[:id]) if project
     render nothing: true unless @order
-   end
+  end
+
+  def update
+    @order.update(shipment_details)
+    respond_to do |format|
+      format.html {render text: "Successfully Updated."}
+      format.json {render json: {message: "Successfully Updated"} }
+    end
+  end
 
   def tracking
-
+    @project = Project.find(params[:id])
   end
 
   def status
-    @shipment = Shipment.find_by(po_number: params[:id])
+    @project = Project.find(params[:id])
   end
 
   private
 
+  def set_order
+    project= Project.elem_match(orders: {_id: BSON::ObjectId.from_string(params[:id])}).first
+    @order = project.orders.find(params[:id]) if project
+  end
+
   def shipment_params
     params.require(:shipment).permit(params[:shipment].keys)
+  end
+
+  def shipment_details
+    params.require(:order).permit(:shipment_date, :shipment_details)
   end
 
 end

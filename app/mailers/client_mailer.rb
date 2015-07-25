@@ -25,4 +25,9 @@ class ClientMailer < ApplicationMailer
     mail(from: ENV['SENDER'],to: emails,subject: 'Artline Quotation')
   end
 
+  def order_details(id)
+    @project  = Project.find(id)
+    mail(to: @project.user.email,subject: 'Order Details')
+  end
+
 end
