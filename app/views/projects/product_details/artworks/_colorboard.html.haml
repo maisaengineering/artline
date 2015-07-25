@@ -1,0 +1,54 @@
+.row
+  .col-md-12
+    %spna.project_details
+      Name :
+    %span
+      = item.artwork_type
+.row
+  .col-md-12
+    %span.project_details
+      Title :
+    %span
+      = item.product.title
+.row
+  .col-md-12
+    %span.project_details
+      Board option :
+    %span
+      = item.product.board_option
+.row
+  .col-md-12
+    %spna.project_details
+      Width :
+    %span
+      = item.product.width
+.row
+  .col-md-12
+    %spna.project_details
+      Height :
+    %span
+      = item.product.height
+.row
+  .col-md-12
+    %spna.project_details
+      Supplier :
+    %span
+      = item.product.supplier.name
+.row
+  .col-md-4
+    %spna.project_details
+      Image:
+    %span
+      = image_tag(item.product.image.source.url, class: "product-img")
+.row
+  .col-md-12
+    %spna.project_details
+      Size :
+    %span
+      = "#{item.product.image.width} X #{item.product.image.height}"
+.row
+  .col-md-12
+    %spna.project_details
+      Artist :
+    %span
+      = item.product.image.artist

@@ -1,10 +1,5 @@
 = render 'projects/forms/similar_fields'
-.row
-  .col-md-3.mbtm15
-    = text_field_tag("project[item_list][][print_cost]", nil, class: "form-control", placeholder: "Print Cost", required: true)
+= hidden_field_tag "project[item_list][][artwork_type]", "Vinyl"
 .row
   .col-md-3.mbtm15.txt_area
     = text_area_tag("project[item_list][][special_instructions]", nil, class: "form-control", placeholder: "Special Instructions", required: true)
-.row
-  .col-md-3.mbtm15
-    = label_tag(:tot_cost, "Total Cost:")

@@ -1,8 +1,3 @@
--#.row
--#  .col-md-3.mbtm15
--#    = text_field_tag("project[item_list][][new_frame][supplier_item_number]", nil, class: "form-control", placeholder: "Supplier Item Number")
--#  .col-md-3.mbtm15
--#    = text_field_tag("project[item_list][][new_frame][artline_item_number]", nil, class: "form-control", placeholder: "Artline Item Number")
 .row
   .col-md-3.mbtm15
     = text_field_tag("project[item_list][][product][new][frame][size]", nil, class: "form-control", placeholder: "Size", required: true)
@@ -11,3 +6,7 @@
 .row
   .col-md-3.mbtm15
     = text_field_tag("project[item_list][][product][new][frame][category]", nil, class: "form-control", placeholder: "Category")
+.row
+  .fileUpload.btn.btn-primary.mbtm15
+    %span Upload image
+    = file_field_tag("project[item_list][][product][new][frame][source]", class: "upload")

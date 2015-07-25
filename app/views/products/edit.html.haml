@@ -5,3 +5,4 @@
       %div.panel-body.ptop35
         = render  "/products/forms/#{@product._type.split("::").last.downcase}"
 
+= javascript_include_tag 'product', 'data-turbolinks-track' => true

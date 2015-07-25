@@ -1,4 +1,5 @@
 = hidden_field_tag "project[item_list][][type]", "Artwork"
+= hidden_field_tag "project[item_list][][artwork_type]", "FramedArt"
 .row
   .col-md-3.mbtm15
     = text_field_tag("project[item_list][][tag]", nil, class: "form-control", placeholder: "Tag", required: true)
@@ -10,41 +11,41 @@
 .supplier
 .row
   .col-md-3.mbtm15
-    = select_tag("project[item_list][][product][existing][number]", options_for_select(Artwork.artine_item_numbers.push('add')),prompt: "Image Number" , class: "form-control" , onchange:"new_item(this)", data:{name: 'Artwork'}, required: true)
-.artwork
+    = select_tag("project[item_list][][product][existing][image_id]", options_for_select(Image.pluck(:title,:id).push('add')),prompt: "Image Number" , class: "form-control" , onchange:"new_item(this)", data:{name: 'Image'}, required: true)
+.image
 .row
   .col-md-3.mbtm15
-    = text_field_tag("project[item_list][][product][existing][title]", nil, class: "form-control", placeholder: "Title", required: true)
+    = text_field_tag("project[item_list][][product][new][title]", nil, class: "form-control", placeholder: "Title", required: true)
 .row
   .col-md-3.mbtm15
-    = text_field_tag("project[item_list][][product][existing][image_width]", nil, class: "form-control", placeholder: "Image Width", required: true)
+    = text_field_tag("project[item_list][][product][new][width]", nil, class: "form-control", placeholder: "Image Width", required: true)
   .col-md-3.mbtm15
-    = text_field_tag("project[item_list][][product][existing][image_height]", nil, class: "form-control", placeholder: "Image Height", required: true)
+    = text_field_tag("project[item_list][][product][new][height]", nil, class: "form-control", placeholder: "Image Height", required: true)
 .row
   .col-md-3.mbtm15
-    = select_tag("project[item_list][][product][existing][matting]", options_for_select(["Single", "Double","None","add"]),prompt: "Matting" , class: "form-control matting_no", onchange:"new_field(this)",data:{name: 'Matting'}, required: true)
+    = select_tag("project[item_list][][product][new][matting]", options_for_select(["Single", "Double","None","add"]),prompt: "Matting" , class: "form-control matting_no", onchange:"new_field(this)",data:{name: 'Matting'}, required: true)
   .col-md-3.mbtm15
-    = number_field_tag("project[item_list][][product][existing][mat_size]", 3, class: "form-control", placeholder: "Mat Size",min: 0, required: true )
+    = number_field_tag("project[item_list][][product][new][mat_size]", 3, class: "form-control", placeholder: "Mat Size",min: 0, required: true )
 .row
   .col-md-3
     .matting
 .row
   .col-md-3.mbtm15.txt_area
-    = text_area_tag("project[item_list][][product][existing][mat_special_instructions]", nil, class: "form-control", placeholder: "Mat Special Instructions", required: true)
+    = text_area_tag("project[item_list][][product][new][mat_special_instructions]", nil, class: "form-control", placeholder: "Mat Special Instructions", required: true)
 .row
   .col-md-3.mbtm15
-    = select_tag("project[item_list][][product][existing][glazing]", options_for_select(["Glass", "Plexie","None"]),prompt: "Glazing" , class: "form-control" , required: true)
+    = select_tag("project[item_list][][product][new][glazing]", options_for_select(["Glass", "Plexie","None"]),prompt: "Glazing" , class: "form-control" , required: true)
 .row
   .col-md-3.mbtm15.txt_area
-    = text_area_tag("project[item_list][][product][existing][glazing_special_instructions]", nil, class: "form-control", placeholder: "Glazing Special Instructions", required: true)
+    = text_area_tag("project[item_list][][product][new][glazing_special_instructions]", nil, class: "form-control", placeholder: "Glazing Special Instructions", required: true)
 .row
   .col-md-3.mbtm15
-    = text_field_tag("project[item_list][][product][existing][glass_width]", nil, class: "form-control", placeholder: "Glass Width", required: true)
+    = text_field_tag("project[item_list][][product][new][glass_width]", nil, class: "form-control", placeholder: "Glass Width", required: true)
   .col-md-3.mbtm15
-    = text_field_tag("project[item_list][][product][existing][glass_height]", nil, class: "form-control", placeholder: "Glass Height", required: true)
+    = text_field_tag("project[item_list][][product][new][glass_height]", nil, class: "form-control", placeholder: "Glass Height", required: true)
 .row
   .col-md-3.mbtm15
-    = text_field_tag("project[item_list][][product][existing][glass_united_inches]", nil, class: "form-control", placeholder: "Glass United Inches", required: true)
+    = text_field_tag("project[item_list][][product][new][glass_united_inches]", nil, class: "form-control", placeholder: "Glass United Inches", required: true)
 .row
   .col-md-3.mbtm15
     = select_tag("project[item_list][][product][existing][moulding_company_id]", options_for_select(MouldingCompany.all.map{|m|[m.name, m.id]}.push('add')),prompt: "Moulding Company" , class: "form-control mouldingcompany_no", onchange:"new_item(this)", data:{name: 'MouldingCompany'}, required: true)
@@ -55,17 +56,14 @@
 .frame
 .row
   .col-md-3.mbtm15
-    = text_field_tag("project[item_list][][product][existing][category]", nil, class: "form-control", placeholder: "Category", required: true)
+    = text_field_tag("project[item_list][][product][new][category]", nil, class: "form-control", placeholder: "Category", required: true)
   .col-md-3.mbtm15
-    = text_field_tag("project[item_list][][product][existing][frame_size]", nil, class: "form-control", placeholder: "Frame Size", required: true)
+    = text_field_tag("project[item_list][][product][new][frame_size]", nil, class: "form-control", placeholder: "Frame Size", required: true)
 .row
   .col-md-3.mbtm15
-    = text_field_tag("project[item_list][][product][existing][overall_width]", nil, class: "form-control", placeholder: "Overall Width", required: true)
+    = text_field_tag("project[item_list][][product][new][overall_width]", nil, class: "form-control", placeholder: "Overall Width", required: true)
   .col-md-3.mbtm15
-    = text_field_tag("project[item_list][][product][existing][overall_height]", nil, class: "form-control", placeholder: "Overall Height", required: true)
-.row
-  .col-md-3.mbtm15
-    = text_field_tag("project[item_list][][product][existing][framing_cost]", nil, class: "form-control", placeholder: "Framing Cost", required: true)
+    = text_field_tag("project[item_list][][product][new][overall_height]", nil, class: "form-control", placeholder: "Overall Height", required: true)
 .row
   .col-md-3.mbtm15.txt_area
     = text_area_tag("project[item_list][][special_instructions]", nil, class: "form-control", placeholder: "Special Instructions", required: true)

@@ -1,17 +1,18 @@
 class Products::Artwork < Product
 
 
-  field :type
+  #field :type
   field :title
-  field :artist
-  field :publisher_item_number
+  #field :artist
+  #field :publisher_item_number
   field :width    #image width
   field :height   #image height
-  field :print_cost
-  field :rights_cost
+  #field :print_cost
+  #field :rights_cost
   field :supplier_id
   field :moulding_company_id
   field :frame_id
+  field :image_id
 
    #need image source field source
   mount_uploader :source, SourceUploader
@@ -24,16 +25,12 @@ class Products::Artwork < Product
     %w(frame)
   end
 
-  def number=(arg)
-    price = Price.find_by(artline_item_number:arg)
-    if price and price.product
-      self.title = price.product.title
-      self.artist = price.product.artist
-      self.width = price.product.width
-      self.height = price.product.height
-      self.print_cost = price.product.print_cost
-      self.rights_cost = price.product.rights_cost
-      self.source = price.product.source
+  def image=(arg)
+    image = Image.create(arg)
+    unless image.errors.any?
+      self.image_id = image.id
+    else
+      errors.add(:image, product.errors.full_messages.join(', '))
     end
   end
 
@@ -74,6 +71,10 @@ class Products::Artwork < Product
 
   def frame
     Frame.find(frame_id)
+  end
+
+  def image
+    Image.find(image_id)
   end
 
   def self.artine_item_numbers

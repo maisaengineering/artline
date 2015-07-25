@@ -1,0 +1,55 @@
+.row
+  .col-md-12
+    %spna.project_details
+      Name :
+    %span
+      = item.type
+.row
+  .col-md-12
+    %spna.project_details
+      Glass Width :
+    %span
+      = item.product.glass_width
+.row
+  .col-md-12
+    %spna.project_details
+      Glass Height :
+    %span
+      = item.product.glass_height
+.row
+  .col-md-12
+    %spna.project_details
+      Overall Width :
+    %span
+      = item.product.overall_width
+.row
+  .col-md-12
+    %spna.project_details
+      Overall Height :
+    %span
+      = item.product.overall_height
+.row
+  .col-md-12
+    %span.project_details
+      United Inches :
+    %span
+      = item.product.united_inches
+.row
+  .col-md-12
+    %spna.project_details
+      Moulding Company :
+    %span
+      = item.product.moulding_company.name
+.row
+  .col-md-4
+    %spna.project_details
+      Frame:
+    %span
+      = image_tag(item.product.frame.source.url, class: "product-img")
+      = "Size: #{item.product.frame.size}"
+.row
+  .col-md-5
+    %spna.project_details
+      Finish :
+    %span
+      = item.product.frame.finish

@@ -1,15 +1,11 @@
 = render 'projects/forms/similar_fields'
+= hidden_field_tag "project[item_list][][artwork_type]", "Acrylic"
 .row
   .col-md-3.mbtm15
-    = select_tag("project[item_list][][acrylic_thickness]", options_for_select(["1/4","1/2","add"]),prompt: "Acrylic Thickness" , class: "form-control acrylic_thickness_no", onchange:"new_field(this)", data:{name: 'Acrylic_Thickness'}, required: true)
-  .col-md-3.mbtm15
-    = text_field_tag("project[item_list][][print_cost]", nil, class: "form-control", placeholder: "Print Cost", required: true)
+    = select_tag("project[item_list][][product][new][acrylic_thickness]", options_for_select(["1/4","1/2","add"]),prompt: "Acrylic Thickness" , class: "form-control acrylic_thickness_no", onchange:"new_field(this)", data:{name: 'Acrylic_Thickness'}, required: true)
 .row
   .col-md-3
     .acrylic_thickness
 .row
   .col-md-3.mbtm15.txt_area
     = text_area_tag("project[item_list][][special_instructions]", nil, class: "form-control", placeholder: "Special Instructions", required: true)
-.row
-  .col-md-3.mbtm15
-    = label_tag(:tot_cost, "Total Cost:")
