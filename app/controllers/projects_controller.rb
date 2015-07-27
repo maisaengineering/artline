@@ -38,9 +38,13 @@ class ProjectsController < ApplicationController
   end
 
   def update
+    if  params[:item_to_be_deleted].present?
+      delete_list = params[:item_to_be_deleted].split(',')
+      @project.items.in(id: delete_list).destroy
+    end
     @project.update(project_params)
     flash[:notice] = "Successfully Updated"  unless @project.errors.any?
-    redirect_to :back
+    redirect_to projects_url
 
   end
 

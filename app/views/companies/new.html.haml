@@ -7,7 +7,7 @@
           .row
             .col-md-3.mbtm15
               = select_tag :_type, options_for_select(%w(Client Supplier)),prompt: "Select Client/Supplier", class: "form-control", required: true
-          = render 'form'
+          = render 'form',client: nil
           .row
             .col-md-12
               .actions

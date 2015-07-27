@@ -1,0 +1,107 @@
+.project_item
+  %hr
+  .row
+    .col-md-12
+      %spna.project_details
+        Name :
+      %span
+        = item.artwork_type
+      .btn.btn-danger.float_right{id: item.id,onclick: "delete_item(this)"}
+        delete
+  .row
+    .col-md-3
+      %spna.project_details
+        Tag :
+      %span
+        = item.tag
+    .col-md-2
+      %spna.project_details
+        Quantity :
+      %span
+        = item.quantity
+  .row
+    .col-md-3
+      %spna.project_details
+        Title :
+      %span
+        = item.product.title
+    .col-md-3
+      %spna.project_details
+        Width :
+      %span
+        = item.product.width
+    .col-md-3
+      %spna.project_details
+        Height :
+      %span
+        = item.product.height
+  .row
+    .col-md-3
+      %spna.project_details
+        Acrylic Thickness :
+      %span
+        = item.product.acrylic_thickness
+  %br
+  .row
+    .col-md-3
+      %spna.project_details
+        Publisher :
+      %span
+        = item.product.supplier.name
+    .col-md-3
+      %spna.project_details
+        Attention :
+      %span
+        = item.product.supplier.attention.join(",")
+  .row
+    .col-md-6
+      %spna.project_details
+        address :
+      %span
+        = item.product.supplier.address
+      %br
+      %span.pad_left_66
+        = "#{item.product.supplier.city}, #{item.product.supplier.state}."
+      %div.pad_left_66
+        = item.product.supplier.zip
+      %div
+        %spna.project_details
+          Phone :
+        %span
+          = item.product.supplier.phone
+      %div
+        %spna.project_details
+          Email :
+        %span
+          = item.product.supplier.email
+  %br
+  .row
+    .col-md-6
+      %div
+        %spna.project_details
+          Image Title:
+        %span
+          = item.product.image.title
+      %div
+        %span
+        = image_tag(item.product.image.source.url, class: "product-img") if item.product.image.source?
+      %div
+        %spna.project_details
+          Artist :
+        %span
+          = item.product.image.artist
+      %div
+        %spna.project_details
+          Width :
+        %span
+          = item.product.image.width
+        %spna.project_details
+          Height :
+        %span
+          = item.product.image.height
+  .row
+    .col-md-12
+      %spna.project_details
+        Special Instructions :
+      %div
+        = item.special_instructions

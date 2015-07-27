@@ -114,3 +114,17 @@ add_sales_rep = function(element){
         $(".sales_rep").empty().closest('.row').hide()
     }
 }
+
+delete_item = function(element){
+    var id = $(element).attr("id")
+    var items_list = $("#item_to_be_deleted").val()
+    if(items_list == "")
+    {
+        $("#item_to_be_deleted").val(id + ',')
+    }
+    else{
+        pre_item = $("#item_to_be_deleted").val()
+        $("#item_to_be_deleted").val(pre_item + id + ',')
+    }
+    $(element).closest('.project_item').hide()
+}

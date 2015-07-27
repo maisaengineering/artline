@@ -1,4 +1,10 @@
 %section#main-content
   %section.wrapper
     %h1 Edit Project
-    -#= render 'form'
+    %section.panel
+      %div.panel-body.ptop35
+        = form_tag(project_path, method: :put, multipart:true) do
+          = render 'form'
+
+
+= javascript_include_tag "project", 'data-turbolinks-track' => true

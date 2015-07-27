@@ -1,0 +1,56 @@
+.project_item
+  %hr
+  .row
+    .col-md-12
+      %spna.project_details
+        Name :
+      %span
+        = item.type
+      .btn.btn-danger.float_right{id: item.id,onclick: "delete_item(this)"}
+        delete
+  .row
+    .col-md-3
+      %spna.project_details
+        Tag :
+      %span
+        = item.tag
+    .col-md-2
+      %spna.project_details
+        Quantity :
+      %span
+        = item.quantity
+  .row
+    .col-md-3
+      %spna.project_details
+        Plant :
+      %span
+        = item.product.name
+      %div
+        %span
+        = image_tag(item.product.source.url, class: "product-img") if item.product.source?
+      %div
+        %spna.project_details
+          Size :
+        %span
+          = item.product.size
+  .row
+    .col-md-3
+      %spna.project_details
+        Fire Rating :
+      %span
+        = item.product.fire_rating
+  .row
+    .col-md-3
+      %spna.project_details
+        Container :
+      %span
+        = item.product.container.name
+      %div
+        %span
+        = image_tag(item.product.container.source.url, class: "product-img") if item.product.container.source?
+  .row
+    .col-md-12
+      %spna.project_details
+        Special Instructions :
+      %div
+        = item.special_instructions

@@ -1,0 +1,154 @@
+.project_item
+  %hr
+  .row
+    .col-md-12
+      %spna.project_details
+        Name :
+      %span
+        = item.type
+      .btn.btn-danger.float_right{id: item.id,onclick: "delete_item(this)"}
+        delete
+  .row
+    .col-md-3
+      %spna.project_details
+        Tag :
+      %span
+        = item.tag
+    .col-md-3
+      %spna.project_details
+        Quantity :
+      %span
+        = item.quantity
+  .row
+    .col-md-3
+      %spna.project_details
+        Bevel :
+      %span
+        = item.product.bevel
+    .col-md-3
+      %spna.project_details
+        Bevel Size :
+      %span
+        = item.product.bevel_size
+  .row
+    .col-md-12
+      %spna.project_details
+        Bevel special instructions :
+      %div
+        = item.product.bevel_special_instructions
+  .row
+    .col-md-3
+      %spna.project_details
+        Glazing :
+      %span
+        = item.product.glazing
+  .row
+    .col-md-12
+      %spna.project_details
+        Glazing special instructions :
+      %div
+        = item.product.glazing_special_instructions
+  .row
+    .col-md-3
+      %spna.project_details
+        Glass Width :
+      %span
+        = item.product.glass_width
+    .col-md-3
+      %spna.project_details
+        Glass Height :
+      %span
+        = item.product.glass_width
+  %br
+  .row
+    .col-md-3
+      %spna.project_details
+        Moulding Company :
+      %span
+        = item.product.moulding_company.name
+    .col-md-3
+      %spna.project_details
+        Attention :
+      %span
+        = item.product.moulding_company.attention.join(",")
+  .row
+    .col-md-6
+      %spna.project_details
+        address :
+      %span
+        = item.product.moulding_company.address
+      %br
+      %span.pad_left_66
+        = "#{item.product.moulding_company.city}, #{item.product.moulding_company.state}."
+      %div.pad_left_66
+        = item.product.moulding_company.zip
+      %div
+        %spna.project_details
+          Phone :
+        %span
+          = item.product.moulding_company.phone
+      %div
+        %spna.project_details
+          Email :
+        %span
+          = item.product.moulding_company.email
+  %br
+  .row
+    .col-md-6
+      %div
+        %spna.project_details
+          Frame :
+      %div
+        %span
+        = image_tag(item.product.frame.source.url, class: "product-img") if item.product.frame.source?
+      %div
+        %spna.project_details
+          Size :
+        %span
+          = item.product.frame.size
+      %div
+        %spna.project_details
+          Finish :
+        %span
+          = item.product.frame.finish
+      - if item.product.frame.category?
+        %div
+          %spna.project_details
+            Category :
+          %span
+            = item.product.frame.category
+  %br
+  .row
+    .col-md-3
+      %spna.project_details
+        Category :
+      %span
+        = item.product.frame_category
+    .col-md-3
+      %spna.project_details
+        Frame Size :
+      %span
+        = item.product.frame_size
+  .row
+    .col-md-3
+      %spna.project_details
+        Overall Width :
+      %span
+        = item.product.overall_width
+    .col-md-3
+      %spna.project_details
+        Overall Height :
+      %span
+        = item.product.overall_height
+  .row
+    .col-md-3
+      %spna.project_details
+        United Inches :
+      %span
+        = item.product.united_inches
+  .row
+    .col-md-12
+      %spna.project_details
+        Special Instructions :
+      %div
+        = item.special_instructions
