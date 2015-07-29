@@ -32,6 +32,7 @@ Rails.application.routes.draw do
       get 'tracking'
       get 'status'
       post 'create_order_tracking'
+      get 'search'
     end
   end
 

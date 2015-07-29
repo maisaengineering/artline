@@ -35,6 +35,11 @@ class OrdersController < ApplicationController
     @project = Project.find(params[:id])
   end
 
+  def search
+    @projects = Project.where("$text"=>{"$search"=>params["key"]}).and(:po_number.exists=>true).desc(:created_at).paginate(page: params[:page], per_page: 5)
+    render 'index'
+  end
+
   private
 
   def set_order
