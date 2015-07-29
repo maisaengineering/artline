@@ -97,7 +97,7 @@ class ProjectsController < ApplicationController
     end
     respond_to do |format|
       format.html
-      format.json {render json: {message: @project.errors.full_messages.to_sentence} }
+      format.json {render json: {message: @project.errors.full_messages.to_sentence,redirect_url: orders_url} }
     end
   end
 

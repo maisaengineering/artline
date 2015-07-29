@@ -190,13 +190,18 @@
               dataType: 'json',
               url: location + "/create_order",
               data: {items_ids: items_ids,po_number: po_num},
+              beforeSend: function(){
+               $("#PlaceOrderModal").hide()
+               $('.loading-indicator').show()
+               },
               success: function(data){
                 if(data.message.length > 0){
                   $('.errors').show().html(data.message)
                 }
                 else{
+                  $('.loading-indicator').hide()
                   alert("Successfully created")
-                  location.reload();
+                  location= data.redirect_url;
                 }
               }
             });
@@ -247,7 +252,11 @@
           method: 'POST',
           dataType: 'json',
           data: {rsq_data: $data},
+          beforeSend: function(){
+               $('.loading-indicator').show()
+               },
           success: function(data){
+            $('.loading-indicator').hide()
             alert("Request Successfully sent")
             location= data.redirect_url;
           },

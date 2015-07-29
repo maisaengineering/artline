@@ -6,18 +6,18 @@
     = text_field_tag("project[item_list][][quantity]", nil, class: "form-control", placeholder: "Quantity", required: true)
 .row
   .col-md-3.mbtm15
-    = select_tag("project[item_list][][product][existing][number]", options_for_select(ArtificialPlant.artine_item_numbers.push("add")),prompt: "Item Number" , class: "form-control artificialplant_no", onchange:"new_item(this)", data:{name: 'ArtificialPlant'}, required: true)
+    = select_tag("project[item_list][][product][existing][number]", options_for_select(ArtificialPlant.artine_item_numbers.push("add")),prompt: "Item" , class: "form-control artificialplant_no", onchange:"new_item(this)", data:{name: 'ArtificialPlant'}, required: true)
 .artificialplant
 .row
   .col-md-3.mbtm15
     = select_tag("project[item_list][][product][existing][fire_rating]", options_for_select(["Yes", "No"]),prompt: "Fire Rating" , class: "form-control", required: true )
 .row
   .col-md-3.mbtm15
-    = select_tag("project[item_list][][product][existing][container_id]", options_for_select(Container.pluck(:name,:id).push('add')),prompt: "Container Number" , class: "form-control container_no", onchange:"new_item(this)", data:{name: 'Container'}, required: true)
+    = select_tag("project[item_list][][product][existing][container_id]", options_for_select(Container.pluck(:name,:id).push('add')),prompt: "Container" , class: "form-control container_no", onchange:"new_item(this)", data:{name: 'Container'}, required: true)
 .container.pad0px
 .row
   .col-md-3.mbtm15.txt_area
-    = text_area_tag("project[item_list][][special_instructions]", nil, class: "form-control", placeholder: "Special Instructions", required: true)
+    = text_area_tag("project[item_list][][special_instructions]", nil, class: "form-control", placeholder: "Special Instructions")
 .row
   .col-md-3.mbtm15
     = label_tag(:tot_cost, "Total Cost:")

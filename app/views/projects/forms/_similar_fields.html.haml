@@ -10,7 +10,7 @@
 .supplier
 .row
   .col-md-3.mbtm15
-    = select_tag("project[item_list][][product][existing][image_id]", options_for_select(Image.pluck(:title,:id).push('add')),prompt: "Image Number" , class: "form-control" , onchange:"new_item(this)", data:{name: 'Image'}, required: true)
+    = select_tag("project[item_list][][product][existing][image_id]", options_for_select(Image.pluck(:title,:id).push('add')),prompt: "Image" , class: "form-control" , onchange:"new_item(this)", data:{name: 'Image'}, required: true)
 .image
 .row
   .col-md-3.mbtm15

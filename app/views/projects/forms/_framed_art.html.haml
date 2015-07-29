@@ -11,7 +11,7 @@
 .supplier
 .row
   .col-md-3.mbtm15
-    = select_tag("project[item_list][][product][existing][image_id]", options_for_select(Image.pluck(:title,:id).push('add')),prompt: "Image Number" , class: "form-control" , onchange:"new_item(this)", data:{name: 'Image'}, required: true)
+    = select_tag("project[item_list][][product][existing][image_id]", options_for_select(Image.pluck(:title,:id).push('add')),prompt: "Image" , class: "form-control" , onchange:"new_item(this)", data:{name: 'Image'}, required: true)
 .image
 .row
   .col-md-3.mbtm15
@@ -52,7 +52,7 @@
 .mouldingcompany
 .row
   .col-md-3.mbtm15
-    = select_tag("project[item_list][][product][existing][frame_id]", options_for_select(Frame.all.map{|f| [f["finish"],f["id"]]}.push('add')),prompt: "Frame Number" , class: "form-control frame_no", onchange:"new_item(this)", data:{name: 'Frame'}, required: true )
+    = select_tag("project[item_list][][product][existing][frame_id]", options_for_select(Frame.all.map{|f| [f["finish"],f["id"]]}.push('add')),prompt: "Frame" , class: "form-control frame_no", onchange:"new_item(this)", data:{name: 'Frame'}, required: true )
 .frame
 .row
   .col-md-3.mbtm15
@@ -66,10 +66,10 @@
     = text_field_tag("project[item_list][][product][new][overall_height]", nil, class: "form-control", placeholder: "Overall Height", required: true)
 .row
   .col-md-3.mbtm15.txt_area
-    = text_area_tag("project[item_list][][special_instructions]", nil, class: "form-control", placeholder: "Special Instructions", required: true)
-.row
-  .col-md-3.mbtm15
-    = label_tag(:tot_cost, "Total Cost:")
+    = text_area_tag("project[item_list][][special_instructions]", nil, class: "form-control", placeholder: "Special Instructions")
+-#.row
+-#  .col-md-3.mbtm15
+-#    = label_tag(:tot_cost, "Total Cost:")
 
 
 

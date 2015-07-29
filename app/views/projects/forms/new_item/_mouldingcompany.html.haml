@@ -5,7 +5,7 @@
     .row
       .col-md-12#field
         = text_field_tag("project[item_list][][product][new][moulding_company][attention][]", nil, class: "attention", placeholder: "Attention", required: true)
-        %button#b1.btn#add-more{:type => "button"} +
+        -#%button#b1.btn#add-more{:type => "button"} +
 .row
   .col-md-3.mbtm15
     = text_field_tag("project[item_list][][product][new][moulding_company][address]", nil, class: "form-control", placeholder: "Address", required: true)
