@@ -22,7 +22,7 @@ class ClientMailer < ApplicationMailer
      pdf.table product.unshift(["#", "Product","Quantity", "Price per Item" , "Price"]),:header => true if product
 
     attachments["artline_quote_#{@project.quote_number}.pdf"] = pdf.render
-    mail(from: ENV['SENDER'],to: emails,subject: 'Artline Quotation')
+    mail(to: emails,subject: 'Artline Quotation')
   end
 
   def order_details(id)
