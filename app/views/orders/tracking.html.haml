@@ -41,31 +41,14 @@
             - order.items.each do |item |
               %tr
                 %td
-                  .row
-                    .col-md-12
-                      %div
-                        %span.project_details
-                          Name :
-                        = item["type"]
-                        &nbsp; &nbsp; &nbsp;
-
-                      .row
-                        .col-md-4{style: "padding-right: 0px;"}
-                          - unless item.product.source.file.blank?
-                            = image_tag(item.product.source.url, class: "product-img")
-                          = "Size: #{item.product.size}"
-                        .col-md-8
-                          = item.product.description
-                      - item.product.addons.each do |addon|
-                        .project_details
-                          #{addon}:
-                        - addon = item.product.instance_eval(addon)
-                        .row
-                          .col-md-3{style: "padding-right: 0px;"}
-                            - unless addon.source.file.blank?
-                              = image_tag(addon.source.url, class: "product-img")
-                          .col-md-9
-                            = addon.details
+                  - if item["type"].eql?("Mirror")
+                    = render "projects/product_details/#{item["type"].downcase}", item: item
+                  - elsif item["type"].eql?("Lamp")
+                    = render "projects/product_details/#{item["type"].downcase}", item: item
+                  - elsif item["type"].eql?("ArtificialPlant")
+                    = render "projects/product_details/#{item["type"].downcase}", item: item
+                  - elsif item["type"].eql?("Artwork")
+                    = render "projects/product_details/artworks/#{item["artwork_type"].downcase}", item: item
                 %td
                   = item["quantity"]
                 %td

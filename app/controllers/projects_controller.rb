@@ -138,7 +138,6 @@ class ProjectsController < ApplicationController
   end
 
   def search
-
     @projects = Project.where("$text"=>{"$search"=>params["key"]}).and(:po_number.exists=>false).desc(:created_at).paginate(page: params[:page], per_page: 5)
     render 'index'
   end

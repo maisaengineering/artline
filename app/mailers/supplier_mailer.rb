@@ -2,7 +2,7 @@ class SupplierMailer < ApplicationMailer
 
   def quote(id, email)
     @rsq_id = id
-    mail(to: email,subject: 'Artline: Quotation Needed')
+    mail( to: email,subject: 'Artline: Quotation Needed')
   end
 
   def reply_to_requester(user_id,supplier_id,supplier_cost)

@@ -18,7 +18,7 @@ class Products::Artwork < Product
   mount_uploader :source, SourceUploader
 
   def field_names
-    %w(title artist width height print_cost rights_cost source)
+    %w(title artist width height source)
   end
 
   def addons
@@ -79,6 +79,10 @@ class Products::Artwork < Product
 
   def self.artine_item_numbers
     Price.in(product_id: Artwork.pluck(:id)).pluck(:artline_item_number)
+  end
+
+  def details
+    "Publisher: #{supplier.name}\n Moulding Company: #{moulding_company["name"]}"
   end
 
 end
