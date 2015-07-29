@@ -17,8 +17,6 @@
 //= require bootstrap-sprockets
 //= require bootstrap-tagsinput
 //= require bootstrap-multiselect
-
-
 //= require company
 //= require order
 
