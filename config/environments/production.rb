@@ -46,6 +46,7 @@ Rails.application.configure do
 
   # Use the lowest log level to ensure availability of diagnostic information
   # when problems arise.
+  config.logger = Logger.new(STDOUT)
   config.log_level = :debug
 
   # Prepend all log lines with the following tags.
@@ -72,6 +73,7 @@ Rails.application.configure do
   config.active_support.deprecation = :notify
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
+
   config.log_formatter = ::Logger::Formatter.new
 
   config.action_mailer.default_url_options = { host: 'artline.herokuapp.com'}
