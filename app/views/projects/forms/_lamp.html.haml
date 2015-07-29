@@ -6,7 +6,7 @@
     = text_field_tag("project[item_list][][quantity]", nil, class: "form-control", placeholder: "Quantity", required: true)
 .row
   .col-md-3.mbtm15
-    = select_tag("project[item_list][][product][existing][number]", options_for_select(Lamp.artine_item_numbers.push('add')),prompt: "Item Number" , class: "form-control lamb_no", onchange:"new_item(this)", data:{name: 'Lamp'}, required: true)
+    = select_tag("project[item_list][][product][existing][number]", options_for_select(Lamp.artine_item_numbers.push('add')),prompt: "Item" , class: "form-control lamb_no", onchange:"new_item(this)", data:{name: 'Lamp'}, required: true)
 .lamp
 
 .row
@@ -19,7 +19,7 @@
 .bulb
 .row
   .col-md-3.mbtm15.txt_area
-    = text_area_tag("project[item_list][][special_instructions]", nil, class: "form-control", placeholder: "Special Instructions", required: true)
+    = text_area_tag("project[item_list][][special_instructions]", nil, class: "form-control", placeholder: "Special Instructions")
 .row
   .col-md-3.mbtm15
     = label_tag(:total_cost, "Total Cost:")

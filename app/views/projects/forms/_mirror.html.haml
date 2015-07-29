@@ -30,7 +30,7 @@
 .mouldingcompany
 .row
   .col-md-3.mbtm15
-    = select_tag("project[item_list][][product][existing][frame_id]", options_for_select(Frame.all.map{|f| [f["finish"],f["id"]]}.push('add')),prompt: "Frame Number" , class: "form-control frame_no",id: "frame", onchange:"new_item(this)", data:{name: 'Frame'}, required: true )
+    = select_tag("project[item_list][][product][existing][frame_id]", options_for_select(Frame.all.map{|f| [f["finish"],f["id"]]}.push('add')),prompt: "Frame" , class: "form-control frame_no",id: "frame", onchange:"new_item(this)", data:{name: 'Frame'}, required: true )
 .frame
 .row
   .col-md-3.mbtm15
@@ -47,7 +47,7 @@
     = text_field_tag("project[item_list][][product][new][united_inches]", nil, class: "form-control", placeholder: "United Inches", required: true)
 .row
   .col-md-3.mbtm15.txt_area
-    = text_area_tag("project[item_list][][special_instructions]", nil, class: "form-control", placeholder: "Special Instructions", required: true)
+    = text_area_tag("project[item_list][][special_instructions]", nil, class: "form-control", placeholder: "Special Instructions")
 .row
   .col-md-3.mbtm15
     = label_tag(:tot_cost, "Total Cost:")
