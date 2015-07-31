@@ -56,6 +56,24 @@ class ProductsController < ApplicationController
 
   end
 
+  def prefill_data
+    quote = Price.where(artline_item_number: params[:artline_number]).first unless params[:addon]
+    product = params[:addon] ? Product.where(id: params[:artline_number]).first : quote.product
+    render json: case product.class.to_s.split("::").last
+                   when 'Lamp'
+                     {"shade_id"=> product.shade_id.to_s, "bulb_id"=> product.bulb_id.to_s}
+                   when 'ArtificialPlant'
+                     {"fire_rating"=>product.fire_rating, "container_id"=>product.container_id.to_s}
+                   when 'Frame'
+                     product.attributes.slice("category", "size")
+                   when 'Image'
+                     product.attributes.slice("title", "width", "height")
+                   else
+                     {}
+                 end
+
+  end
+
   private
 
   def set_product

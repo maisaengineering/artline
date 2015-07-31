@@ -1,7 +1,13 @@
 <%unless params["class_name"].blank?%>
-     $("."+"<%=params["class_name"]%>").eq(<%=params["index"].to_i%>).html("<%= j render(:partial => '/projects/forms/new_item/'+ params["item"].downcase ) %>");
-$("."+"<%=params["class_name"]%>").eq(<%=params["index"].to_i%>).prev('.row').remove();
-
+    $("."+"<%=params["class_name"]%>").eq(<%=params["index"].to_i%>).html("<%= j render(:partial => '/projects/forms/new_item/'+ params["item"].downcase ) %>");
+    $("."+"<%=params["class_name"]%>").eq(<%=params["index"].to_i%>).prev('.row').remove();
+    $("."+"<%=params["class_name"]%>").eq(<%=params["index"].to_i%>).nextAll(".replaceable:eq(0)").remove();
+   <%if params["class_name"].eql?("frame")%>
+    $("."+"<%=params["class_name"]%>").eq(<%=params["index"].to_i%>).find("input[id$='frame_size']:eq(0)").trigger('change');
+   <%elsif params["class_name"].eql?("image") %>
+    $("."+"<%=params["class_name"]%>").eq(<%=params["index"].to_i%>).find("input[id$='new_image_width']:eq(0)").trigger('change');
+    $("."+"<%=params["class_name"]%>").eq(<%=params["index"].to_i%>).find("input[id$='new_image_height']:eq(0)").trigger('change');
+   <%end%>
 <%else%>
     $('.selected_item').empty().append("<%= j render(:partial => '/products/forms/'+ params[:item].downcase ) %>");
 <%end%>

@@ -75,7 +75,6 @@ new_item = function(element){
     $index = $($(":input[class='"+$(element).attr('class')+"']")).index(element);
     $index = $('.'+$class_name).index($(element).closest('.row').next('.'+$class_name));
     if($val=='add'){
-        var item = $val
         var url = "/products/load_form"
         $.ajax({
             method: "GET",
@@ -86,6 +85,47 @@ new_item = function(element){
         })
     }else{
         $("."+$(element).attr('data-name').toLowerCase()).eq($index).html("");
+        var data = new Object({class_name: $class_name, artline_number: $val});
+        if($(element).attr('data-addon')){
+            data["addon"]=true;
+        }
+
+        var url = "/products/prefill_data";
+        $.ajax({
+            method: "GET",
+            url: url,
+            dataType: 'json',
+            data: data,
+            success: function(data){
+                switch($class_name) {
+                    case "lamp":
+                        $elementRow = $(element).closest('.row').nextAll(".row");
+                        $elementRow.find("select[id$='shade_id']:eq(0)").val(data.shade_id);
+                        $elementRow.find("select[id$='bulb_id']:eq(0)").val(data.bulb_id);
+                        break;
+                    case "artificialplant":
+                        $elementRow = $(element).closest('.row').nextAll(".row");
+                        console.log(data);
+                        $elementRow.find("select[id$='fire_rating']:eq(0)").val(data.fire_rating);
+                        $elementRow.find("select[id$='container_id']:eq(0)").val(data.container_id);
+                        break;
+                    case "frame":
+                        $elementRow = $(element).closest('.row').nextAll(".row");
+                        $elementRow.find("input[id$='frame_category']:eq(0)").val(data.category);
+                        $elementRow.find("input[id$='frame_size']:eq(0)").val(data.size);
+                        $elementRow.find("input[id$='frame_size']:eq(0)").trigger('change');
+                        break;
+                    case "image":
+                        console.log(data);
+                        $elementRow = $(element).closest('.row').nextAll(".replaceable");
+                        $elementRow.find("input[id$='title']:eq(0)").val(data.title);
+                        $elementRow.find("input[id$='width']:eq(0)").val(data.width);
+                        $elementRow.find("input[id$='height']:eq(0)").val(data.height);
+                        $elementRow.find("input[id$='width']:eq(0), input[id$='height']:eq(0)").trigger('change');
+                        break;
+                }
+            }
+        })
     }
 
 }
@@ -127,4 +167,130 @@ delete_item = function(element){
         $("#item_to_be_deleted").val(pre_item + id + ',')
     }
     $(element).closest('.project_item').hide()
+}
+
+glass_width= function(element){
+    $val = eval($(element).val() || 0);
+    $element_row = $(element).closest('.row');
+    $frame_size = eval($element_row.nextAll('div').find("input[id$='frame_size']:eq(0)").val() || 0);
+    $overall_width_element = $element_row.nextAll('.row').find("input[id$='overall_width']:eq(0)");
+    $overall_height_element = $element_row.nextAll('.row').find("input[id$='overall_height']:eq(0)");
+    $overall_width_element.val($val+2*$frame_size);
+    $element_row.nextAll('.row').find("input[id$='united_inches']:eq(0)").val(eval($overall_width_element.val())+eval($overall_height_element.val()));
+}
+
+glass_height= function(element){
+    $val = eval($(element).val() || 0);
+    $element_row = $(element).closest('.row');
+    $frame_size = eval($element_row.nextAll('div').find("input[id$='frame_size']:eq(0)").val() || 0);
+    $overall_width_element = $element_row.nextAll('.row').find("input[id$='overall_width']:eq(0)");
+    $overall_height_element = $element_row.nextAll('.row').find("input[id$='overall_height']:eq(0)");
+    $overall_height_element.val($val+2*$frame_size);
+    $element_row.nextAll('.row').find("input[id$='united_inches']:eq(0)").val(eval($overall_width_element.val())+eval($overall_height_element.val()));
+}
+
+frame_size=function(element){
+    $val = eval($(element).val() || 0);
+    $element_row = $(element).closest('.replaceable');
+    if($element_row.length==0){
+        $element_row= $(element).closest('.frame');
+    }
+    $width_element = $element_row.prevAll('.row').find("input[id$='glass_width']:eq(0)");
+    $height_element = $element_row.prevAll('.row').find("input[id$='glass_height']:eq(0)");
+    $overall_width_element = $element_row.nextAll('.row').find("input[id$='overall_width']:eq(0)");
+    $overall_height_element = $element_row.nextAll('.row').find("input[id$='overall_height']:eq(0)");
+    $overall_width_element.val(eval($width_element.val()||0)+2*$val);
+    $overall_height_element.val(eval($height_element.val()||0)+2*$val);
+    $element_row.nextAll('.row').find("input[id$='united_inches']:eq(0)").val(eval($overall_width_element.val())+eval($overall_height_element.val()));
+}
+
+overall_width=function(element){
+    $val = eval($(element).val() || 0);
+    $element_row = $(element).closest('.row');
+    $frame_size = eval($element_row.prevAll('div').find("input[id$='frame_size']:eq(0)").val() || 0);
+    $overall_height_element = $element_row.find("input[id$='overall_height']:eq(0)");
+    $glass_width = $element_row.prevAll('.row').find("input[id$='glass_width']:eq(0)");
+    $glass_width.val(eval($val||0)-2*$frame_size);
+    $element_row.nextAll('.row').find("input[id$='united_inches']:eq(0)").val($val+eval($overall_height_element.val()));
+    $mat_size = eval($element_row.prevAll('.row').find("input[id$='mat_size']:eq(0)").val()||0);
+    $element_row.prevAll('div').find("input[id$='new_width'], input[id$='new_image_width']:eq(0)").val(eval($glass_width.val())-2*$mat_size);
+
+}
+
+overall_height=function(element){
+    $val = eval($(element).val() || 0);
+    $element_row = $(element).closest('.row');
+    $frame_size = eval($element_row.prevAll('div').find("input[id$='frame_size']:eq(0)").val() || 0);
+    $overall_width_element = $element_row.find("input[id$='overall_width']:eq(0)");
+    $glass_height = $element_row.prevAll('.row').find("input[id$='glass_height']:eq(0)");
+    $glass_height.val(eval($val||0)-2*$frame_size);
+    $element_row.nextAll('.row').find("input[id$='united_inches']:eq(0)").val(eval($overall_width_element.val())+$val);
+    $mat_size = eval($element_row.prevAll('.row').find("input[id$='mat_size']:eq(0)").val()||0);
+    $element_row.prevAll('div').find("input[id$='new_height'], input[id$='new_image_height']:eq(0)").val(eval($glass_height.val())-2*$mat_size);
+}
+
+image_width = function(element){
+    $val = eval($(element).val() || 0);
+    $element_row = $(element).closest('.replaceable');
+    if($element_row.length==0){
+        $element_row= $(element).closest('.image');
+    }
+    $mat_size = eval($element_row.nextAll('.row').find("input[id$='mat_size']:eq(0)").val()||0);
+    $glass_width = $element_row.nextAll('.row').find("input[id$='glass_width']:eq(0)");
+    $glass_height = $element_row.nextAll('.row').find("input[id$='glass_height']:eq(0)");
+    $glass_width.val($val+2*$mat_size);
+    $element_row.nextAll('.row').find("input[id$='glass_united_inches']:eq(0)").val(eval($glass_width.val())+eval($glass_height.val()));
+    glass_width($glass_width);
+}
+
+
+image_height = function(element){
+    $val = eval($(element).val() || 0);
+    $element_row = $(element).closest('.replaceable');
+    if($element_row.length==0){
+        $element_row= $(element).closest('.image');
+    }
+    $mat_size = eval($element_row.nextAll('.row').find("input[id$='mat_size']:eq(0)").val()||0);
+    $glass_width = $element_row.nextAll('.row').find("input[id$='glass_width']:eq(0)");
+    $glass_height = $element_row.nextAll('.row').find("input[id$='glass_height']:eq(0)");
+    $glass_height.val($val+2*$mat_size);
+    $element_row.nextAll('.row').find("input[id$='glass_united_inches']:eq(0)").val(eval($glass_width.val())+eval($glass_height.val()));
+    glass_height($glass_height);
+
+}
+
+glass_width_artwork = function(element){
+    $val = eval($(element).val() || 0);
+    $element_row = $(element).closest('.row');
+    $mat_size = eval($element_row.prevAll('.row').find("input[id$='mat_size']:eq(0)").val()||0);
+    $image_width= $element_row.prevAll('div').find("input[id$='new_width'], input[id$='new_image_width']:eq(0)");
+    $image_width.val($val- 2*$mat_size)
+    $glass_height = $element_row.find("input[id$='glass_height']:eq(0)");
+    $element_row.nextAll('.row').find("input[id$='glass_united_inches']:eq(0)").val($val+eval($glass_height.val()));
+    glass_width(element);
+}
+
+glass_height_artwork = function(element){
+    $val = eval($(element).val() || 0);
+    $element_row = $(element).closest('.row');
+    $mat_size = eval($element_row.prevAll('.row').find("input[id$='mat_size']:eq(0)").val()||0);
+    $image_height= $element_row.prevAll('div').find("input[id$='new_height'], input[id$='new_image_height']:eq(0)");
+    $image_height.val($val- 2*$mat_size)
+    $glass_width = $element_row.find("input[id$='glass_width']:eq(0)");
+    $element_row.nextAll('.row').find("input[id$='glass_united_inches']:eq(0)").val($val+eval($glass_width.val()));
+    glass_height(element);
+}
+
+mat_size = function(element){
+    $val = eval($(element).val() || 0);
+    $element_row = $(element).closest('.row');
+    $image_width= eval($element_row.prevAll('div').find("input[id$='new_width'], input[id$='new_image_width']:eq(0)").val() || 0);
+    $image_height= eval($element_row.prevAll('div').find("input[id$='new_height'], input[id$='new_image_height']:eq(0)").val() || 0);
+    $glass_width = $element_row.nextAll('.row').find("input[id$='glass_width']:eq(0)");
+    $glass_height = $element_row.nextAll('.row').find("input[id$='glass_height']:eq(0)");
+    $glass_width.val($image_width+2*$val);
+    $glass_height.val($image_height+2*$val);
+    $element_row.nextAll('.row').find("input[id$='glass_united_inches']:eq(0)").val(eval($glass_width.val())+eval($glass_height.val()));
+    glass_width($glass_width);
+    glass_height($glass_height);
 }

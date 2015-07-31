@@ -1,6 +1,6 @@
 .row
   .col-md-3.mbtm15
-    = text_field_tag("project[item_list][][product][new][frame][size]", nil, class: "form-control", placeholder: "Size", required: true)
+    = number_field_tag("project[item_list][][product][new][frame][size]", 1, class: "form-control", placeholder: "Size",min:0, required: true, onchange:"frame_size(this)")
   .col-md-3.mbtm15
     = text_field_tag("project[item_list][][product][new][frame][finish]", nil, class: "form-control", placeholder: "Finish", required: true)
 .row

@@ -8,16 +8,18 @@
   .col-md-3.mbtm15
     = select_tag("project[item_list][][product][existing][supplier_id]", options_for_select(Companies::Supplier.all.map{|s|[s.name, s.id]}.push('add')),prompt: "Publisher" , class: "form-control supplier_no", onchange:"new_item(this)", data:{name: 'Supplier'}, required: true)
 .supplier
+.replaceable
 .row
   .col-md-3.mbtm15
-    = select_tag("project[item_list][][product][existing][image_id]", options_for_select(Image.pluck(:title,:id).push('add')),prompt: "Image" , class: "form-control" , onchange:"new_item(this)", data:{name: 'Image'}, required: true)
+    = select_tag("project[item_list][][product][existing][image_id]", options_for_select(Image.pluck(:title,:id).push('add')),prompt: "Image" , class: "form-control" , onchange:"new_item(this)", data:{name: 'Image', addon:true}, required: true, onchange:"new_item(this)")
 .image
-.row
-  .col-md-3.mbtm15
-    = text_field_tag("project[item_list][][product][new][title]", nil, class: "form-control", placeholder: "Title", required: true)
-.row
-  .col-md-3.mbtm15
-    = text_field_tag("project[item_list][][product][new][width]", nil, class: "form-control", placeholder: "Image Width", required: true)
-  .col-md-3.mbtm15
-    = text_field_tag("project[item_list][][product][new][height]", nil, class: "form-control", placeholder: "Image Height", required: true)
+.replaceable
+  .row
+    .col-md-3.mbtm15
+      = text_field_tag("project[item_list][][product][new][title]", nil, class: "form-control", placeholder: "Title", required: true)
+  .row
+    .col-md-3.mbtm15
+      = number_field_tag("project[item_list][][product][new][width]", nil, class: "form-control", placeholder: "Image Width", required: true)
+    .col-md-3.mbtm15
+      = number_field_tag("project[item_list][][product][new][height]", nil, class: "form-control", placeholder: "Image Height", required: true)
 

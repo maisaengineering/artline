@@ -5,9 +5,9 @@
     = text_field_tag("project[item_list][][product][new][image][artist]", nil, class: "form-control", placeholder: "Artist", required: true)
 .row
   .col-md-3.mbtm15
-    = text_field_tag("project[item_list][][product][new][image][width]", nil, class: "form-control", placeholder: "Image Width", required: true)
+    = number_field_tag("project[item_list][][product][new][image][width]", 1, class: "form-control", placeholder: "Image Width", required: true, onchange:"image_width(this)")
   .col-md-3.mbtm15
-    = text_field_tag("project[item_list][][product][new][image][height]", nil, class: "form-control", placeholder: "Image Height", required: true)
+    = number_field_tag("project[item_list][][product][new][image][height]", 1, class: "form-control", placeholder: "Image Height", required: true, onchange:"image_height(this)")
 .row
   .fileUpload.btn.btn-primary.mbtm15
     %span Upload image

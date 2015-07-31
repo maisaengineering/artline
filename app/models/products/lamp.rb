@@ -3,8 +3,8 @@ class Products::Lamp < Product
 
   field :description
   field :size
-  field :shade_id
-  field :bulb_id
+  field :shade_id, type: BSON::ObjectId
+  field :bulb_id, type: BSON::ObjectId
 
   #need image source field source
   mount_uploader :source, SourceUploader
