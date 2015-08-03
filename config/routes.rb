@@ -20,7 +20,11 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :companies
+  resources :companies do
+    collection do
+      get "search"
+    end
+  end
   resources :products do
     collection do
       get 'load_form'
@@ -43,6 +47,7 @@ Rails.application.routes.draw do
   post '/users/create'=>"users#create", as: :users
   get '/project-managers'=>"users#index", as: :project_managers
   delete 'users/:id', to: "users#destroy", as: :destroy_user
+  get "users/search", to: "users#search"
   post 'create_request_quote', to: "companies#create_request_quote", as: :create_request_quote
 
   get '/product_ajax_load', to: 'projects#product_ajax_load'

@@ -6,8 +6,8 @@
           %li
             = link_to "Add Client/Supplier", new_company_path,class:'btn'
           %li
-            %form.navbar-form
-              %input.form-control{:placeholder => "Search", :type => "text"}
+            = form_tag(search_companies_path, method: :get) do
+              %input.form-control{placeholder: "Search", type: "text", name: "key"}
     %section.panel
       %header.panel-heading.no-border
         Client's/Supplier's

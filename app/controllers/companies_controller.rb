@@ -65,6 +65,11 @@ class CompaniesController < ApplicationController
     redirect_to products_url
   end
 
+  def search
+    @companys = Company.where("$text"=>{"$search"=>params["key"]}).desc(:created_at).paginate(page: params[:page], per_page: 5)
+    render "index"
+  end
+
   private
 
   def set_company

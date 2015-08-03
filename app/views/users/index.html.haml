@@ -6,8 +6,8 @@
           %li
             = link_to "Create New Project Manager", new_users_path,class:'btn'
           %li
-            -#%form.navbar-form
-            -#  %input.form-control{:placeholder => "Search", :type => "text"}
+            = form_tag(users_search_path, method: "get") do
+              %input.form-control{placeholder: "Search with fname or lname", type: "text", name: "key"}
     %section.panel
       %header.panel-heading.no-border
         Project manager's

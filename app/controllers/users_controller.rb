@@ -26,6 +26,11 @@ class UsersController < ApplicationController
     redirect_to project_managers_path
   end
 
+  def search
+    @users = User.where("$text"=>{"$search"=>params["key"]}).paginate(page: params[:page], per_page: 5)
+    render 'index'
+  end
+
   private
 
   def user_params

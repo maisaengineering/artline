@@ -1,7 +1,7 @@
 class Companies::Supplier < Company
 
   field :number
-  field :name
+ # field :name
 
 
   has_many :prices
