@@ -112,7 +112,7 @@ class ProjectsController < ApplicationController
       if @items[true]
         @product = @items[true].map do |item|
           client_price = Price.find_by(artline_item_number: item["number"]).client_cost(item["additional_charges"].to_i)
-          product_details = "#{item['type']} : \n #{item.product.details}"
+          product_details = "#{item['type'].eql?("Artwork") ? item.product.artwork_type.gsub("_"," ") : item['type']} : \n #{item.product.details}"
           [i+=1, product_details, item["quantity"], client_price.round(2), (client_price * item["quantity"].to_i).round(2) ]
         end
         supplier_id =Price.in(artline_item_number: @items[true].map(&:number)).map(&:supplier_id).uniq

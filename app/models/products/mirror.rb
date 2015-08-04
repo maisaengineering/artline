@@ -65,4 +65,8 @@ class Products::Mirror < Product
     ""
   end
 
+  def details
+    "Bevel: #{bevel},  Bevel size: #{bevel_size}\n Glazing: #{glazing} \n Glass width: #{glass_width},  Glass height: #{glass_height}\n Frame: #{frame.finish},  Frame size: #{frame_size}\n Moulding company: #{moulding_company.name}\n Overall width: #{overall_width},  Overall height: #{overall_height}"
+  end
+
 end

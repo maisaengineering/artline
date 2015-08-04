@@ -108,7 +108,7 @@ class Products::Artwork < Product
 
 
   def details
-    # "Publisher: #{supplier.name}\n Moulding Company: #{moulding_company["name"]}"
+     "Publisher: #{supplier.name}\n Image: #{image["title"]}  Artist: #{image.artist}\n Title: #{title} \n Width: #{width}\n Height: #{height}"
   end
 
   def glass_united_inches
