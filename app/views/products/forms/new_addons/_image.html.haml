@@ -1,0 +1,18 @@
+.row
+  .col-md-3.mbtm15
+    = label_tag "Title"
+    = text_field_tag("product[image][title]", nil, class: "form-control", required: true)
+  .col-md-3.mbtm15
+    = label_tag "Artist"
+    = text_field_tag("product[image][artist]", nil, class: "form-control", required: true)
+.row
+  .col-md-3.mbtm15
+    = label_tag "Image Width"
+    = number_field_tag("product[image][width]", 1, class: "form-control", required: true, onchange:"image_width(this)")
+  .col-md-3.mbtm15
+    = label_tag "Image Height"
+    = number_field_tag("product[image][height]", 1, class: "form-control", required: true, onchange:"image_height(this)")
+.row
+  .fileUpload.btn.btn-primary.mbtm15
+    %span Upload image
+    = file_field_tag("product[image][source]", class: "upload")

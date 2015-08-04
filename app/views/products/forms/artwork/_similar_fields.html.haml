@@ -1,0 +1,19 @@
+.row
+  .col-md-3.mbtm15
+    = f.select :supplier_id, options_for_select(Supplier.all.map{|s|[s.name, s.id]}.push('add'),@product.persisted? ? @product.supplier.id : nil),{:prompt => "Publisher"} , class:"form-control", onchange:"new_item(this)", data:{name: 'Supplier'},required: true
+.supplier
+.row
+  .col-md-3.mbtm15
+    = f.select :image_id, options_for_select(Image.pluck(:title,:id).push('add'),@product.persisted? ? @product.image.id : nil),{:prompt => "Image"}, class: "form-control", onchange:"new_item(this)", data:{name: 'Image'},required: true
+.image
+.row
+  .col-md-3.mbtm15
+    Title
+    = f.text_field :title, value: @product.title, class: "form-control",required: true
+.row
+  .col-md-3.mbtm15
+    Width
+    = f.number_field :width, value: @product.width,min:1, class: "form-control",required: true
+  .col-md-3.mbtm15
+    Height
+    = f.number_field :height, value: @product.height,min:1, class: "form-control",required: true

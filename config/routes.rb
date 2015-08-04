@@ -30,6 +30,7 @@ Rails.application.routes.draw do
       get 'load_form'
       get 'load_addons'
       get 'prefill_data'
+      get "artwork_children"
     end
   end
   resources :orders do

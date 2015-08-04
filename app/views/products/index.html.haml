@@ -25,7 +25,8 @@
             %td
               #{index+1}
             %td
-              = link_to("#{product._type.split("::").last}", product_path(product.id) )
+              - item = product._type.split("::").last
+              = link_to("#{item.eql?("Artwork") ? product.artwork_type : item}", product_path(product.id) )
               - if product.has_attribute?(:source) && product.source.present?
                 = image_tag(product.source, class: "product_mini_img" )
             %td

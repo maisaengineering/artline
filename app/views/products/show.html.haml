@@ -11,7 +11,8 @@
         %tbody
           %tr
             %td
-              = @product._type.split("::").last
+              - item = @product._type.split("::").last
+              = item.eql?("Artwork") ? @product.artwork_type : item
               - if @product.has_attribute?(:source) && @product.source.present?
                 = image_tag(@product.source, class: "product_mini_img" )
             %td

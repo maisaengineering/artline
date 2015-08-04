@@ -46,7 +46,7 @@
     - elsif item["type"].eql?("ArtificialPlant")
       = render "projects/edit/#{item["type"].downcase}", item: item
     - elsif item["type"].eql?("Artwork")
-      = render "projects/edit/artworks/#{item["artwork_type"].downcase}", item: item
+      = render "projects/edit/artworks/#{item.product["artwork_type"].downcase}", item: item
   %hr
 .row
   .col-md-3.mbtm15

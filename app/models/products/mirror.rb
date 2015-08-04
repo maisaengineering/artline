@@ -1,5 +1,15 @@
 class Products::Mirror < Product
 
+  field :bevel
+  field :bevel_size
+  field :bevel_special_instructions
+  field :glazing
+  field :glazing_special_instructions
+  field :glass_width
+  field :glass_height
+  field :frame_category
+  field :frame_size
+  field :united_inches
   field :moulding_company_id
   field :frame_id
   field :overall_width

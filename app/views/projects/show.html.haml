@@ -31,7 +31,7 @@
                       - elsif item["type"].eql?("ArtificialPlant")
                         = render "projects/product_details/#{item["type"].downcase}", item: item
                       - elsif item["type"].eql?("Artwork")
-                        = render "projects/product_details/artworks/#{item["artwork_type"].downcase}", item: item
+                        = render "projects/product_details/artworks/#{item.product["artwork_type"].downcase}", item: item
                     %td
                       = number_field_tag "project[item_list][][quantity]", item["quantity"]
                       X
@@ -108,7 +108,7 @@
                     - elsif item["type"].eql?("ArtificialPlant")
                       = render "projects/product_details/#{item["type"].downcase}", item: item
                     - elsif item["type"].eql?("Artwork")
-                      = render "projects/product_details/artworks/#{item["artwork_type"].downcase}", item: item
+                      = render "projects/product_details/artworks/#{item.product["artwork_type"].downcase}", item: item
                   %td
                     = number_field_tag "project[item_list][][quantity]", item["quantity"]
                   %td{style: "width: 36%"}

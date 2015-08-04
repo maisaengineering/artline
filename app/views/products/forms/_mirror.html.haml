@@ -1,0 +1,67 @@
+= form_for @product, as: :product, url:( @product.new_record? ? products_path(@product) : product_path(@product)) do |f|
+  = hidden_field_tag :item_type, @product.class
+  - if @product.errors.present?
+    #error_explanation
+      %h2 #{@product.errors.count} error prohibited this user from being saved:
+      %ul
+        - @product.errors.full_messages.each do |error|
+          %li
+            = "#{error}"
+  .row
+    .col-md-3.mbtm15
+      %label
+      = f.select :bevel, options_for_select(["Yes", "No"],@product.bevel),{prompt: "Bevel"}, class: "form-control",required: true
+    .col-md-3.mbtm15
+      = f.label :bevel_size,style: "margin-bottom: 0px;"
+      = f.text_field :bevel_size,value: @product.bevel_size? ? @product.bevel_size : 1, class: "form-control", required: true
+  .row
+    .col-md-3.txt_area
+      = f.label :bevel_special_instructions
+      = f.text_area :bevel_special_instructions,class: "form-control"
+  .row
+    .col-md-3.mbtm15
+      %label
+      = f.select :glazing, options_for_select(["Glass", "Plexie"],@product.glazing),{prompt: "Glazing"}, class: "form-control",required: true
+  .row
+    .col-md-3.mbtm15.txt_area
+      = f.label :glazing_special_instructions
+      = f.text_area :glazing_special_instructions,class: "form-control"
+  .row
+    .col-md-3.mbtm15
+      = f.label :glass_width
+      = f.number_field :glass_width, value: @product.glass_width? ? @product.glass_width : 1,min:1, class: "form-control",required: true
+    .col-md-3.mbtm15
+      = f.label :glass_height
+      = f.number_field :glass_height, value: @product.glass_height? ? @product.glass_height : 1,min:1, class: "form-control",required: true
+  .row
+    .col-md-3.mbtm15
+      = f.select :moulding_company_id, options_for_select(MouldingCompany.all.map{|m|[m.name, m.id]}.push('add'),@product.moulding_company_id),{:prompt => "Moulding Company"} , class:"form-control", onchange:"new_item(this)", data:{name: 'mouldingcompany'},required: true
+  .mouldingcompany
+  .row
+    .col-md-3.mbtm15
+      = f.select :frame_id, options_for_select(Frame.all.map{|f| [f.finish,f.id]}.push('add'),@product.frame_id),{:prompt => "Frame"}, class: "form-control", onchange:"new_item(this)", data:{name: 'frame'},required: true
+  .frame
+  .row
+    .col-md-3.mbtm15
+      = f.label :category
+      = f.number_field :frame_category, value: @product.frame_category, class: "form-control",required: true,placeholder: "Category",disabled: true
+    .col-md-3.mbtm15
+      = f.label :frame_size
+      = f.number_field :frame_size, value: @product.frame_size? ? @product.frame_size : 1,min:1, class: "form-control",required: true,disabled: true
+  .row
+    .col-md-3.mbtm15
+      = f.label :overall_width
+      = f.number_field :overall_width, value: @product.overall_width ? @product.overall_width : 3,min:1, class: "form-control",required: true
+    .col-md-3.mbtm15
+      = f.label :overall_height
+      = f.number_field :overall_height, value: @product.overall_height ? @product.overall_height : 3,min:1, class: "form-control",required: true
+  .row
+    .col-md-3.mbtm15
+      = f.label :united_inches
+      = f.number_field :united_inches, value: @product.united_inches? ? @product.united_inches : 6,min:1, class: "form-control",required: true,disabled: true
+
+  = f.submit nil, class: "btn btn-success mbtm15"
+
+
+
+

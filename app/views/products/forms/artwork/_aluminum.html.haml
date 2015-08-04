@@ -1,0 +1,12 @@
+= form_for @product, as: :product, url:( @product.new_record? ? products_path(@product) : product_path(@product)) do |f|
+  = hidden_field_tag :item_type, @product.class
+  = hidden_field_tag "product[artwork_type]", "Aluminum"
+  - if @product.errors.present?
+    #error_explanation
+      %h2 #{@product.errors.count} error prohibited this user from being saved:
+      %ul
+        - @product.errors.full_messages.each do |error|
+          %li
+            = "#{error}"
+  = render "products/forms/artwork/similar_fields", f: f
+  = f.submit nil, class: "btn btn-success mbtm15"

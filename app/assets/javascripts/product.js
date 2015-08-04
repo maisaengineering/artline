@@ -3,8 +3,13 @@ $(document).ready(function() {
         if( $(this).val() == ""){
             $(".selected_item").empty()
         }
-        else if($(this).val() == "Mirror"){
-            $('.selected_item').html("<h2>No form</h2>")
+        else if($(this).val() == "Artwork"){
+            var item = $(this).val()
+            $.ajax({
+                url: "/products/artwork_children",
+                method: "GET",
+                data: {item: item}
+            });
         }
         else {
             var item = $(this).val()
@@ -17,6 +22,20 @@ $(document).ready(function() {
             })
         }
     });
+
+    getArtworkForm = function(element){
+    var child = $(element).val()
+        if(child == ""){
+            $('.artwork_form').empty()
+        }
+        else {
+            $.ajax({
+                url: "/products/load_form",
+                method: "GET",
+                data: {item: "Artwork", artwork_children: child}
+            });
+        }
+    }
 
     new_item = function(element){
         $val= $.trim($(element).val());
@@ -34,6 +53,18 @@ $(document).ready(function() {
             $("." + $class_name).empty()
         }
     }
+
+    add_field = function(element){
+        var val = $(element).val()
+        var field = $(element).attr('data-name').toLowerCase();
+        if(val == "add") {
+            $("."+ field ).html('<input class="form-control" required="required" type="text" name="product[new_'+ field +'][name]" placeholder="'+ field +'">')
+        }
+        else{
+            $("."+ field).empty()
+        }
+    }
+
 
     upload_img = function(input){
         var filename = input.files[0]

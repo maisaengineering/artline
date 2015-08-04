@@ -1,0 +1,25 @@
+= form_for @product, as: :product, url:( @product.new_record? ? products_path(@product) : product_path(@product)) do |f|
+  = hidden_field_tag :item_type, @product.class
+  = hidden_field_tag "product[artwork_type]", "Acrylic"
+  - if @product.errors.present?
+    #error_explanation
+      %h2 #{@product.errors.count} error prohibited this user from being saved:
+      %ul
+        - @product.errors.full_messages.each do |error|
+          %li
+            = "#{error}"
+  = render "products/forms/artwork/similar_fields", f: f
+  .row
+    .col-md-3.mbtm15
+      - if @product.persisted?
+        - if ["1/4","1/2"].include?@product.acrylic_thickness
+          = f.select :acrylic_thickness, options_for_select(["1/4","1/2","add"],@product.acrylic_thickness),{prompt: "Acrylic Thickness"} , class: "form-control", onchange:"add_field(this)",data:{name: 'acrylic_thickness'},required: true
+        - else
+          Acrylic Thickness
+          %input.form-control{:name => "product[new_acrylic_thickness][name]",value: @product.acrylic_thickness , required: "required", type: "text"}
+      - else
+        = f.select :acrylic_thickness, options_for_select(["1/4","1/2","add"]),{prompt: "Acrylic Thickness"} , class: "form-control", onchange:"add_field(this)",data:{name: 'acrylic_thickness'},required: true
+  .row
+    .col-md-3.mbtm15.acrylic_thickness
+
+  = f.submit nil, class: "btn btn-success mbtm15"

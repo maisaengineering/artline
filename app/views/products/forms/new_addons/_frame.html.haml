@@ -1,0 +1,12 @@
+.row
+  .col-md-3.mbtm15
+    = number_field_tag("product[frame][size]", 1, class: "form-control", placeholder: "Size",min:0, required: true, onchange:"frame_size(this)")
+  .col-md-3.mbtm15
+    = text_field_tag("product[frame][finish]", nil, class: "form-control", placeholder: "Finish", required: true)
+.row
+  .col-md-3.mbtm15
+    = text_field_tag("product[frame][category]", nil, class: "form-control", placeholder: "Category")
+.row
+  .fileUpload.btn.btn-primary.mbtm15
+    %span Upload image
+    = file_field_tag("product[frame][source]", class: "upload")

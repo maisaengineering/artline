@@ -9,6 +9,20 @@ class Products::Artwork < Product
   field :moulding_company_id
   field :frame_id
   field :image_id
+  field :board_option
+  field :acrylic_thickness
+  field :matting
+  field :mat_size
+  field :mat_special_instructions
+  field :glazing
+  field :glazing_special_instructions
+  field :glass_width
+  field :glass_height
+  field :glass_united_inches
+  field :category
+  field :frame_size
+  field :overall_width
+  field :overall_height
 
    #need image source field source
   mount_uploader :source, SourceUploader
@@ -57,6 +71,18 @@ class Products::Artwork < Product
     else
       errors.add(:frame, product.errors.full_messages.join(', '))
     end
+  end
+
+  def new_board_option=(arg)
+    self.board_option = arg[:name]
+  end
+
+  def new_acrylic_thickness=(arg)
+    self.acrylic_thickness = arg[:name]
+  end
+
+  def new_matting=(arg)
+    self.matting = arg[:name]
   end
 
   def supplier

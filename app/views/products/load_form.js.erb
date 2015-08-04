@@ -9,5 +9,9 @@
     $("."+"<%=params["class_name"]%>").eq(<%=params["index"].to_i%>).find("input[id$='new_image_height']:eq(0)").trigger('change');
    <%end%>
 <%else%>
-    $('.selected_item').empty().append("<%= j render(:partial => '/products/forms/'+ params[:item].downcase ) %>");
+    <% if params[:item].eql?("Artwork") %>
+      $('.artwork_form').empty().append("<%= j render(:partial => '/products/forms/artwork/'+ params[:artwork_children].downcase ) %>");
+    <% else  %>
+      $('.selected_item').empty().append("<%= j render(:partial => '/products/forms/'+ params[:item].downcase ) %>");
+    <%end%>
 <%end%>

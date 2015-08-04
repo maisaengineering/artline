@@ -1,0 +1,31 @@
+.row
+  .col-md-3.mbtm15
+    = label_tag "Company Name"
+    = text_field_tag("product[supplier][name]", nil, class: "form-control", required: true)
+  .col-md-3.mbtm15{style: "width: 30%;"}
+    .row
+      .col-md-12#field
+        = label_tag "Attention"
+        = text_field_tag("product[supplier][attention][]", nil, class: "attention", required: true)
+.row
+  .col-md-3.mbtm15
+    = label_tag "Address"
+    = text_field_tag("product[supplier][address]", nil, class: "form-control", required: true)
+  .col-md-3.mbtm15
+    = label_tag "City"
+    = text_field_tag("product[supplier][city]", nil, class: "form-control", required: true)
+.row
+  .col-md-3.mbtm15
+    = label_tag "State"
+    = text_field_tag("product[supplier][state]", nil, class: "form-control", required: true)
+  .col-md-3.mbtm15
+    = label_tag "Zip"
+    = text_field_tag("product[supplier][zip]", nil, class: "form-control", required: true)
+.row
+  .col-md-3.mbtm15
+    = label_tag "Phone"
+    = phone_field_tag("product[supplier][phone]", nil, class: "form-control", required: true)
+  .col-md-3.mbtm15
+    = label_tag "Email"
+    = email_field_tag("product[supplier][email]", nil, class: "form-control", required: true)
+

@@ -1,0 +1,24 @@
+.row
+  .col-md-3.mbtm15
+    = text_field_tag("product[moulding_company][name]", nil, class: "form-control", placeholder: "Company Name", required: true)
+  .col-md-3.mbtm15{style: "width: 30%;"}
+    .row
+      .col-md-12#field
+        = text_field_tag("product[moulding_company][attention][]", nil, class: "attention", placeholder: "Attention", required: true)
+        -#%button#b1.btn#add-more{:type => "button"} +
+.row
+  .col-md-3.mbtm15
+    = text_field_tag("product[moulding_company][address]", nil, class: "form-control", placeholder: "Address", required: true)
+  .col-md-3.mbtm15
+    = text_field_tag("product[moulding_company][city]", nil, class: "form-control", placeholder: "City", required: true)
+.row
+  .col-md-3.mbtm15
+    = text_field_tag("product[moulding_company][state]", nil, class: "form-control", placeholder: "State", required: true)
+  .col-md-3.mbtm15
+    = text_field_tag("product[moulding_company][zip]", nil, class: "form-control", placeholder: "Zip", required: true)
+.row
+  .col-md-3.mbtm15
+    = phone_field_tag("product[moulding_company][phone]", nil, class: "form-control", placeholder: "Phone", required: true)
+  .col-md-3.mbtm15
+    = email_field_tag("product[moulding_company][email]", nil, class: "form-control", placeholder: "Email", required: true)
+

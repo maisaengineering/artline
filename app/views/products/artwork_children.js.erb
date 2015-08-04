@@ -1,0 +1,1 @@
+$('.selected_item').empty().append("<div class='row'><div class='col-md-3 mbtm15'><%=j select_tag("child_product", options_for_select(Childrens[params[:item]].to_a.map(&:reverse)),prompt: "Select Product" , onchange: "getArtworkForm(this)", class: "form-control", required: true )%></div></div><div class='row'><div class='col-md-12 artwork_form'></div></div>")

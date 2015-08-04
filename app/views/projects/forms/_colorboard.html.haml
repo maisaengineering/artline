@@ -1,5 +1,5 @@
 = render 'projects/forms/similar_fields'
-= hidden_field_tag "project[item_list][][artwork_type]", "Colorboard"
+= hidden_field_tag "project[item_list][][product][new][artwork_type]", "Colorboard"
 .row
   .col-md-3.mbtm15
     = select_tag("project[item_list][][product][new][board_option]", options_for_select(["Lite Board","Float Board","Boxed Board","Doublelite","add"]),prompt: "Board Options" , class: "form-control board_option_no", onchange:"new_field(this)",data:{name: 'Board_Option'}, required: true)

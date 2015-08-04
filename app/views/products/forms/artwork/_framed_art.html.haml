@@ -1,0 +1,77 @@
+= form_for @product, as: :product, url:( @product.new_record? ? products_path(@product) : product_path(@product)) do |f|
+  = hidden_field_tag :item_type, @product.class
+  = hidden_field_tag "product[artwork_type]", "Framed_Art"
+  - if @product.errors.present?
+    #error_explanation
+      %h2 #{@product.errors.count} error prohibited this user from being saved:
+      %ul
+        - @product.errors.full_messages.each do |error|
+          %li
+            = "#{error}"
+  = render "products/forms/artwork/similar_fields", f: f
+  .row
+    .col-md-3.mbtm15
+      %label
+      - if @product.persisted?
+        - if ["Single", "Double","None","add"].include?@product.matting
+          Matting
+          = f.select :matting, options_for_select(["Single", "Double","None","add"],@product.matting),{prompt: "Matting"} , class: "form-control", onchange:"add_field(this)",data:{name: 'matting'},required: true
+        - else
+          Matting
+          %input.form-control{:name => "product[new_matting][name]",value: @product.matting , required: "required", type: "text"}
+      - else
+        = f.select :matting, options_for_select(["Single", "Double","None","add"],@product.matting),{prompt: "Matting"} , class: "form-control", onchange:"add_field(this)",data:{name: 'matting'},required: true
+    .col-md-3.mbtm15
+      Matting Size
+      = f.text_field :mat_size, value: @product.mat_size? ? @product.mat_size : 1 ,min:1, class: "form-control",required: true
+  .row
+    .col-md-3.mbtm15.matting
+  .row
+    .col-md-3.mbtm15.txt_area
+      Matting special instructions
+      = f.text_area :mat_special_instructions, value: @product.mat_special_instructions,class:"form-control"
+  .row
+    .col-md-3.mbtm15
+      = f.select :glazing, options_for_select(["Glass", "Plexie","None"],@product.glazing),{prompt: "Glazing"} , class: "form-control", required: true
+  .row
+    .col-md-3.mbtm15.txt_area
+      Glazing special instructions
+      = f.text_area :glazing_special_instructions, value: @product.glazing_special_instructions,class:"form-control"
+  .row
+    .col-md-3.mbtm15
+      Glass width
+      = f.number_field :glass_width, value: @product.glass_width? ? @product.glass_width : 2,min:1, class: "form-control",required: true
+    .col-md-3.mbtm15
+      Glass height
+      = f.number_field :glass_height, value: @product.glass_height? ? @product.glass_height : 2,min:1, class: "form-control",required: true
+  .row
+    .col-md-3.mbtm15
+      Glass united inches
+      = f.number_field :glass_united_inches, value: @product.glass_united_inches? ? @product.glass_united_inches : 4,min:1, class: "form-control",required: true,disabled: true
+  .row
+    .col-md-3.mbtm15
+      Moulding company
+      = f.select :moulding_company_id, options_for_select(MouldingCompany.all.map{|m|[m.name, m.id]}.push('add'),@product.moulding_company_id),{:prompt => "Moulding Company"} , class:"form-control", onchange:"new_item(this)", data:{name: 'MouldingCompany'},required: true
+  .mouldingcompany
+  .row
+    .col-md-3.mbtm15
+      Frame
+      = f.select :frame_id, options_for_select(Frame.all.map{|f| [f["finish"],f["id"]]}.push('add'),@product.frame_id),{:prompt => "Frame"} , class:"form-control", onchange:"new_item(this)", data:{name: 'Frame'},required: true
+  .frame
+  .row
+    .col-md-3.mbtm15
+      Frame category
+      = f.text_field :category, value: @product.category, class: "form-control",required: true
+    .col-md-3.mbtm15
+      Frame size
+      = f.number_field :frame_size, value: @product.frame_size? ? @product.frame_size : 1,min:1, class: "form-control",required: true
+  .row
+    .col-md-3.mbtm15
+      Overall width
+      = f.number_field :overall_width, value: @product.overall_width? ? @product.overall_width : 4,min:1, class: "form-control",required: true
+    .col-md-3.mbtm15
+      Overall height
+      = f.number_field :overall_height, value: @product.overall_height? ? @product.overall_height : 4,min:1, class: "form-control",required: true
+
+
+  = f.submit nil, class: "btn btn-success mbtm15"
