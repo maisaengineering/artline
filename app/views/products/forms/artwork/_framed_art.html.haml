@@ -20,6 +20,7 @@
           Matting
           %input.form-control{:name => "product[new_matting][name]",value: @product.matting , required: "required", type: "text"}
       - else
+        Matting
         = f.select :matting, options_for_select(["Single", "Double","None","add"],@product.matting),{prompt: "Matting"} , class: "form-control", onchange:"add_field(this)",data:{name: 'matting'},required: true
     .col-md-3.mbtm15
       Matting Size
@@ -32,6 +33,7 @@
       = f.text_area :mat_special_instructions, value: @product.mat_special_instructions,class:"form-control"
   .row
     .col-md-3.mbtm15
+      Glazing
       = f.select :glazing, options_for_select(["Glass", "Plexie","None"],@product.glazing),{prompt: "Glazing"} , class: "form-control", required: true
   .row
     .col-md-3.mbtm15.txt_area

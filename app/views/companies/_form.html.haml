@@ -1,24 +1,32 @@
 .row
   .col-md-3.mbtm15
-    = text_field_tag("company[name]", client.present?  ? client.name : nil, class: "form-control", placeholder: "Company Name", required: true)
+    Company Name
+    = text_field_tag("company[name]", client.present?  ? client.name : nil, class: "form-control", required: true)
   .col-md-3.mbtm15{style: "width: 30%;"}
+    Attention
     .row
       .col-md-12#field
-        = text_field_tag("company[attention][]", nil, class: "attention", placeholder: "Attention")
+        = text_field_tag("company[attention][]", nil, class: "attention")
         %button#b1.btn#add-more{:type => "button"} +
 .row
   .col-md-3.mbtm15
-    = text_field_tag("company[address]", client.present?  ? client.address : nil, class: "form-control", placeholder: "Address", required: true)
+    Address
+    = text_field_tag("company[address]", client.present?  ? client.address : nil, class: "form-control", required: true)
   .col-md-3.mbtm15
-    = text_field_tag("company[city]", client.present? ? client.city : nil, class: "form-control", placeholder: "City", required: true)
+    City
+    = text_field_tag("company[city]", client.present? ? client.city : nil, class: "form-control", required: true)
 .row
   .col-md-3.mbtm15
-    = text_field_tag("company[state]", client.present? ? client.state  : nil,class: "form-control", placeholder: "State", required: true)
+    State
+    = text_field_tag("company[state]", client.present? ? client.state  : nil,class: "form-control", required: true)
   .col-md-3.mbtm15
-    = text_field_tag("company[zip]", client.present? ? client.zip : nil, class: "form-control", placeholder: "Zip", required: true)
+    Zip
+    = text_field_tag("company[zip]", client.present? ? client.zip : nil, class: "form-control", required: true)
 .row
   .col-md-3.mbtm15
-    = phone_field_tag("company[phone]", client.present? ? client.phone : nil, class: "form-control", placeholder: "Phone", required: true)
+    Phone
+    = phone_field_tag("company[phone]", client.present? ? client.phone : nil, class: "form-control", required: true)
   .col-md-3.mbtm15
-    = email_field_tag("company[email]", client.present? ? client.email : nil, class: "form-control", placeholder: "Email", required: true)
+    Email
+    = email_field_tag("company[email]", client.present? ? client.email : nil, class: "form-control", required: true)
 .row{style: "display:none;"}

@@ -13,11 +13,13 @@
     .col-md-3.mbtm15
       - if @product.persisted?
         - if ["Lite Board","Float Board","Boxed Board","Doublelite"].include?@product.board_option
+          Board Options
           = f.select :acrylic_thickness, options_for_select(["Lite Board","Float Board","Boxed Board","Doublelite","add"],@product.board_option),{prompt: "Board Options"} , class: "form-control", onchange:"add_field(this)",data:{name: 'board_option'},required: true
         - else
           Board Options
           %input.form-control{:name => "product[new_board_option][name]",value: @product.board_option , required: "required", type: "text"}
       - else
+        Board Options
         = f.select :acrylic_thickness, options_for_select(["Lite Board","Float Board","Boxed Board","Doublelite","add"]),{prompt: "Board Options"} , class: "form-control", onchange:"add_field(this)",data:{name: 'board_option'},required: true
   .row
     .col-md-3.mbtm15.board_option

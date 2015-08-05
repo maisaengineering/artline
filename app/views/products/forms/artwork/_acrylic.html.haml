@@ -13,11 +13,13 @@
     .col-md-3.mbtm15
       - if @product.persisted?
         - if ["1/4","1/2"].include?@product.acrylic_thickness
+          Acrylic Thickness
           = f.select :acrylic_thickness, options_for_select(["1/4","1/2","add"],@product.acrylic_thickness),{prompt: "Acrylic Thickness"} , class: "form-control", onchange:"add_field(this)",data:{name: 'acrylic_thickness'},required: true
         - else
           Acrylic Thickness
           %input.form-control{:name => "product[new_acrylic_thickness][name]",value: @product.acrylic_thickness , required: "required", type: "text"}
       - else
+        Acrylic Thickness
         = f.select :acrylic_thickness, options_for_select(["1/4","1/2","add"]),{prompt: "Acrylic Thickness"} , class: "form-control", onchange:"add_field(this)",data:{name: 'acrylic_thickness'},required: true
   .row
     .col-md-3.mbtm15.acrylic_thickness

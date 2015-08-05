@@ -9,10 +9,10 @@
             = "#{error}"
   .row
     .col-md-3.mbtm15
-      = f.label :name
+      Name
       = f.text_field :name, class: "form-control", required: true
     .col-md-3.mbtm15
-      = f.label :size
+      Size
       = f.text_field :size, class: "form-control", required: true
   .row
     .col-md-2.fileUpload.btn.btn-primary.mbtm15
@@ -20,9 +20,11 @@
       = f.file_field :source, class: "upload"
   .row
     .col-md-3.mbtm15
+      Fire Rating
       = f.select :fire_rating, options_for_select(["Yes", "No"],@product.fire_rating),{:prompt => "Fire Rating"} , class: "form-control",required: true
   .row
     .col-md-3.mbtm15
+      Container
       = f.select :container_id, options_for_select(Container.pluck(:name,:id).push('add'),@product.container_id),{prompt: "Container"} , class: "form-control container_no", onchange:"new_item(this)", data:{name: 'Container'}, required: true
   .container.pad0px
   = f.submit nil, class: "btn btn-success mbtm15"

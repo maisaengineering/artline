@@ -9,13 +9,15 @@
               = select_tag "company[_type]", options_for_select([["Client","Companies::Client"],["Supplier","Companies::Supplier"]],@company._type),prompt: "Select Client/Supplier", class: "form-control", required: true
           .row
             .col-md-3.mbtm15
-              = text_field_tag("company[name]", @company.name, class: "form-control", placeholder: "Company Name", required: true)
+              Company Name
+              = text_field_tag("company[name]", @company.name, class: "form-control", required: true)
             - if @company.attention.kind_of?(Array)
               .col-md-3.mbtm15{style: "width: 30%;"}
+                Attention
                 - @company.attention.each_with_index do |val,ind|
                   .row
                     .col-md-12#field
-                      = text_field_tag("company[attention][]", val, class: "attention", placeholder: "Attention")
+                      = text_field_tag("company[attention][]", val, class: "attention")
                       - if ind == 0
                         %button#b1.btn#add-more{:type => "button"} +
             - else
@@ -26,19 +28,25 @@
                     %button#b1.btn#add-more{:type => "button"} +
           .row
             .col-md-3.mbtm15
-              = text_field_tag("company[address]", @company.address, class: "form-control", placeholder: "Address", required: true)
+              Address
+              = text_field_tag("company[address]", @company.address, class: "form-control", required: true)
             .col-md-3.mbtm15
-              = text_field_tag("company[city]", @company.city, class: "form-control", placeholder: "City", required: true)
+              City
+              = text_field_tag("company[city]", @company.city, class: "form-control", required: true)
           .row
             .col-md-3.mbtm15
-              = text_field_tag("company[state]", @company.state, class: "form-control", placeholder: "State", required: true)
+              State
+              = text_field_tag("company[state]", @company.state, class: "form-control", required: true)
             .col-md-3.mbtm15
-              = text_field_tag("company[zip]", @company.zip, class: "form-control", placeholder: "Zip", required: true)
+              Zip
+              = text_field_tag("company[zip]", @company.zip, class: "form-control", required: true)
           .row
             .col-md-3.mbtm15
-              = phone_field_tag("company[phone]", @company.phone, class: "form-control", placeholder: "Phone", required: true)
+              Phone
+              = phone_field_tag("company[phone]", @company.phone, class: "form-control", required: true)
             .col-md-3.mbtm15
-              = email_field_tag("company[email]", @company.email, class: "form-control", placeholder: "Email", required: true)
+              Email
+              = email_field_tag("company[email]", @company.email, class: "form-control", required: true)
           .row
             .col-md-12
               .actions

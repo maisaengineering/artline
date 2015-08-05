@@ -9,18 +9,18 @@
             = "#{error}"
   .row
     .col-md-3.mbtm15
-      %label
+      Bevel
       = f.select :bevel, options_for_select(["Yes", "No"],@product.bevel),{prompt: "Bevel"}, class: "form-control",required: true
     .col-md-3.mbtm15
-      = f.label :bevel_size,style: "margin-bottom: 0px;"
+      Bevel Size
       = f.text_field :bevel_size,value: @product.bevel_size? ? @product.bevel_size : 1, class: "form-control", required: true
   .row
-    .col-md-3.txt_area
+    .col-md-3.txt_area.mbtm15
       = f.label :bevel_special_instructions
       = f.text_area :bevel_special_instructions,class: "form-control"
   .row
     .col-md-3.mbtm15
-      %label
+      Glazing
       = f.select :glazing, options_for_select(["Glass", "Plexie"],@product.glazing),{prompt: "Glazing"}, class: "form-control",required: true
   .row
     .col-md-3.mbtm15.txt_area
@@ -35,10 +35,12 @@
       = f.number_field :glass_height, value: @product.glass_height? ? @product.glass_height : 1,min:1, class: "form-control",required: true
   .row
     .col-md-3.mbtm15
+      Moulding Company
       = f.select :moulding_company_id, options_for_select(MouldingCompany.all.map{|m|[m.name, m.id]}.push('add'),@product.moulding_company_id),{:prompt => "Moulding Company"} , class:"form-control", onchange:"new_item(this)", data:{name: 'mouldingcompany'},required: true
   .mouldingcompany
   .row
     .col-md-3.mbtm15
+      Frame
       = f.select :frame_id, options_for_select(Frame.all.map{|f| [f.finish,f.id]}.push('add'),@product.frame_id),{:prompt => "Frame"}, class: "form-control", onchange:"new_item(this)", data:{name: 'frame'},required: true
   .frame
   .row

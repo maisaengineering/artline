@@ -1,9 +1,11 @@
 .row
   .col-md-3.mbtm15
+    Publisher
     = f.select :supplier_id, options_for_select(Supplier.all.map{|s|[s.name, s.id]}.push('add'),@product.persisted? ? @product.supplier.id : nil),{:prompt => "Publisher"} , class:"form-control", onchange:"new_item(this)", data:{name: 'Supplier'},required: true
 .supplier
 .row
   .col-md-3.mbtm15
+    Image
     = f.select :image_id, options_for_select(Image.pluck(:title,:id).push('add'),@product.persisted? ? @product.image.id : nil),{:prompt => "Image"}, class: "form-control", onchange:"new_item(this)", data:{name: 'Image'},required: true
 .image
 .row

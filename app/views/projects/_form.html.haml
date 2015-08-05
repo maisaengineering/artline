@@ -12,17 +12,22 @@
     = @project.quote_number? ? @project.quote_number : nil
 .row
   .col-md-3.mbtm15
-    = text_field_tag("project[name]", @project.name, class: "form-control", placeholder: "Project Name", required: true)
+    Project Name
+    = text_field_tag("project[name]", @project.name, class: "form-control", required: true)
   .col-md-3.mbtm15
+    Date
     = date_field_tag("project[date]", @project.date? ? @project.date.strftime("%Y-%m-%d") : Date.today, class: "form-control", placeholder: "Date", required: true)
 .row
   .col-md-3.mbtm15
+    Company Name
     = select_tag("project[client_id]", options_for_select(Companies::Client.all.map{|c|[c.name, c.id]}.push(['add']),@project.client_id),prompt: "Choose Company" , class: "form-control", id:"project_client_id", required: true)
   - if @project.client_id?
     .col-md-3.mbtm15
+      Attention
       = select_tag("project[client_attention]", options_for_select(@project.client.attention,@project.client_attention),prompt: "Attention" , class: "form-control", required: true )
   - else
     .col-md-3.mbtm15
+      Attention
       = select_tag("project[client_attention]", options_for_select([]),prompt: "Attention" , class: "form-control", required: true )
 .row
   .col-md-3
@@ -31,6 +36,7 @@
 = render 'companies/form', client: @project.client_id? ? @project.client : nil
 .row
   .col-md-3.mbtm15
+    Sales Representative
     = select_tag("project[sales_rep]", options_for_select(SalesRep.pluck(:name).push("add","None"),@project.sales_rep),prompt: "Sales Rep", onchange:"add_sales_rep(this)" , class: "form-control", placeholder: "Attention" , required: true)
 .row
   .col-md-3.mbtm15
