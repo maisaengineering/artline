@@ -16,7 +16,11 @@ class CompaniesController < ApplicationController
   def create
     @company = eval(params[:_type]).create(company_params)
     if @company.save
-      redirect_to companies_url
+     # redirect_to companies_url
+      respond_to do |format|
+        format.html { redirect_to companies_url }
+        format.json {render json: {message: "Successfully created"} }
+      end
     else
       render :new
     end

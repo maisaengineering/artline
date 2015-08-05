@@ -127,8 +127,62 @@
               -#= link_to "Place Order", "#",class: "btn btn-primary"
               %button.btn.btn-primary{"data-target" => "#PlaceOrderModal", "data-toggle" => "modal", :type => "button"} Place Order
         - else
-          .col-md-12
+          .col-md-12.mbtm15
             = link_to "Request Suppliers Quote", "#", id: "request_suppliers_quote",class: "btn btn-primary"
+
+    %button.btn.btn-primary{"data-target" => "#AddSupplier", "data-toggle" => "modal", type: "button",style: "margin-left: 14px;"} Add Supplier
+
+#AddSupplier.modal.fade{"aria-labelledby" => "exampleModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-dialog{:role => "document"}
+    .modal-content
+      .modal-header
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+          %span{"aria-hidden" => "true"} &times;
+        %h4#exampleModalLabel.modal-title New Supplier
+      .modal-body
+        .form-group
+          .row
+            .col-md-5.mbtm15
+              = text_field_tag("company[name]", nil, class: "form-control", placeholder: "Company Name", required: true)
+              %span.company_name_error{style: "color: red; display: none"}
+                please enter the company name
+            .col-md-6.mbtm15
+              .row
+                .col-md-12#field.cmp_att
+                  = text_field_tag("company[attention][]", nil, class: "attention", placeholder: "Attention")
+                  %button#b1.btn#add-more{:type => "button"} +
+              %span.attention_error{style: "color: red; display: none"}
+                please enter atleast one attention
+          .row
+            .col-md-5.mbtm15
+              = text_field_tag("company[address]", nil, class: "form-control", placeholder: "Address", required: true)
+              %span.address_error{style: "color: red; display: none"}
+                please enter the address
+            .col-md-5.mbtm15
+              = text_field_tag("company[city]", nil, class: "form-control", placeholder: "City", required: true)
+              %span.city_error{style: "color: red; display: none"}
+                please enter city
+          .row
+            .col-md-5.mbtm15
+              = text_field_tag("company[state]", nil,class: "form-control", placeholder: "State", required: true)
+              %span.state_error{style: "color: red; display: none"}
+                please enter state
+            .col-md-5.mbtm15
+              = text_field_tag("company[zip]", nil, class: "form-control", placeholder: "Zip", required: true)
+              %span.zip_error{style: "color: red; display: none"}
+                please enter zip code
+          .row
+            .col-md-5.mbtm15
+              = phone_field_tag("company[phone]", nil, class: "form-control", placeholder: "Phone", required: true)
+              %span.phone_error{style: "color: red;"}
+            .col-md-5.mbtm15
+              = email_field_tag("company[email]", nil, class: "form-control", placeholder: "Email", required: true)
+              %span.email_error{style: "color: red;"}
+      .modal-footer.email_model_footer
+        %button.btn.btn-default{"data-dismiss" => "modal", type: "button"} Close
+        %button.btn.btn-success.create_supplier Submit
+
+
 
 #PlaceOrderModal.modal.fade{"aria-labelledby" => "exampleModalLabel", :role => "dialog", :tabindex => "-1"}
   .modal-dialog{:role => "document"}
@@ -170,6 +224,80 @@
 
 
 :javascript
+
+
+    $(".create_supplier").click(function(){
+    var name = $("#company_name").val()
+    var attention_with_empty_strings = $.map($(".attention"),function(n){
+                        return n.value
+                         });
+    var attention =  attention_with_empty_strings.filter(function(v){return v!==''});
+    var address = $("#company_address").val()
+    var city = $("#company_city").val()
+    var state = $("#company_state").val()
+    var zip = $("#company_zip").val()
+    var phone = $("#company_phone").val()
+    var email = $("#company_email").val()
+     if( name == ""){ $(".company_name_error").show();}
+     else{ $(".company_name_error").hide();}
+     if( attention.length < 1){ $(".attention_error").show();}
+     else{ $(".attention_error").hide();}
+     if( address == ""){$(".address_error").show();}
+     else{ $(".address_error").hide();}
+     if( city == ""){ $(".city_error").show();}
+     else{ $(".city_error").hide();}
+     if( state == ""){ $(".state_error").show();}
+     else{ $(".state_error").hide();}
+     if( zip == ""){ $(".zip_error").show();}
+     else{ $(".zip_error").hide();}
+     if( phone == ""){ $(".phone_error").html("please enter phone number");}
+     else{ $(".phone_error").html("");}
+     if( email == ""){ $(".email_error").html("please enter the company email");}
+     else{ $(".email_error").html("");}
+     if(phone.length > 0){
+            var reg = /(^\d{10}$)/;
+            if(!reg.test(phone))
+            {
+                $(".phone_error").html("Invalid phone number must be 10 digits");
+                return false;
+            }
+        }
+     function validateEmail(txtEmail){
+        var email_add = txtEmail
+        var filter = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
+        if(filter.test(email_add)){
+            return true;
+        }
+        else{
+            return false;
+        }
+     }
+     if(email && !validateEmail(email)){
+           $(".email_error").html("Invalid email");
+           return false;
+         }
+     if(( name != "" ) && (attention.length > 0) && (address != "") && (city != "") && (state != "") && (zip != "") && (phone != "") && (email != "")){
+         url ="/companies"
+         $.ajax({
+           url: url,
+           type: "POST",
+           dataType: "json",
+           data: {"company[name]": name,"company[attention][]": attention,
+                  "company[address]": address,"company[city]": city,
+                  "company[state]": state,"company[zip]": zip,
+                  "company[phone]": phone,"company[email]": email,_type: "Supplier"},
+             beforeSend: function(){
+                 $("#AddSupplier").hide()
+                 $('.loading-indicator').show()
+                 },
+             success:function(data){
+                 $('.loading-indicator').hide()
+                 alert(data.message)
+                 location.reload();
+             }
+         });
+     }
+    })
 
 
     $(".place_order").click(function(e){
