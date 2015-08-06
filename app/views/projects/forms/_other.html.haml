@@ -1,0 +1,5 @@
+= render 'projects/forms/similar_fields'
+= hidden_field_tag "project[item_list][][product][new][artwork_type]", "Other"
+.row
+  .col-md-3.mbtm15.txt_area
+    = text_area_tag("project[item_list][][product][new][description]", nil, class: "form-control", placeholder: "Description")

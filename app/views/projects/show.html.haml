@@ -115,18 +115,18 @@
                   %td{style: "width: 36%"}
                     = select_tag("suppliers", options_for_select(Companies::Supplier.all.map{|c|[c.name, c.id]}), class:"example-multiple-selected", multiple: true, data:{item_id: item.id.to_s})
         - if @items[false].blank?
-
-          .col-md-12
-            %p
-              -#= link_to "Email Customer Quote",send_quotation_project_url(@project.id),class: "btn btn-primary"
-              %button.btn.btn-primary{"data-target" => "#emailsModal", "data-toggle" => "modal", :type => "button"} Email Customer Quote
-          .col-md-12
-            %p
-              = link_to "Download Customer Quote", customer_qoute_project_url(@project.id, format: 'pdf'), target: "_blank",class: "btn btn-primary"
-          .col-md-12
-            %p
-              -#= link_to "Place Order", "#",class: "btn btn-primary"
-              %button.btn.btn-primary{"data-target" => "#PlaceOrderModal", "data-toggle" => "modal", :type => "button"} Place Order
+          - if @items[true].count == @items[true].map(&:number).compact.count
+            .col-md-12
+              %p
+                -#= link_to "Email Customer Quote",send_quotation_project_url(@project.id),class: "btn btn-primary"
+                %button.btn.btn-primary{"data-target" => "#emailsModal", "data-toggle" => "modal", :type => "button"} Email Customer Quote
+            .col-md-12
+              %p
+                = link_to "Download Customer Quote", customer_qoute_project_url(@project.id, format: 'pdf'), target: "_blank",class: "btn btn-primary"
+            .col-md-12
+              %p
+                -#= link_to "Place Order", "#",class: "btn btn-primary"
+                %button.btn.btn-primary{"data-target" => "#PlaceOrderModal", "data-toggle" => "modal", :type => "button"} Place Order
         - else
           .col-md-12.mbtm15
             = link_to "Request Suppliers Quote", "#", id: "request_suppliers_quote",class: "btn btn-primary"

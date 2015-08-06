@@ -1,0 +1,52 @@
+.row
+  .col-md-12
+    %spna.project_details
+      Name :
+    %span
+      = item.product.artwork_type
+.row
+  .col-md-12
+    %span.project_details
+      Title :
+    %span
+      = item.product.title
+.row
+  .col-md-12
+    %spna.project_details
+      Width :
+    %span
+      = item.product.width
+.row
+  .col-md-12
+    %spna.project_details
+      Height :
+    %span
+      = item.product.height
+.row
+  .col-md-12
+    %spna.project_details
+      Supplier :
+    %span
+      = item.product.supplier.name
+.row
+  .col-md-12
+    %div
+      %spna.project_details
+        Image Title:
+      %span
+        = item.product.image.title
+    %div
+      %span
+        = image_tag(item.product.image.source.url, class: "product-img") if item.product.image.source?
+.row
+  .col-md-12
+    %spna.project_details
+      Size :
+    %span
+      = "#{item.product.image.width} X #{item.product.image.height}"
+.row
+  .col-md-12
+    %spna.project_details
+      Artist :
+    %span
+      = item.product.image.artist

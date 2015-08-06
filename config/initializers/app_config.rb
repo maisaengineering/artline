@@ -3,7 +3,7 @@ Categories = {"Artwork"=>"Artwork", "Mirror"=>"Mirror",
               "Lamp"=>"Lamp"}
 Childrens={"Artwork"=>{"framed_art"=>"Framed Art", "acrylic"=>"Acrylic",
                        "aluminum"=>"Aluminum", "colorboard"=>"Colorboard",
-                       "vinyl"=>"Vinyl"}}
+                       "vinyl"=>"Vinyl", "other" => "Other"}}
 Addons = {"Bulb"=>"Bulb", "Container"=>"Container","Frame"=> "Frame",
           "Image"=> "Image", "Shade"=>"Shade","Other" => "Other"}
 
