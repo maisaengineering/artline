@@ -36,7 +36,8 @@
                       = number_field_tag "project[item_list][][quantity]", item["quantity"]
                       X
                     %td
-                      = select_tag("project[item_list][][number]", options_for_select(Price.where(product_id: item["product_id"],project_id: @project.id).asc(:supplier_cost).map{|c|["#{c.companies_supplier.name}($#{c.supplier_cost.to_f})", c.artline_item_number]}, item.number), class:"example-multiple-selected")
+                      -#= select_tag("project[item_list][][number]", options_for_select(Price.where(product_id: item["product_id"],project_id: @project.id).asc(:supplier_cost).map{|c|["#{c.companies_supplier.name}($#{c.supplier_cost.to_f})", c.artline_item_number]}, item.number), class:"example-multiple-selected")
+                      = select_tag("project[item_list][][number]", options_for_select(Price.any_of({product_id: item["product_id"]},{artline_item_number: item["number"]}).asc(:supplier_cost).map{|c|["#{c.companies_supplier.name}($#{c.supplier_cost.to_f})", c.artline_item_number]}, item.number), class:"example-multiple-selected")
                     %td
                       +
                       =  number_field_tag "project[item_list][][additional_charges]", item["additional_charges"]||2

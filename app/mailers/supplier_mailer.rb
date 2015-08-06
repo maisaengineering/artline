@@ -18,4 +18,12 @@ class SupplierMailer < ApplicationMailer
    mail(to: @supplier.email,subject: 'Artline Order')
   end
 
+  def enter_shipment_details(po_number,supplier_id,shipment_date,order_id)
+    @po_number = po_number
+    @shipment_date = shipment_date
+    @supplier = Supplier.find(supplier_id)
+    @url = ENV['HOST_URL'] + "orders/" +  order_id + "/enter_shipment_details"
+    mail(to: @supplier.email,subject: 'Shipment Details')
+  end
+
 end

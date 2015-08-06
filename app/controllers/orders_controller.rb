@@ -1,7 +1,7 @@
 class OrdersController < ApplicationController
-  before_action :authenticate_user!, except: [:show,:tracking]
-  before_action :set_order, only: [:show, :update]
-  layout "mailer", only: [:show,:tracking]
+  before_action :authenticate_user!, except: [:show,:tracking,:enter_shipment_details,:update]
+  before_action :set_order, only: [:show, :update,:enter_shipment_details]
+  layout "mailer", only: [:show,:tracking,:enter_shipment_details]
 
   def index
     @projects = Project.where(:po_number.exists=>true).desc(:created_at).paginate(page: params[:page], per_page: 5)
@@ -38,6 +38,14 @@ class OrdersController < ApplicationController
   def search
     @projects = Project.where("$text"=>{"$search"=>params["key"]}).and(:po_number.exists=>true).desc(:created_at).paginate(page: params[:page], per_page: 5)
     render 'index'
+  end
+
+  def enter_shipment_details
+    Project.where(:po_number.ne => nil).each do |project|
+      project.orders.where(:shipment_date.exists => true,:shipment_details => nil).each do |order|
+        SupplierMailer.conform_shipment(project.po_number,order.supplier_id,order.shipment_date,order.id).deliver_now
+      end
+    end
   end
 
   private

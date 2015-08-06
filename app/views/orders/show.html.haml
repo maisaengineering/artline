@@ -41,18 +41,18 @@
             -#  %td
             -#    Total
             -#  %td
-      - if @order.shipment_date? && @order.shipment_details
-        %b
-          You have alredy entered the shipment details.
-      - else
-        = form_for(@order, method: :patch) do |f|
-          .row
-            .col-md-3.mbtm15
-              = f.label :shipment_date
-              = f.date_field :shipment_date, class: "form-control",required: true
-          .row
-            .col-md-6.mbtm15
-              = f.label :shipment_details
-              = f.text_area :shipment_details, class: "form-control",required: true
-          = f.submit nil, class: "btn btn-success"
+      -#- if @order.shipment_date?# && @order.shipment_details
+      -#  %b
+      -#    You have alredy entered the shipment date.
+      -#- else
+      = form_for(@order, method: :patch) do |f|
+        .row
+          .col-md-3.mbtm15
+            = f.label :shipment_date
+            = f.date_field :shipment_date,value: @order.shipment_date, class: "form-control",required: true
+        -#.row
+        -#  .col-md-6.mbtm15
+        -#    =# f.label :shipment_details
+        -#    =# f.text_area :shipment_details, class: "form-control",required: true
+        = f.submit nil, class: "btn btn-success"
 

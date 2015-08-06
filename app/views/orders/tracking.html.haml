@@ -53,7 +53,7 @@
                   = item["quantity"]
                 %td
                   = item["number"]
-                - each_price = Price.where(project_id: @project.id,product_id: item.product.id).first.supplier_cost
+                  - each_price = Price.where(product_id: item["product_id"],artline_item_number: item["number"]).first.supplier_cost
                 %td
                   = each_price
                 %td

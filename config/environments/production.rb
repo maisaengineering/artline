@@ -84,6 +84,7 @@ Rails.application.configure do
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.default :charset => "utf-8"
   ENV['SENDER'] = 'labs@maisasolutions.com'
+  ENV['HOST_URL'] = 'http://artline.herokuapp.com/'
 
 
   # ENV['CDN_URL'] = 'https://d1l5f2v82xoaic.cloudfront.net'

@@ -1,0 +1,10 @@
+%p
+  = "Dear #{@supplier.name},"
+According to our records,
+= "PO # {#{@po_number}} was supposed to ship on {#{@shipment_date}}."
+Please provide shipping information for the PO, including the name, phone number, and website URL of the shipping company as well as the tracking number.
+%p
+  = link_to("Click here to enter shipment details",@url,target: "_blank")
+%p
+  Thank you,
+  {{Signature}}

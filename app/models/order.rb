@@ -8,7 +8,7 @@ class Order
 
   field :supplier_id
   field :item_ids, type: Array, default:[]
-  field :shipment_date # expect shipment date
+  field :shipment_date, type: Date # expect shipment date
   field :shipment_details
 
   after_create :place_order_to_supplier

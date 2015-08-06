@@ -40,6 +40,9 @@ Rails.application.routes.draw do
       post 'create_order_tracking'
       get 'search'
     end
+    member do
+      get "enter_shipment_details"
+    end
   end
 
 

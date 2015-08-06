@@ -1,0 +1,10 @@
+%section.wrapper
+  %h1 Enter Shipment Details
+  %section.panel
+    .panel-body.ptop35
+      = form_for(@order, method: :patch) do |f|
+        .row
+          .col-md-6.mbtm15
+            = f.label :shipment_details
+            = f.text_area :shipment_details,value: @order.shipment_details, class: "form-control",required: true
+        = f.submit nil, class: "btn btn-success"
