@@ -27,7 +27,7 @@
                 - elsif item["type"].eql?("ArtificialPlant")
                   = render "projects/product_details/#{item["type"].downcase}", item: item
                 - elsif item["type"].eql?("Artwork")
-                  = render "projects/product_details/artworks/#{item["artwork_type"].downcase}", item: item
+                  = render "projects/product_details/artworks/#{item.product["artwork_type"].downcase}", item: item
               %td
                 = item["quantity"]
               %td
