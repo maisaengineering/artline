@@ -54,3 +54,4 @@ gem "will_paginate_mongoid"
 gem 'delayed_job_mongoid'
 gem 'prawn-rails'
 gem 'rufus-scheduler'
+gem 'mongoid-paranoia'

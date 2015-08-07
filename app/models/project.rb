@@ -3,6 +3,7 @@ class Project
   include Mongoid::Document
   include Mongoid::Timestamps
   include Mongoid::Attributes::Dynamic
+  include Mongoid::Paranoia
 
 
   field :quote_number #Quote Number
