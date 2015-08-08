@@ -4,7 +4,11 @@ class OrdersController < ApplicationController
   layout "mailer", only: [:show,:tracking,:enter_shipment_details]
 
   def index
-    @projects = Project.where(:po_number.exists=>true).desc(:created_at).paginate(page: params[:page], per_page: 5)
+    if current_user.is?(:super_admin)
+       @projects = Project.where(:po_number.exists=>true).desc(:created_at).paginate(page: params[:page], per_page: 5)
+    else
+      @projects = current_user.projects.where(:po_number.exists=>true).desc(:created_at).paginate(page: params[:page], per_page: 5)
+    end
   end
 
   def create_order_tracking
