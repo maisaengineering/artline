@@ -68,10 +68,10 @@
 .row.replaceable
   .col-md-3.mbtm15
     Frame Category:
-    = text_field_tag("project[item_list][][product][new][category]", nil, class: "form-control", placeholder: "Category", required: true)
+    = text_field_tag("project[item_list][][product][new][category]", nil, class: "form-control", placeholder: "Category", required: true,readonly: true)
   .col-md-3.mbtm15
     Frame size
-    = number_field_tag("project[item_list][][product][new][frame_size]", 1, class: "form-control", placeholder: "Frame Size", required: true, onchange:"frame_size(this)")
+    = number_field_tag("project[item_list][][product][new][frame_size]", 1, class: "form-control", placeholder: "Frame Size", required: true, onchange:"frame_size(this)",readonly: true)
 .row
   .col-md-3.mbtm15
     Overall Width:
