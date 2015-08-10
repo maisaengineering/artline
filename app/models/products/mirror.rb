@@ -38,8 +38,8 @@ class Products::Mirror < Product
     frame = Frame.create(arg)
     unless frame.errors.any?
       self.frame_id = frame.id
-      # self.frame_category = frame.category
-      # self.frame_size = frame.size
+      self.frame_category = frame.category
+      self.frame_size = frame.size
     else
       errors.add(:frame, product.errors.full_messages.join(', '))
     end

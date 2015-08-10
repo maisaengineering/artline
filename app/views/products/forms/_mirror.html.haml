@@ -29,10 +29,10 @@
   .row
     .col-md-3.mbtm15
       = f.label :glass_width
-      = f.number_field :glass_width, value: @product.glass_width? ? @product.glass_width : 1,min:1, class: "form-control",required: true
+      = f.number_field :glass_width, value: @product.glass_width? ? @product.glass_width : 1,min:1, class: "form-control",required: true, onchange: "glass_width(this)"
     .col-md-3.mbtm15
       = f.label :glass_height
-      = f.number_field :glass_height, value: @product.glass_height? ? @product.glass_height : 1,min:1, class: "form-control",required: true
+      = f.number_field :glass_height, value: @product.glass_height? ? @product.glass_height : 1,min:1, class: "form-control",required: true,onchange: "glass_height(this)"
   .row
     .col-md-3.mbtm15
       Moulding Company
@@ -41,26 +41,26 @@
   .row
     .col-md-3.mbtm15
       Frame
-      = f.select :frame_id, options_for_select(Frame.all.map{|f| [f.finish,f.id]}.push('add'),@product.frame_id),{:prompt => "Frame"}, class: "form-control", onchange:"new_item(this)", data:{name: 'frame'},required: true
+      = f.select :frame_id, options_for_select(Frame.all.map{|f| [f.finish,f.id]}.push('add'),@product.frame_id),{:prompt => "Frame"}, class: "form-control", onchange:"new_item(this)", data:{name: 'frame', addon: true},required: true
   .frame
-  .row
+  .row.replaceable
     .col-md-3.mbtm15
       = f.label :category
-      = f.number_field :frame_category, value: @product.frame_category, class: "form-control",required: true,placeholder: "Category",disabled: true
+      = f.text_field :frame_category, value: @product.frame_category, class: "form-control",required: true,placeholder: "Category",readonly: true
     .col-md-3.mbtm15
       = f.label :frame_size
-      = f.number_field :frame_size, value: @product.frame_size? ? @product.frame_size : 1,min:1, class: "form-control",required: true,disabled: true
+      = f.number_field :frame_size, value: @product.frame_size? ? @product.frame_size : 1,min:1, class: "form-control",required: true,readonly: true, onchange:"frame_size(this)"
   .row
     .col-md-3.mbtm15
       = f.label :overall_width
-      = f.number_field :overall_width, value: @product.overall_width ? @product.overall_width : 3,min:1, class: "form-control",required: true
+      = f.number_field :overall_width, value: @product.overall_width ? @product.overall_width : 3,min:1, class: "form-control",required: true, onchange:"overall_width(this)"
     .col-md-3.mbtm15
       = f.label :overall_height
-      = f.number_field :overall_height, value: @product.overall_height ? @product.overall_height : 3,min:1, class: "form-control",required: true
+      = f.number_field :overall_height, value: @product.overall_height ? @product.overall_height : 3,min:1, class: "form-control",required: true, onchange:"overall_height(this)"
   .row
     .col-md-3.mbtm15
       = f.label :united_inches
-      = f.number_field :united_inches, value: @product.united_inches? ? @product.united_inches : 6,min:1, class: "form-control",required: true,disabled: true
+      = f.number_field :united_inches, value: @product.united_inches? ? @product.united_inches : 6,min:1, class: "form-control",required: true,readonly: true
 
   = f.submit nil, class: "btn btn-success mbtm15"
 

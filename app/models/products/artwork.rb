@@ -39,6 +39,7 @@ class Products::Artwork < Product
     image = Image.create(arg)
     unless image.errors.any?
       self.image_id = image.id
+      self.title = image.title
       self.width = image.width
       self.height = image.height
     else
@@ -68,6 +69,8 @@ class Products::Artwork < Product
     frame = Frame.create(arg)
     unless frame.errors.any?
       self.frame_id = frame.id
+      self.category = frame.category
+      self.frame_size = frame.size
     else
       errors.add(:frame, product.errors.full_messages.join(', '))
     end
