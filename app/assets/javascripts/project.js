@@ -84,6 +84,9 @@ new_item = function(element){
                 class_name: $class_name}
         })
     }else{
+        if( ($class_name == "mouldingcompany") || ($class_name == "supplier")){
+            return false;
+        }
         $("."+$(element).attr('data-name').toLowerCase()).eq($index).html("");
         var data = new Object({class_name: $class_name, artline_number: $val});
         if($(element).attr('data-addon')){
@@ -105,18 +108,16 @@ new_item = function(element){
                         break;
                     case "artificialplant":
                         $elementRow = $(element).closest('.row').nextAll(".row");
-                        console.log(data);
                         $elementRow.find("select[id$='fire_rating']:eq(0)").val(data.fire_rating);
                         $elementRow.find("select[id$='container_id']:eq(0)").val(data.container_id);
                         break;
                     case "frame":
                         $elementRow = $(element).closest('.row').nextAll(".row");
-                        $elementRow.find("input[id$='frame_category']:eq(0)").val(data.category);
+                        $elementRow.find("input[id$='category']:eq(0)").val(data.category);
                         $elementRow.find("input[id$='frame_size']:eq(0)").val(data.size);
                         $elementRow.find("input[id$='frame_size']:eq(0)").trigger('change');
                         break;
                     case "image":
-                        console.log(data);
                         $elementRow = $(element).closest('.row').nextAll(".replaceable");
                         $elementRow.find("input[id$='title']:eq(0)").val(data.title);
                         $elementRow.find("input[id$='width']:eq(0)").val(data.width);

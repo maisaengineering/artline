@@ -12,7 +12,7 @@
 .replaceable
 .row
   .col-md-3.mbtm15
-    = select_tag("project[item_list][][product][existing][image_id]", options_for_select(Image.pluck(:title,:id).push('add')),prompt: "Image" , class: "form-control" , onchange:"new_item(this)", data:{name: 'Image'}, required: true)
+    = select_tag("project[item_list][][product][existing][image_id]", options_for_select(Image.pluck(:title,:id).push('add')),prompt: "Image" , class: "form-control" , onchange:"new_item(this)", data:{name: 'Image', addon:true}, required: true)
 .image
 .replaceable
   .row
@@ -63,7 +63,7 @@
 .replaceable
 .row
   .col-md-3.mbtm15
-    = select_tag("project[item_list][][product][existing][frame_id]", options_for_select(Frame.all.map{|f| [f["finish"],f["id"]]}.push('add')),prompt: "Frame" , class: "form-control frame_no", onchange:"new_item(this)", data:{name: 'Frame'}, required: true )
+    = select_tag("project[item_list][][product][existing][frame_id]", options_for_select(Frame.all.map{|f| [f["finish"],f["id"]]}.push('add')),prompt: "Frame" , class: "form-control frame_no", onchange:"new_item(this)", data:{name: 'Frame', addon:true}, required: true )
 .frame
 .row.replaceable
   .col-md-3.mbtm15
