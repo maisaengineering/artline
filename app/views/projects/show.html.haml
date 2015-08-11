@@ -348,11 +348,12 @@
                $('.loading-indicator').show()
                },
               success: function(data){
+                $('.loading-indicator').hide()
                 if(data.message.length > 0){
+                  $("#PlaceOrderModal").show()
                   $('.errors').show().html(data.message)
                 }
                 else{
-                  $('.loading-indicator').hide()
                   alert("Successfully created")
                   location= data.redirect_url;
                 }
