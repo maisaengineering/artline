@@ -45,11 +45,7 @@ class OrdersController < ApplicationController
   end
 
   def enter_shipment_details
-    Project.where(:po_number.ne => nil).each do |project|
-      project.orders.where(:shipment_date.exists => true,:shipment_details => nil).each do |order|
-        SupplierMailer.conform_shipment(project.po_number,order.supplier_id,order.shipment_date,order.id).deliver_now
-      end
-    end
+   
   end
 
   private
