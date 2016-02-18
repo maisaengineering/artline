@@ -104,7 +104,7 @@ production:
   pool_timeout: 10.0
   sessions:
     default:
-      uri: <%= ENV["MONGOLAB_URI"] %>
+      uri: <%= ENV["MONGOHQ_URL"] %>
   options:
     use_activesupport_time_zone: true
     use_utc: false
